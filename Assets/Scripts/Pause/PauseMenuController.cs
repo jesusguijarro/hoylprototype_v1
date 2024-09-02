@@ -23,5 +23,4 @@ public class PauseMenuController : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1;
     }
-
 }
