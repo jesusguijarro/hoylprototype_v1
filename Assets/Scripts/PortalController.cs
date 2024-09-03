@@ -50,12 +50,22 @@ public class PortalController : MonoBehaviour
         //player.transform.position = portal.TeleportLocation;
         //playerAgent.ResetPath();        
 
-        bool warpSuccessful = playerAgent.Warp(portal.TeleportLocation);
-        if (!warpSuccessful)
-        {
-            Debug.LogWarning("Warp failed. Ensure the destination is on a valid NavMesh.");
-            player.transform.position = portal.TeleportLocation; // Fallback if warp fails
-        }
+        //bool warpSuccessful = playerAgent.Warp(portal.TeleportLocation);
+        //if (!warpSuccessful)
+        //{
+        //    Debug.LogWarning("Warp failed. Ensure the destination is on a valid NavMesh.");
+        //    player.transform.position = portal.TeleportLocation; // Fallback if warp fails
+        //}
+
+        // Disable NavMeshAgent before teleporting
+        playerAgent.enabled = false;
+
+        // Teleport player
+        player.transform.position = portal.TeleportLocation;
+
+        // Re-enable NavMeshAgent after teleportation and reset the path
+        playerAgent.enabled = true;
+        playerAgent.ResetPath();
 
         foreach (Button button in GetComponentsInChildren<Button>()) 
         {
