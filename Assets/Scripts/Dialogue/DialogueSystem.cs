@@ -13,6 +13,9 @@ public class DialogueSystem : MonoBehaviour
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private Animator portraitAnimator;
+    private Animator layoutAnimator;
 
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
@@ -23,9 +26,13 @@ public class DialogueSystem : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     //private bool canContinueToNextLine = false; // new
-    private bool isContinueButtonPressed = false; // new
-    
+    private bool isContinueButtonPressed = false; // new    
     Button continueBtn;
+
+    private const string SPEAKER_TAG = "speaker";
+    private const string PORTRAIT_TAG = "portrait";
+    private const string LAYOUT_TAG = "layout";
+
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -49,6 +56,9 @@ public class DialogueSystem : MonoBehaviour
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+
+        // get layout animator
+        layoutAnimator = dialoguePanel.GetComponent<Animator>();
 
         // get all of the choices text
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -79,6 +89,12 @@ public class DialogueSystem : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        // reset portrait, layout and speaker
+        displayNameText.text = "???";
+        portraitAnimator.Play("default");
+        layoutAnimator.Play("right");
+
         ContinueStory();
     }
 
@@ -101,11 +117,48 @@ public class DialogueSystem : MonoBehaviour
             dialogueText.text = currentStory.Continue();          
             // display choices, if any, for this dialogue line
             DisplayChoices(); //*****************************
+            // handle tags
+            HandleTags(currentStory.currentTags);
         }
         else
         {
             ExitDialogueMode();
         }
+    }
+
+    private void HandleTags(List<string> currentTags)
+    {
+        // loop through each tag and handle it accordingly
+        foreach (string tag in currentTags)
+        {
+            // parse the tag
+            string[] splitTag = tag.Split(':');
+            if (splitTag.Length != 2)
+            {
+                Debug.LogError("Tag could not be appropiately parsed: " + tag);
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+
+            // handle the tag
+            switch (tagKey)
+            {
+                case SPEAKER_TAG:
+                    displayNameText.text = tagValue;
+                    break;
+                
+                case PORTRAIT_TAG:
+                    portraitAnimator.Play(tagValue);
+                    break;
+
+                case LAYOUT_TAG:
+                    layoutAnimator.Play(tagValue);
+                    break;
+                default:
+                    Debug.LogWarning("Tag came in but is not currently being handled");
+                    break;
+            }
+        } 
     }
 
     private void DisplayChoices()
