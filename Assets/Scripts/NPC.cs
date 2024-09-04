@@ -10,7 +10,8 @@ public class NPC : Interactable
 
     public override void Interact()
     {
-        if (DialogueSystem.Instance != null && !DialogueSystem.Instance.dialogueIsPlaying)
+        //DialogueSystem.Instance != null && 
+        if (!DialogueSystem.Instance.dialogueIsPlaying)
         {
             DialogueSystem.Instance.EnterDialogueMode(inkJSON);
         }
