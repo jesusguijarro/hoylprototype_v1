@@ -10,8 +10,13 @@ public class DialogueSystem : MonoBehaviour
 {
     public static DialogueSystem Instance { get; set; }
 
+    [Header("Params")]
+    [SerializeField] private float typingSpeed = 0.04f;
+
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
@@ -24,6 +29,10 @@ public class DialogueSystem : MonoBehaviour
     private Story currentStory;
 
     public bool dialogueIsPlaying { get; private set; }
+
+    private bool canContinueToNextLine = false;
+    
+    private Coroutine displayLineCoroutine;
 
     //private bool canContinueToNextLine = false; // new
     private bool isContinueButtonPressed = false; // new    
@@ -77,7 +86,9 @@ public class DialogueSystem : MonoBehaviour
             return;        
         }
         // handle continuing to the next line in the dialogue when submit is pressed
-        if (currentStory.currentChoices.Count == 0 && isContinueButtonPressed)
+        if ( canContinueToNextLine 
+            && currentStory.currentChoices.Count == 0 
+            && isContinueButtonPressed)
         {
             ContinueStory();
             isContinueButtonPressed = false;
@@ -113,16 +124,54 @@ public class DialogueSystem : MonoBehaviour
     private void ContinueStory()
     {
         if (currentStory.canContinue)
-        {            
-            dialogueText.text = currentStory.Continue();          
-            // display choices, if any, for this dialogue line
-            DisplayChoices(); //*****************************
+        {
+            if (displayLineCoroutine != null)
+            {
+                StopCoroutine(displayLineCoroutine);
+            }
+
+            //dialogueText.text = currentStory.Continue();        old line
+            displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
+
             // handle tags
             HandleTags(currentStory.currentTags);
         }
         else
         {
             ExitDialogueMode();
+        }
+    }
+
+    private IEnumerator DisplayLine(string line)
+    {
+        // empty the dialogue text
+        dialogueText.text = "";
+
+        // hide items while text is typing
+        continueIcon.SetActive(false);
+        HideChoices();
+
+        canContinueToNextLine = false;
+
+        // display each letter one at a time
+        foreach (char letter in line.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        // actions to take after the entire line has finished displaying
+        continueIcon.SetActive(true);
+        DisplayChoices();
+
+        canContinueToNextLine = true;
+    }
+
+    private void HideChoices()
+    {
+        foreach (GameObject choiceButton in choices)
+        {
+            choiceButton.SetActive(false);
         }
     }
 
@@ -199,8 +248,11 @@ public class DialogueSystem : MonoBehaviour
     
     public void MakeChoice(int choiceIndex)
     {
-        currentStory.ChooseChoiceIndex(choiceIndex);        
-        ContinueStory();
+        if (canContinueToNextLine)
+        {
+            currentStory.ChooseChoiceIndex(choiceIndex);
+            ContinueStory();
+        }        
     }
 
 }

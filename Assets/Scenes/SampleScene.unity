@@ -9877,7 +9877,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2693e75479cf5e4784eca9a18e0ded2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingSpeed: 0.04
   dialoguePanel: {fileID: 1587826158}
+  continueIcon: {fileID: 1366624948}
   dialogueText: {fileID: 692630361}
   displayNameText: {fileID: 1012495899}
   portraitAnimator: {fileID: 1955561677}
