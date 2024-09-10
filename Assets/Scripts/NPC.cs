@@ -15,6 +15,6 @@ public class NPC : Interactable
         {
             DialogueSystem.Instance.EnterDialogueMode(inkJSON);
         }
-        Debug.Log(inkJSON.text);
+        //Debug.Log(inkJSON.text);
     }
 }

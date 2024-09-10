@@ -31,6 +31,8 @@ public class DialogueSystem : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     private bool canContinueToNextLine = false;
+    private bool canSkip = false;
+    private bool submitSkip = false;
     
     private Coroutine displayLineCoroutine;
 
@@ -81,6 +83,11 @@ public class DialogueSystem : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            submitSkip = true;
+        }
+
         // return right away if dialogue isn't playing
         if (!dialogueIsPlaying) {
             return;        
@@ -151,11 +158,21 @@ public class DialogueSystem : MonoBehaviour
         continueIcon.SetActive(false);
         HideChoices();
 
+        submitSkip = false;
         canContinueToNextLine = false;
+
+        StartCoroutine(CanSkip());
 
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
         {
+            if (canSkip && submitSkip)
+            {
+                submitSkip = false;
+                dialogueText.text = line;
+                break;
+            }
+
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
@@ -165,6 +182,13 @@ public class DialogueSystem : MonoBehaviour
         DisplayChoices();
 
         canContinueToNextLine = true;
+    }
+
+    private IEnumerator CanSkip()
+    {
+        canSkip = false; //Making sure the variable is false.
+        yield return new WaitForSeconds(0.05f);
+        canSkip = true;
     }
 
     private void HideChoices()
