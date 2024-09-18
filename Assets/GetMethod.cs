@@ -11,7 +11,7 @@ public class GetMethod : MonoBehaviour
    
     void Start()
     {        
-        GameObject.Find("GetButton").GetComponent<Button>().onClick.AddListener(GetData);
+        //GameObject.Find("GetButton").GetComponent<Button>().onClick.AddListener(GetData);
     }
     
     void GetData() => StartCoroutine(GetDataCoroutine());

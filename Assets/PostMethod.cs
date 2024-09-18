@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,14 @@ public class PostMethod : MonoBehaviour
 {
     public TMP_InputField outputArea;
 
+    [Header("Register Inputs")]
+    public TMP_InputField nameInputField;
+    public TMP_InputField ageInputField;
+    public TMP_InputField userInputField;
+    
     private void Start()
-    {
-        GameObject.Find("PostButton").GetComponent<Button>().onClick.AddListener(PostData);
+    {        
+        GameObject.Find("ContinueButton").GetComponent<Button>().onClick.AddListener(PostData);
     }
 
     void PostData() => StartCoroutine(PostDataCoroutine());
@@ -21,12 +27,41 @@ public class PostMethod : MonoBehaviour
         public string query;
     }
 
+    public enum Appearance
+    {
+        MALE,
+        FEMALE,        
+    }
+
     IEnumerator PostDataCoroutine()
     {
         outputArea.text = "Loading...";
         string uri = "http://localhost:8083/graphql";
-        string mutation = "mutation { registerPlayer(create: { name: \"Jesus\", age: 21, username: \"jesusguijarro\", appearance: MALE }) { id name age username appearance } }";
-                
+
+        string name = nameInputField.text;
+        int age = int.Parse(ageInputField.text);
+        string username = userInputField.text;
+        string appearance = AppearanceSelector.instance.selectedAppearance;
+        Appearance appearanceEnumValue;
+
+        switch (appearance)
+        {
+            case "MALE":
+                appearanceEnumValue = Appearance.MALE;
+                break;
+            case "FEMALE":
+                appearanceEnumValue = Appearance.FEMALE;
+                break;
+            default:
+                appearanceEnumValue = Appearance.MALE;
+                break;
+        }        
+
+        // Name, username and age works
+        // string mutation = "mutation { registerPlayer(create: { name: \"" + name + "\", age: " + age + ", username: \"" + username + "\", appearance: MALE }) { id name age username appearance } }";
+
+        string mutation = "mutation { registerPlayer(create: { name: \"" + name + "\", age: " + age + ", username: \"" + username + "\", appearance: " + appearanceEnumValue + " }) { id name age username appearance } }";
+
         using (UnityWebRequest request = new UnityWebRequest(uri, "POST"))
         {
             Query queryObj = new Query { query = mutation };
@@ -40,9 +75,17 @@ public class PostMethod : MonoBehaviour
 
             yield return request.SendWebRequest();
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-                outputArea.text = request.error;
+            {
+                Debug.LogError(request.error);
+            }
             else
+            {
+                Debug.Log("Request: " + request.url);
+                Debug.Log("Request Headers: " + request.GetRequestHeader("Content-Type"));
+                Debug.Log("Request Body: " + json);
+                Debug.Log("Response: " + request.downloadHandler.text);
                 outputArea.text = request.downloadHandler.text;
+            }
         }
     }
 }
