@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 using TMPro;
 public class PostMethod : MonoBehaviour
 {
-    public TMP_InputField outputArea;
+    //public GameObject outputArea;
+    public GameObject statusPanel;
 
     [Header("Register Inputs")]
     public TMP_InputField nameInputField;
@@ -30,15 +31,26 @@ public class PostMethod : MonoBehaviour
     public enum Appearance
     {
         MALE,
-        FEMALE,        
+        FEMALE,
+        OTHER
     }
 
     IEnumerator PostDataCoroutine()
     {
-        outputArea.text = "Loading...";
+        //bool errorPanel = false;
+        //outputArea.enabled = false;
+        //outputArea.text = "Loading...";
+
+        //TMP_InputField inputField = outputArea.GetComponent<TMP_InputField>();
+        //inputField.text = "Loading...";
+
+        TextMeshProUGUI statusText = statusPanel.GetComponentInChildren<TextMeshProUGUI>();
+        statusText.text = "Cargando...";
+
         string uri = "http://localhost:8083/graphql";
 
         string name = nameInputField.text;
+        string ageStr = ageInputField.text;
         int age = int.Parse(ageInputField.text);
         string username = userInputField.text;
         string appearance = AppearanceSelector.instance.selectedAppearance;
@@ -53,9 +65,19 @@ public class PostMethod : MonoBehaviour
                 appearanceEnumValue = Appearance.FEMALE;
                 break;
             default:
-                appearanceEnumValue = Appearance.MALE;
+                appearanceEnumValue = Appearance.OTHER;
                 break;
-        }        
+        }
+
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(ageStr) || string.IsNullOrEmpty(appearance))
+        {
+            //outputArea.SetActive(true);
+            statusPanel.SetActive(true);
+            //outputArea.text = "Error: Please fill in all fields.";
+            //inputField.text = "Error: Please fill in all fields.";
+            statusText.text = "Error: Por favor rellene todos los campos.";
+            yield break;
+        }
 
         // Name, username and age works
         // string mutation = "mutation { registerPlayer(create: { name: \"" + name + "\", age: " + age + ", username: \"" + username + "\", appearance: MALE }) { id name age username appearance } }";
@@ -76,6 +98,8 @@ public class PostMethod : MonoBehaviour
             yield return request.SendWebRequest();
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
+                //outputArea.SetActive(true);
+                statusPanel.SetActive(true);
                 Debug.LogError(request.error);
             }
             else
@@ -84,7 +108,10 @@ public class PostMethod : MonoBehaviour
                 Debug.Log("Request Headers: " + request.GetRequestHeader("Content-Type"));
                 Debug.Log("Request Body: " + json);
                 Debug.Log("Response: " + request.downloadHandler.text);
-                outputArea.text = request.downloadHandler.text;
+                //outputArea.SetActive(false);
+                statusPanel.SetActive(false);
+                //inputField.text = request.downloadHandler.text;
+                //outputArea.text = request.downloadHandler.text;
             }
         }
     }
