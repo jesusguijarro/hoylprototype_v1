@@ -37,13 +37,6 @@ public class PostMethod : MonoBehaviour
 
     IEnumerator PostDataCoroutine()
     {
-        //bool errorPanel = false;
-        //outputArea.enabled = false;
-        //outputArea.text = "Loading...";
-
-        //TMP_InputField inputField = outputArea.GetComponent<TMP_InputField>();
-        //inputField.text = "Loading...";
-
         TextMeshProUGUI statusText = statusPanel.GetComponentInChildren<TextMeshProUGUI>();
         statusText.text = "Cargando...";
 
@@ -70,17 +63,11 @@ public class PostMethod : MonoBehaviour
         }
 
         if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(ageStr) || string.IsNullOrEmpty(appearance))
-        {
-            //outputArea.SetActive(true);
+        {            
             statusPanel.SetActive(true);
-            //outputArea.text = "Error: Please fill in all fields.";
-            //inputField.text = "Error: Please fill in all fields.";
             statusText.text = "Error: Por favor rellene todos los campos.";
             yield break;
-        }
-
-        // Name, username and age works
-        // string mutation = "mutation { registerPlayer(create: { name: \"" + name + "\", age: " + age + ", username: \"" + username + "\", appearance: MALE }) { id name age username appearance } }";
+        }     
 
         string mutation = "mutation { registerPlayer(create: { name: \"" + name + "\", age: " + age + ", username: \"" + username + "\", appearance: " + appearanceEnumValue + " }) { id name age username appearance } }";
 
@@ -97,8 +84,7 @@ public class PostMethod : MonoBehaviour
 
             yield return request.SendWebRequest();
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-            {
-                //outputArea.SetActive(true);
+            {                
                 statusPanel.SetActive(true);
                 Debug.LogError(request.error);
             }
@@ -107,11 +93,9 @@ public class PostMethod : MonoBehaviour
                 Debug.Log("Request: " + request.url);
                 Debug.Log("Request Headers: " + request.GetRequestHeader("Content-Type"));
                 Debug.Log("Request Body: " + json);
-                Debug.Log("Response: " + request.downloadHandler.text);
-                //outputArea.SetActive(false);
+                Debug.Log("Response: " + request.downloadHandler.text);                
                 statusPanel.SetActive(false);
-                //inputField.text = request.downloadHandler.text;
-                //outputArea.text = request.downloadHandler.text;
+                PlayerPrefs.SetString("PlayerUsername",username);
             }
         }
     }
