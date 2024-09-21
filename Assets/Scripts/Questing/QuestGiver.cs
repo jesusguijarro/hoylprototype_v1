@@ -27,7 +27,7 @@ public class QuestGiver : NPC
         }
         else 
         {
-            DialogueSystem.Instance.AddNewDialogue(new string[] { "Gracias por ayudarme aquella vez!."}, name);
+            //DialogueSystem.Instance.AddNewDialogue(new string[] { "Gracias por ayudarme aquella vez!."}, name);
         }
     }
 
@@ -44,11 +44,11 @@ public class QuestGiver : NPC
             Quest.GiveReward();
             Helped = true;
             AssignedQuest = false;
-            DialogueSystem.Instance.AddNewDialogue(new string[] { "Gracias por eso!, te daré una recompensa."}, name);
+            //DialogueSystem.Instance.AddNewDialogue(new string[] { "Gracias por eso!, te daré una recompensa."}, name);
         }
         else
         {
-            DialogueSystem.Instance.AddNewDialogue(new string[] { "Aún no terminas, vuelve a ello!"}, name);
+            //DialogueSystem.Instance.AddNewDialogue(new string[] { "Aún no terminas, vuelve a ello!"}, name);
         }
     }
 }

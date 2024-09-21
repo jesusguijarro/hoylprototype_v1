@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
         PlayerLevel = GetComponent<PlayerLevel>();
         this.currentHealth = this.maxHealth;
         characterStats = new CharacterStats(10,10,10);
-        UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth); 
+        UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+        string playerUsername = PlayerPrefs.GetString("PlayerUsername");
+        Debug.Log("Bienvenido, " + playerUsername + "!");
     }
 
     public void TakeDamage(int amount)
