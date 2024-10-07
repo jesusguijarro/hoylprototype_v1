@@ -32,6 +32,9 @@ public class WorldInteraction : MonoBehaviour
             else if (interactedObject.tag == "Interactable Object")
             {
                 interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
+                playerAgent.stoppingDistance += 2.5f;
+                Debug.Log("Stopping distance: " + playerAgent.stoppingDistance);
+                Debug.Log("Distance to interactable object: " + Vector3.Distance(playerAgent.transform.position, interactedObject.transform.position));
             }
             else
             {

@@ -104,7 +104,10 @@ public class DialogueSystem : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
-        currentStory = new Story(inkJSON.text);
+        string playerName = PlayerPrefs.GetString("PlayerUsername");
+        string inkText = inkJSON.text.Replace("~PlayerUsername", playerName);        
+                
+        currentStory = new Story(inkText);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
