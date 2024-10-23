@@ -7,12 +7,13 @@ public class WorldInteraction : MonoBehaviour
 {
     NavMeshAgent playerAgent;
     public float movementSpeed = 5f;
-    public bool isUsingWASD = false; // Tracks if the player is using WASD keys
-        
+    public bool isUsingWASD = false; // tracks if the player is using WASD keys
+    Animator playerAnimator; // reference to the animator
 
     private void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>();
+        playerAnimator = GetComponentInChildren<Animator>(); // get the animator component
     }
     private void Update()
     {   // GetMouseButtonDown(0) - left mouse button
@@ -28,6 +29,9 @@ public class WorldInteraction : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             GetInteraction();
+
+        UpdateAnimations();
+
     }
 
     void MoveWithWASD() {
@@ -83,5 +87,27 @@ public class WorldInteraction : MonoBehaviour
                 playerAgent.destination = interactionInfo.point;
             }
         }
+    }
+
+    void UpdateAnimations()
+    {
+        // If player is using WASD, play the walking animation
+        if (isUsingWASD)
+        {
+            playerAnimator.SetBool("isMoving", true);
+        }
+        else
+            playerAnimator.SetBool("isMoving", false);
+
+        // If the NavMeshAgent is moving, trigger walking animation
+        if (playerAgent.velocity.magnitude > 0.1f && !isUsingWASD)
+        {
+            playerAnimator.SetBool("isMoving", true);
+        }
+        else if (!isUsingWASD)
+        {
+            playerAnimator.SetBool("isMoving", false);
+        }
+
     }
 }
