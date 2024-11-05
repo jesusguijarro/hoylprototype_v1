@@ -12,13 +12,28 @@ public class WorldInteraction : MonoBehaviour
     Animator playerAnimator; // reference to the animator
     Sword sword;
 
+    public float jumpForce = 7f;
+    private Rigidbody rb;
+    private bool isGrounded = true;
+
+    private bool isJumping;
+
     private void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>();
         playerAnimator = GetComponentInChildren<Animator>(); // get the animator component
+        rb = GetComponent<Rigidbody>();
+
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
     private void Update()
     {   // GetMouseButtonDown(0) - left mouse button
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            Debug.Log("isGrounded" + isGrounded);
+            Jump();
+        }
+
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             isUsingWASD = true;
@@ -38,18 +53,42 @@ public class WorldInteraction : MonoBehaviour
             PerformAttack();
         }
 
-
         UpdateAnimations();
 
+        // Check for falling state
+        if (!isGrounded && rb.velocity.y < 0)
+        {
+            playerAnimator.SetBool("isFalling", true);
+        }
+
+    }
+
+    void Jump()
+    {
+        playerAnimator.SetBool("isGrounded", false);
+        isGrounded = false;
+        playerAgent.enabled = false; // Disable NavMeshAgent during jump
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        playerAnimator.SetBool("isJumping", true);
+        isJumping = true;
+        Debug.Log("Jump Action");       
     }
 
     void PerformAttack()
     {
-        if (sword != null)
+        if (sword != null && !playerAnimator.GetBool("isAttacking"))
         {
-            sword.PerformAttack(10); // Initiate the attack logic
-            playerAnimator.SetTrigger("Attacking"); // Set the attack trigger in the Animator
+            playerAnimator.SetBool("isAttacking", true);
+            sword.PerformAttack(10); // Initiate the attack logic            
+            Debug.Log("-----------------");
+            //StartCoroutine(ResetAttack()); //
         }
+    }
+
+    IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(0.5f); // Adjust the delay as needed
+        playerAnimator.SetBool("isAttacking", false);
     }
 
     void MoveWithWASD()
@@ -128,5 +167,19 @@ public class WorldInteraction : MonoBehaviour
             playerAnimator.SetBool("isMoving", false);
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            playerAnimator.SetBool("isGrounded", true);
+            isGrounded = true;
+            playerAnimator.SetBool("isJumping", false);            
+            playerAnimator.SetBool("isFalling", false);
+            isJumping = false;
+            playerAgent.enabled = true; // Re-enable NavMeshAgent when grounded
+            Debug.Log("isGrounded" + isGrounded);
+        }        
     }
 }
