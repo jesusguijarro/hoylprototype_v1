@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class WorldInteraction : MonoBehaviour
     public float movementSpeed = 5f;
     public bool isUsingWASD = false; // tracks if the player is using WASD keys
     Animator playerAnimator; // reference to the animator
+    Sword sword;
 
     private void Start()
     {
@@ -17,25 +19,42 @@ public class WorldInteraction : MonoBehaviour
     }
     private void Update()
     {   // GetMouseButtonDown(0) - left mouse button
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) 
-        { 
-                isUsingWASD=true;
-                MoveWithWASD();
-        }
-        else 
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-                isUsingWASD = false;       
+            isUsingWASD = true;
+            MoveWithWASD();
+        }
+        else
+        {
+            isUsingWASD = false;
         }
 
         if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             GetInteraction();
 
+        // Check for attack input
+        if (Input.GetKeyDown(KeyCode.X)) // Change to the key you want for attack
+        {
+            PerformAttack();
+        }
+
+
         UpdateAnimations();
 
     }
 
-    void MoveWithWASD() {
-        
+    void PerformAttack()
+    {
+        if (sword != null)
+        {
+            sword.PerformAttack(10); // Initiate the attack logic
+            playerAnimator.SetTrigger("Attacking"); // Set the attack trigger in the Animator
+        }
+    }
+
+    void MoveWithWASD()
+    {
+
         // Disable NavMeshAgent's pathfinding while using WASD movement
         playerAgent.updateRotation = false;
         playerAgent.isStopped = true;
@@ -52,8 +71,8 @@ public class WorldInteraction : MonoBehaviour
         transform.Translate(movement, Space.World);
 
         // Rotate the player in the direction of movement
-        if (movementDirection != Vector3.zero) 
-        { 
+        if (movementDirection != Vector3.zero)
+        {
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
