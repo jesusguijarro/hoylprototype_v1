@@ -45,9 +45,9 @@ public class Slime : Interactable, IEnemy
     }
     public void PerformAttack()
     {
+        Debug.Log("damage to player");
         player.TakeDamage(5);        
     }
-
     public void TakeDamage(int amount)
     {
         Debug.Log("Took damage.");
@@ -55,7 +55,6 @@ public class Slime : Interactable, IEnemy
         if (currentHealth <= 0)
             Die();
     }
-
     void ChasePlayer(Player player)
     {
         navAgent.SetDestination(player.transform.position);
@@ -72,7 +71,7 @@ public class Slime : Interactable, IEnemy
 
     public void Die() 
     {
-        DropLoot();
+        //DropLoot();
         CombatEvents.EnemyDied(this);
         this.Spawner.Respawn();
         Destroy(gameObject);
