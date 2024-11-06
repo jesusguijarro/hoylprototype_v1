@@ -50,6 +50,7 @@ public class Slime : Interactable, IEnemy
 
     public void TakeDamage(int amount)
     {
+        Debug.Log("Took damage.");
         currentHealth -= amount;
         if (currentHealth <= 0)
             Die();
