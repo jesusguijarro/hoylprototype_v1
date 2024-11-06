@@ -27,12 +27,9 @@ public class WorldInteraction : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
     private void Update()
-    {   // GetMouseButtonDown(0) - left mouse button
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            Debug.Log("isGrounded" + isGrounded);
-            Jump();
-        }
+    {   
+        // GetMouseButtonDown(0) - left mouse button
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) { Jump();}
 
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
@@ -44,22 +41,15 @@ public class WorldInteraction : MonoBehaviour
             isUsingWASD = false;
         }
 
-        if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            GetInteraction();
+        if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) GetInteraction();
 
         // Check for attack input
-        if (Input.GetKeyDown(KeyCode.X)) // Change to the key you want for attack
-        {
-            PerformAttack();
-        }
+        if (Input.GetKeyDown(KeyCode.X)) { PerformAttack(); }
 
         UpdateAnimations();
 
         // Check for falling state
-        if (!isGrounded && rb.velocity.y < 0)
-        {
-            playerAnimator.SetBool("isFalling", true);
-        }
+        if (!isGrounded && rb.velocity.y < 0) { playerAnimator.SetBool("isFalling", true); }
 
     }
 
@@ -76,18 +66,20 @@ public class WorldInteraction : MonoBehaviour
 
     void PerformAttack()
     {
-        if (sword != null && !playerAnimator.GetBool("isAttacking"))
+        playerAnimator.SetBool("isAttacking", true);
+        if (sword != null) // Separate check to ensure sword exists
         {
-            playerAnimator.SetBool("isAttacking", true);
-            sword.PerformAttack(10); // Initiate the attack logic            
-            Debug.Log("-----------------");
-            //StartCoroutine(ResetAttack()); //
+            //playerAnimator.SetBool("isAttacking", true); // Immediately set isAttacking to true
+            sword.PerformAttack(10); // Initiate the attack logic
+            Debug.Log("Attack triggered");
         }
+        // Reset attack after a delay (adjust to the animation length if needed)
+        StartCoroutine(ResetAttackAfterDelay(0.5f));
     }
 
-    IEnumerator ResetAttack()
+    IEnumerator ResetAttackAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(0.5f); // Adjust the delay as needed
+        yield return new WaitForSeconds(delay);
         playerAnimator.SetBool("isAttacking", false);
     }
 
