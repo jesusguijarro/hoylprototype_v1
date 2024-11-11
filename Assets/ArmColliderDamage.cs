@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ArmColliderDamage : MonoBehaviour
-{
-    public int damageAmount = 7;
+{    
     public bool attackActive = false; // Only allow damage during active attack
+    public int CurrentDamage { get; set; }
+    public bool isAttacking { get; set; }
 
-    private void OnTriggerEnter(Collider other)
+    public void PerformAttack(int damage)
     {
-        if (attackActive && other.CompareTag("Player"))
+        CurrentDamage = damage;
+        isAttacking = true;
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("Enemy Collision");
+        if (isAttacking && col.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                Debug.Log("Collision with active attack");
-                player.TakeDamage(damageAmount);
-            }
+            Player player = col.GetComponent<Player>();            
+            player.TakeDamage(CurrentDamage);
+            Debug.Log("Player hit with damage: " + CurrentDamage);
+            isAttacking = false;
         }
     }
 }
