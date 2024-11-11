@@ -18,6 +18,8 @@ public class Golem : Interactable, IEnemy
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
+    private Collider attackCollider;
+    private ArmColliderDamage armColliderDamage;  // Reference to arm collider script
     void Start()
     {
         Droptable = new DropTable();
@@ -32,6 +34,9 @@ public class Golem : Interactable, IEnemy
         navAgent = GetComponent<NavMeshAgent>();
         characterStats = new CharacterStats(6, 10, 2);
         currentHealth = maxHealth;
+
+        attackCollider = transform.Find("AttackCollider").GetComponent<Collider>();
+        attackCollider.isTrigger = true;  // Ensure this collider only handles damage as a trigger        
     }
 
     void FixedUpdate()
@@ -44,11 +49,28 @@ public class Golem : Interactable, IEnemy
     }
     public void PerformAttack()
     {
-        Debug.Log("damage to player");
-        player.TakeDamage(5);
+        //Debug.Log("damage to player");
+        //player.TakeDamage(5);
+        if (attackCollider != null)
+        {
+            Debug.Log("PerformAttack");
+            // Activate damage only during this attack
+            armColliderDamage.attackActive = true;
+            //playerAnimator.SetTrigger("Attack"); // Trigger attack animation
+
+            // Reset damage after animation duration (adjust timing to animation length)
+            StartCoroutine(ResetAttackActive(0.5f)); // Adjust timing as needed
+        }
+        else Debug.Log("armColliderDamage is null");
     }
 
-    public void TakeDamage(int amount)
+    IEnumerator ResetAttackActive(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        armColliderDamage.attackActive = false;
+    }
+
+public void TakeDamage(int amount)
     {
         Debug.Log("Took damage.");
         currentHealth -= amount;

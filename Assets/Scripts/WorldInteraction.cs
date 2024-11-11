@@ -27,9 +27,11 @@ public class WorldInteraction : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
     private void Update()
-    {   
-        // GetMouseButtonDown(0) - left mouse button
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) { Jump();}
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            Jump();
+        }
 
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
@@ -41,16 +43,33 @@ public class WorldInteraction : MonoBehaviour
             isUsingWASD = false;
         }
 
-        if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) GetInteraction();
+        if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            GetInteraction();
+        }
 
-        // Check for attack input
-        if (Input.GetKeyDown(KeyCode.X)) { PerformAttack(); }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            PerformAttack();
+        }
 
         UpdateAnimations();
 
-        // Check for falling state
-        if (!isGrounded && rb.velocity.y < 0) { playerAnimator.SetBool("isFalling", true); }
+        // Check for falling state using both y-velocity and ground proximity
+        if (!isGrounded && rb.velocity.y < -0.1f && !IsGroundNearby())
+        {
+            playerAnimator.SetBool("isFalling", true);
+        }
+        else if (isGrounded || rb.velocity.y >= -0.1f)
+        {
+            playerAnimator.SetBool("isFalling", false);
+        }
+    }
 
+    private bool IsGroundNearby()
+    {
+        // Use a Raycast to detect if the player is close to the ground
+        return Physics.Raycast(transform.position, Vector3.down, 0.1f);
     }
 
     void Jump()
@@ -58,10 +77,11 @@ public class WorldInteraction : MonoBehaviour
         playerAnimator.SetBool("isGrounded", false);
         isGrounded = false;
         playerAgent.enabled = false; // Disable NavMeshAgent during jump
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // Reset vertical velocity before jump
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // High-precision collision
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         playerAnimator.SetBool("isJumping", true);
         isJumping = true;
-        Debug.Log("Jump Action");       
     }
 
     void PerformAttack()
@@ -163,15 +183,21 @@ public class WorldInteraction : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || IsGroundNearby())
         {
             playerAnimator.SetBool("isGrounded", true);
             isGrounded = true;
-            playerAnimator.SetBool("isJumping", false);            
+            playerAnimator.SetBool("isJumping", false);
             playerAnimator.SetBool("isFalling", false);
             isJumping = false;
             playerAgent.enabled = true; // Re-enable NavMeshAgent when grounded
-            Debug.Log("isGrounded" + isGrounded);
-        }        
+
+            // Revert to default collision detection when grounded
+            rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        }
+        else if (isJumping && collision.gameObject.CompareTag("Enemy"))
+        {
+            rb.AddForce(Vector3.down * 2f, ForceMode.Impulse); // Apply a downward force
+        }
     }
 }
