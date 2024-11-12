@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Golem : Interactable, IEnemy
 {
+    public ArmColliderDamage armColliderDamage;  // Reference to arm collider script
+
     public LayerMask aggroLayerMask;
     public float currentHealth;
     public float maxHealth;
@@ -19,8 +21,7 @@ public class Golem : Interactable, IEnemy
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
     //private Collider attackCollider;
-
-    private ArmColliderDamage armColliderDamage;  // Reference to arm collider script
+     
     Animator enemyAnimator;
     void Start()
     {
@@ -40,10 +41,7 @@ public class Golem : Interactable, IEnemy
         //attackCollider = transform.Find("AttackCollider").GetComponent<Collider>();
         //attackCollider.isTrigger = true;  // Ensure this collider only handles damage as a trigger        
 
-        enemyAnimator = GetComponentInChildren<Animator>();
-
-        // Locate the ArmColliderDamage component
-        armColliderDamage = transform.Find("AttackCollider").GetComponent<ArmColliderDamage>();
+        enemyAnimator = GetComponentInChildren<Animator>();        
     }
 
     void FixedUpdate()
@@ -87,26 +85,48 @@ public void TakeDamage(int amount)
     }
     void ChasePlayer(Player player)
     {
-        enemyAnimator.SetBool("isMoving", true);
-        navAgent.SetDestination(player.transform.position);
+        //enemyAnimator.Play("Roar");
+        //wait after Roar ends
         this.player = player;
-        if (navAgent.remainingDistance <= navAgent.stoppingDistance)
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+        // Update destination only if distance is larger than stopping distance
+        if (distanceToPlayer > navAgent.stoppingDistance)
         {
-            if (!IsInvoking("PerformAttack"))                
-                InvokeRepeating("PerformAttack", .5f, 2f);
+            navAgent.SetDestination(player.transform.position);
+            enemyAnimator.SetBool("isMoving", true);  // Start running animation
         }
         else
         {
-            CancelInvoke("PerformAttack");
-            enemyAnimator.SetBool("isMoving", false);
+            enemyAnimator.SetBool("isMoving", false); // Stop running animation
+            if (!IsInvoking("PerformAttack"))
+            {
+                InvokeRepeating("PerformAttack", 0.5f, 2f);
+            }
         }
     }
 
     public void Die()
     {
+        enemyAnimator.Play("Die");
+        navAgent.isStopped = true;
+        StartCoroutine(DestroyAfterAnimation());
+    }
+
+    private IEnumerator DestroyAfterAnimation() {
         //DropLoot();
+        // Wait until the animator is in the "Die" state to ensure the animation starts
+        while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+        {
+            yield return null; // Wait until the Die state is active
+        }
+
+        // Wait for the full duration of the Die animation
+        yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+        // Now destroy the object after the animation finishes
         CombatEvents.EnemyDied(this);
-        this.Spawner.Respawn();
+        Spawner.Respawn();
         Destroy(gameObject);
     }
 

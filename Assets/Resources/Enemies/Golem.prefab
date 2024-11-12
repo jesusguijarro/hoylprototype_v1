@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16db1e8d413a6d04c9d7a916a96e9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
+  attackActive: 0
 --- !u!1 &5069367474503736915
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAgent: {fileID: 0}
+  armColliderDamage: {fileID: 8180127824235860825}
   aggroLayerMask:
     serializedVersion: 2
     m_Bits: 128
