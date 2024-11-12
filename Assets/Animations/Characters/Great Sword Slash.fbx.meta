@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e023c409199b9d740ac3dc5dafdfe1ca
+guid: b16e0f115b7b1b741b0161fb5d714509
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: playerDraw
+      name: GreatSwordSlash
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -122,7 +122,7 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1

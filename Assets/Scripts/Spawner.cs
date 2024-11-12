@@ -30,8 +30,11 @@ public class Spawner : MonoBehaviour
 
     public void Respawn()
     {
-        spawning = true;
-        currentTime = spawnDelay;
+        if (respawn)
+        {
+            spawning = true;
+            currentTime = spawnDelay;
+        }        
     }
 
     void Spawn()
