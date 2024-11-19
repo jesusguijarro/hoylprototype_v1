@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 2054714486137493376}
   m_Layer: 0
   m_Name: DarkLord
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,6 +878,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60816084357a664199db8d088cc872c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAgent: {fileID: 0}
+  armColliderDamage: {fileID: 7295182680210407996}
+  aggroLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  currentHealth: 0
+  maxHealth: 300
+  pickupItem: {fileID: 0}
 --- !u!195 &4977186883430045567
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -887,12 +895,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 5564343540339896001}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Radius: 0.2
+  m_Speed: 5
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 300
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -972,7 +980,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.3, z: 1}
+  m_Size: {x: 1, y: 2.3, z: 0.48}
   m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &5691685392316829082
 GameObject:
