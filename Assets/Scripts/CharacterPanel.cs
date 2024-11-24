@@ -79,25 +79,25 @@ public class CharacterPanel : MonoBehaviour
         weaponIcon.sprite = Resources.Load<Sprite>("UI/Icons/Items/" + item.ObjectSlug);
         weaponNameText.text = item.ItemName;
 
-        for (int i = 0; i < item.Stats.Count; i++)
-        {
-            weaponStatTexts.Add(Instantiate(weaponStatPrefab));
-            weaponStatTexts[i].transform.SetParent(weaponStatPanel);
-            weaponStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
-        }
+        //for (int i = 0; i < item.Stats.Count; i++)
+        //{
+        //    weaponStatTexts.Add(Instantiate(weaponStatPrefab));
+        //    weaponStatTexts[i].transform.SetParent(weaponStatPanel);
+        //    weaponStatTexts[i].text = item.Stats[i].StatName + ": " + item.Stats[i].GetCalculatedStatValue().ToString();
+        //}
         UpdateStats();
     }
 
     public void UnequipWeapon()
-    {
-        weaponNameText.text = "-";
+    {        
+        weaponNameText.text = "Sin equipar";
         weaponIcon.sprite = defaultWeaponSprite;
 
-        for (int i = 0; i < weaponStatTexts.Count; i++)
-        {
-            Destroy(weaponStatTexts[i].gameObject);
-        }
-        weaponStatTexts.Clear();
+        //for (int i = 0; i < weaponStatTexts.Count; i++)
+        //{
+        //    Destroy(weaponStatTexts[i].gameObject);
+        //}
+        //weaponStatTexts.Clear();
         playerWeaponController.UnequipWeapon();
     }
 }
