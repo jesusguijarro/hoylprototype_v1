@@ -234,6 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3889373870839554214}
+  - component: {fileID: 6082235275925370875}
   m_Layer: 0
   m_Name: BearModel
   m_TagString: Untagged
@@ -258,6 +259,27 @@ Transform:
   - {fileID: 389239366833978967}
   m_Father: {fileID: 5822825009770657755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &6082235275925370875
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635196381808467905}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b8848c4c01112bf459da42ed9bcbb325, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1894472962879010919
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +419,7 @@ GameObject:
   - component: {fileID: 7337452149140070567}
   - component: {fileID: 1205328566785464124}
   - component: {fileID: 5376568803791758661}
+  - component: {fileID: 5666116139385333862}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Enemy
@@ -482,7 +505,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3137510139864160668}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.6
+  m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 20
   avoidancePriority: 50
@@ -491,8 +514,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 4.98
-  m_BaseOffset: 0.59
+  m_Height: 1
+  m_BaseOffset: 0.11
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!65 &5376568803791758661
@@ -514,8 +537,28 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.91, y: 4.98, z: 8.41}
-  m_Center: {x: 0, y: 1.93, z: 0}
+  m_Size: {x: 1, y: 1.21, z: 1.84}
+  m_Center: {x: 0, y: 0.48, z: -0.12}
+--- !u!114 &5666116139385333862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137510139864160668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c2a4c4d2985144faed7df2c2007a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAgent: {fileID: 0}
+  headColliderDamage: {fileID: 601651885462098846}
+  aggroLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  currentHealth: 0
+  maxHealth: 300
+  pickupItem: {fileID: 0}
 --- !u!1 &3358765302498327389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1161,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3889373870839554214}
