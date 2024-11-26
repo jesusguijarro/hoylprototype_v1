@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement; // Asegúrate de agregar esta línea
 
 public class PortalController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PortalController : MonoBehaviour
     private GameObject panel;
 
     AudioManager audioManager;
+
+    // Variable estática para almacenar la última posición de teletransporte
+    public static Vector3 teleportPosition;
 
     private void Awake()
     {
@@ -47,27 +51,53 @@ public class PortalController : MonoBehaviour
     void OnPortalButtonClick(int portalIndex, Portal portal)
     {
         audioManager.PlaySFX(audioManager.portal);
-        //player.transform.position = portal.TeleportLocation;
-        //playerAgent.ResetPath();        
 
-        //bool warpSuccessful = playerAgent.Warp(portal.TeleportLocation);
-        //if (!warpSuccessful)
-        //{
-        //    Debug.LogWarning("Warp failed. Ensure the destination is on a valid NavMesh.");
-        //    player.transform.position = portal.TeleportLocation; // Fallback if warp fails
-        //}
-
-        // Disable NavMeshAgent before teleporting
+        // Desactivar el NavMeshAgent antes del teletransporte
         playerAgent.enabled = false;
 
-        // Teleport player
+        // Guardar la escena original
+        string originalScene = SceneManager.GetActiveScene().name;
+
+        // Guardar la posición actual del jugador
+        teleportPosition = player.transform.position;
+
+        // Teletransportar al jugador antes de la transición
         player.transform.position = portal.TeleportLocation;
 
-        // Re-enable NavMeshAgent after teleportation and reset the path
+        // Cargar la escena de transición de manera asíncrona
+        StartCoroutine(LoadTransitionSceneAndTeleport(originalScene, portal));
+    }
+
+    private IEnumerator LoadTransitionSceneAndTeleport(string originalScene, Portal portal)
+    {
+        // Cargar la escena de transición de manera asíncrona
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("loadingScene", LoadSceneMode.Additive);
+
+        // Asegurarse de que la escena de carga se haya cargado completamente
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // Hacer que espere 2 segundos antes de regresar
+        yield return new WaitForSeconds(3f);
+
+        // Regresar a la escena original
+        SceneManager.UnloadSceneAsync("loadingScene");
+        SceneManager.LoadScene(originalScene);
+
+        // Asegurarse de que el jugador y el NavMeshAgent estén activos
+        player.gameObject.SetActive(true);
         playerAgent.enabled = true;
+
+        // Restaurar la posición del jugador desde la variable estática
+        player.transform.position = teleportPosition;
+
+        // Rehabilitar el NavMeshAgent después de volver
         playerAgent.ResetPath();
 
-        foreach (Button button in GetComponentsInChildren<Button>()) 
+        // Destruir los botones y ocultar el panel
+        foreach (Button button in GetComponentsInChildren<Button>())
         {
             Destroy(button.gameObject);
         }

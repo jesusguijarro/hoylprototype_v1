@@ -9,15 +9,16 @@ public class Portal : ActionItem
     [SerializeField]
     private Portal[] linkedPortals;
     private PortalController PortalController { get; set; }
+
     void Start()
     {
         PortalController = FindAnyObjectByType<PortalController>();
-        TeleportLocation = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z);        
+        TeleportLocation = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z);
     }
 
     public override void Interact()
     {
-        PortalController.ActivatePortal(linkedPortals);        
+        PortalController.ActivatePortal(linkedPortals);
         playerAgent.ResetPath();
     }
 }
