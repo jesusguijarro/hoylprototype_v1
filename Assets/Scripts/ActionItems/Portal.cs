@@ -9,7 +9,6 @@ public class Portal : ActionItem
     [SerializeField]
     private Portal[] linkedPortals;
     private PortalController PortalController { get; set; }
-
     void Start()
     {
         PortalController = FindAnyObjectByType<PortalController>();

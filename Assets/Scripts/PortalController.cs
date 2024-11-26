@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement; // Asegúrate de agregar esta línea
+using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour
 {
@@ -16,9 +16,6 @@ public class PortalController : MonoBehaviour
     private GameObject panel;
 
     AudioManager audioManager;
-
-    // Variable estática para almacenar la última posición de teletransporte
-    public static Vector3 teleportPosition;
 
     private void Awake()
     {
@@ -52,51 +49,39 @@ public class PortalController : MonoBehaviour
     {
         audioManager.PlaySFX(audioManager.portal);
 
-        // Desactivar el NavMeshAgent antes del teletransporte
+        // Desactivar NavMeshAgent antes de teletransportar
         playerAgent.enabled = false;
 
-        // Guardar la escena original
-        string originalScene = SceneManager.GetActiveScene().name;
-
-        // Guardar la posición actual del jugador
-        teleportPosition = player.transform.position;
-
-        // Teletransportar al jugador antes de la transición
-        player.transform.position = portal.TeleportLocation;
-
-        // Cargar la escena de transición de manera asíncrona
-        StartCoroutine(LoadTransitionSceneAndTeleport(originalScene, portal));
+        // Iniciar la transición y pasar la posición del portal como parámetro
+        StartCoroutine(LoadTransitionSceneAndTeleport(portal.TeleportLocation));
     }
 
-    private IEnumerator LoadTransitionSceneAndTeleport(string originalScene, Portal portal)
+    private IEnumerator LoadTransitionSceneAndTeleport(Vector3 targetPosition)
     {
         // Cargar la escena de transición de manera asíncrona
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("loadingScene", LoadSceneMode.Additive);
 
-        // Asegurarse de que la escena de carga se haya cargado completamente
+        // Esperar a que la escena de transición se cargue completamente
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        // Hacer que espere 2 segundos antes de regresar
+        // Mostrar la escena de transición durante 3 segundos
         yield return new WaitForSeconds(3f);
 
-        // Regresar a la escena original
-        SceneManager.UnloadSceneAsync("loadingScene");
-        SceneManager.LoadScene(originalScene);
+        // Teletransportar al jugador DESPUÉS de la transición
+        player.transform.position = targetPosition;
+        Debug.Log($"Teleportado a: {targetPosition.x}, {targetPosition.y}, {targetPosition.z}");
 
-        // Asegurarse de que el jugador y el NavMeshAgent estén activos
-        player.gameObject.SetActive(true);
+        // Rehabilitar NavMeshAgent después del teletransporte
         playerAgent.enabled = true;
-
-        // Restaurar la posición del jugador desde la variable estática
-        player.transform.position = teleportPosition;
-
-        // Rehabilitar el NavMeshAgent después de volver
         playerAgent.ResetPath();
 
-        // Destruir los botones y ocultar el panel
+        // Descargar la escena de transición
+        SceneManager.UnloadSceneAsync("loadingScene");
+
+        // Limpiar los botones y ocultar el panel
         foreach (Button button in GetComponentsInChildren<Button>())
         {
             Destroy(button.gameObject);
