@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Ink.UnityIntegration;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class DialogueSystem : MonoBehaviour
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
 
+    [Header("Globals Ink File")]
+    [SerializeField] private InkFile globalsInkFile;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -44,6 +47,8 @@ public class DialogueSystem : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
 
+    private DialogueVariables dialogueVariables;
+
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -61,6 +66,8 @@ public class DialogueSystem : MonoBehaviour
                 gameObject.scene.name + ", GameObject: " + gameObject.name);
             Destroy(gameObject);
         }
+
+        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
     }
 
     private void Start()
@@ -111,6 +118,8 @@ public class DialogueSystem : MonoBehaviour
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
+        dialogueVariables.StartListening(currentStory);
+
         // reset portrait, layout and speaker
         displayNameText.text = "???";
         portraitAnimator.Play("default");
@@ -121,6 +130,9 @@ public class DialogueSystem : MonoBehaviour
 
     private void ExitDialogueMode()
     {
+
+        dialogueVariables.StopListening(currentStory);
+
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";        
@@ -280,6 +292,17 @@ public class DialogueSystem : MonoBehaviour
             currentStory.ChooseChoiceIndex(choiceIndex);
             ContinueStory();
         }        
+    }
+
+    public Ink.Runtime.Object GetVariableState(string variableName) 
+    { 
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if (variableName == null)
+        {
+            Debug.LogWarning("Ink Variable was found to be null: " + variableName);
+        }
+        return variableValue;
     }
 
 }

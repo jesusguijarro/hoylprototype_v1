@@ -1,3 +1,5 @@
+INCLUDE ../globals.ink
+
 ¡Bienvenido a bordo del Navegante de los Sueños, ~PlayerUsername!, ¿Qué te trae a este barco hoy? #speaker:Capitán #portrait:captain_neutral #layout:right
 
 -> main
@@ -10,11 +12,22 @@
 
 - ¿Alguna vez te sientes triste ~PlayerUsername? // pregunta 1
 + [A veces me siento triste]
+    ~ question1 = 0
     Está bien, eso pasa a veces! #portrait:captain_neutro
+    -> chosen
 + [Muchas veces me siento triste]
+    ~ question1 = 1
     Eso me pone triste también! #portrait:captain_sad
+    -> chosen
 + [Siempre estoy triste]
+    ~ question1 = 2
     Eso me pone triste también! #portrait:captain_sad
+    -> chosen
+
+=== chosen ===
+-> END
+
+=== already_chose ===
 
 - Antes de una aventura es importante saber sobre tus habilidades ~PlayerUsername, ¿Crees que te saldrán bien las cosas? #portrait:captain_neutro // pregunta 2
 + [Nunca me saldrá nada bien]
