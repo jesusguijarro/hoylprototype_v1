@@ -161,7 +161,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: escarabajo_celeste_neutral
+  m_Name: greenbeetle_neutral
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -313,7 +313,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: escarabajo_celeste_happy
+  m_Name: greenbeetle_happy
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -521,7 +521,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: escarabajo_celeste_sad
+  m_Name: greenbeetle_sad
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
