@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class SawMovement : MonoBehaviour
 {
-    // Configuración para el movimiento de traslación
-    public float movementSpeed = 2f; // Velocidad del movimiento
-    public float movementRange = 5f; // Distancia máxima del movimiento
+    public float movementSpeed = 2f; // Velocidad de traslación
+    public float rotationSpeed = 360f; // Velocidad de rotación
+    public Transform startPoint; // Punto de inicio
+    public Transform endPoint; // Punto final
 
-    // Configuración para la rotación
-    public float rotationSpeed = 360f; // Grados por segundo
-
-    private Vector3 startPosition; // Posición inicial de la sierra
-    private bool movingForward = true; // Dirección del movimiento
+    private Vector3 startPosition; // Posición inicial
+    private Vector3 endPosition; // Posición final
+    private bool movingForward = true; // Dirección de movimiento
 
     void Start()
     {
-        // Guardar la posición inicial
-        startPosition = transform.position;
+        startPosition = startPoint.position;
+        endPosition = endPoint.position;
+        transform.position = startPosition; // Posicionar la sierra al inicio
     }
 
     void Update()
@@ -24,18 +24,29 @@ public class SawMovement : MonoBehaviour
         float movementStep = movementSpeed * Time.deltaTime;
         if (movingForward)
         {
-            transform.position += transform.right * movementStep; // Mover hacia adelante
-            if (Vector3.Distance(transform.position, startPosition) >= movementRange)
-                movingForward = false; // Cambiar dirección al alcanzar el rango
+            transform.position = Vector3.MoveTowards(transform.position, endPosition, movementStep);
+            if (Vector3.Distance(transform.position, endPosition) <= 0.1f)
+                movingForward = false;
         }
         else
         {
-            transform.position -= transform.right * movementStep; // Mover hacia atrás
+            transform.position = Vector3.MoveTowards(transform.position, startPosition, movementStep);
             if (Vector3.Distance(transform.position, startPosition) <= 0.1f)
-                movingForward = true; // Cambiar dirección al regresar al inicio
+                movingForward = true;
         }
 
-        // Rotación continua
-        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+        // Rotación continua en su propio eje
+        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime, Space.Self);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Verificar si el objeto que toca la sierra tiene el componente de vida
+        Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            player.TakeDamage(15); // Quitar 15 de vida al jugador
+            Debug.Log($"{player.name} tocó la sierra y perdió 10 de vida.");
+        }
     }
 }
