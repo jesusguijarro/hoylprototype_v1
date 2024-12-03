@@ -56,5 +56,13 @@
     "itemType": "Consumable",
     "actionName": "Drink",
     "itemModifier": 0
+  },
+  {
+    "objectSlug": "key",
+    "itemName": "Key",
+    "description": "A key that opens everything.",
+    "itemType": "Quest",
+    "actionName": "Take",
+    "itemModifier": 0
   }
 ]

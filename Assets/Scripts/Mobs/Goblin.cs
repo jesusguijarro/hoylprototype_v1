@@ -23,15 +23,13 @@ public class Goblin : Interactable, IEnemy
 
     Animator enemyAnimator;
 
-    //[SerializeField] private Healthbar _healthbar;
+    [SerializeField] private Healthbar _healthbar;
     void Start()
     {
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
-            new LootDrop("sword", 25),
-            new LootDrop("staff", 25),
-            new LootDrop("potion_log", 25)
+            new LootDrop("key", 100),            
         };
         ID = 0;
         Experience = 100;
@@ -70,7 +68,7 @@ public class Goblin : Interactable, IEnemy
     {
         Debug.Log("Took damage.");
         currentHealth -= amount;
-        //_healthbar.UpdateHealthBar(maxHealth, currentHealth);
+        _healthbar.UpdateHealthBar(maxHealth, currentHealth);
         if (currentHealth <= 0)
             Die();
     }
@@ -95,6 +93,7 @@ public class Goblin : Interactable, IEnemy
     }
     public void Die()
     {
+        
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
         StartCoroutine(DestroyAfterAnimation());
@@ -109,11 +108,13 @@ public class Goblin : Interactable, IEnemy
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
         CombatEvents.EnemyDied(this);
-        Spawner.Respawn();
+        Spawner.Respawn();        
         Destroy(gameObject);
+        DropLoot();
     }
     void DropLoot()
     {
+        Debug.Log("DropLoot called.");
         Item item = Droptable.GetDrop();
         if (item != null)
         {
