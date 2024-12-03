@@ -17,12 +17,15 @@ El futuro es incierto, pero estamos juntos en esta aventura. #speaker:Capitán #
     ~ question6 = 2
     Eso me pone triste! #portrait:captain_sad
 
-- Probablemente sientas que es una carga buscar las piezas faltantes ¿te cuesta hacer este tipo de deberes en tu día a día? #portrait:captain_neutro
+- Probablemente sientas que es una carga buscar las piezas faltantes ¿te cuesta hacer este tipo de deberes en tu día a día? #portrait:captain_neutro // 15
 +[Siempre me cuesta]
+    ~ question15 = 0
     Eso me pone triste! #portrait:captain_sad
 +[Muchas veces me cuesta]
+    ~ question15 = 1
     Eso me pone triste! #portrait:captain_sad
 +[No me cuesta]
+    ~ question15 = 2
     Genial, eso me pone feliz! #portrait:captain_happy
 
 - Dicho esto jugador, dirigete al portal que esta en el barco. #portrait:captain_neutro
