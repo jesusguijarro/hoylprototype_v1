@@ -6,8 +6,7 @@ INCLUDE ../globals.ink
 
 - ¡Lo logramos,  ~PlayerUsername! #speaker:Hada #portrait:fairy_happy #layout:right
 
-
-- !Fue una dura batalla, me siento muy cansada! Sin considerar esta batalla ¿como te sientes normalmente tú ~PlayerUsername? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 17
+- !Fue una dura batalla! Sin considerar esta batalla ¿como te sientes normalmente tú ~PlayerUsername? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 17
 
 +[Estoy cansado de cuando en cuando]
     ~ question17 = 0
@@ -19,7 +18,7 @@ INCLUDE ../globals.ink
     ~ question17 = 2
     Ohh, eso debe ser duro! #portrait:fairy_sad
     
-- Que tranquilidad se ha quedado, ¿no te sientes un poco solo? #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 20
+- Que tranquilidad se ha quedado, ¿cómo te sientes? #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 20
 
 +[Nunca me siento solo]
     ~ question20 = 0
@@ -43,7 +42,7 @@ INCLUDE ../globals.ink
     ~ question18 = 2
     Ohh, eso me entristece! #portrait:fairy_happy
 
-- Personalmente en estas situaciones como la que acaba de pasar, a mí me cuesta mucho decidirme, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 13
+- Personalmente en estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 13
 
 +[No puedo decidirme]
     ~ question13 = 0
@@ -54,6 +53,8 @@ INCLUDE ../globals.ink
 +[Me decido fácilmente]
     ~ question13 = 2
     Me alegra escuchar eso! #portrait:fairy_happy
+
+- A a mí me cuesta mucho decidirme! #portrait:fairy_sad
     
 - Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 16
 
@@ -68,5 +69,7 @@ INCLUDE ../globals.ink
     Me alegra escuchar eso! #portrait:fairy_happy
 
 - Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Hada #portrait:fairy_neutro #layout:right
+
+- Dirigete al barco tomando el portal al final del puente, el capitán te espera!
 
     -> END

@@ -18,9 +18,9 @@
     
 - El Bosque Encantado es un lugar lleno de secretos y maravillas. Pero también es un lugar peligroso para los que no lo respetan #speaker:Hada #portrait:fairy_neutral #layout:right
 
-- Entiendo. Estoy dispuesto a aprender y ayudar en lo que pueda #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- Estoy dispuesto a ayudar en lo que pueda!. #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
 
-- Ahora mismo el rey de las sombras, se encuentra en una isla cercana aquí, parece que a la izquierda de esta isla. #speaker:Hada #portrait:fairy_neutral #layout:right
+- Ahora mismo el rey de las sombras, se encuentra en una isla cercana aquí, a la izquierda de esta isla. #speaker:Hada #portrait:fairy_neutral #layout:right
 
 - ¿Cómo puedo ayudar? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
 
