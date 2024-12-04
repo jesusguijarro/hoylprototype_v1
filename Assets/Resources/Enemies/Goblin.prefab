@@ -236,7 +236,7 @@ MonoBehaviour:
     m_Bits: 128
   currentHealth: 0
   maxHealth: 300
-  pickupItem: {fileID: -8296686059327662082, guid: 6793f69eb2e560c44be533973dc5033b, type: 3}
+  pickupItem: {fileID: 7522918355177131914, guid: 6793f69eb2e560c44be533973dc5033b, type: 3}
   _healthbar: {fileID: 8625364309156523510}
 --- !u!195 &1116738937532886986
 NavMeshAgent:
