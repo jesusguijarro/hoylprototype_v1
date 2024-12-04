@@ -29,7 +29,7 @@ public class Goblin : Interactable, IEnemy
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
-            new LootDrop("key", 100),            
+            new LootDrop("key", 30),            
         };
         ID = 0;
         Experience = 100;
