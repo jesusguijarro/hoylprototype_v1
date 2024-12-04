@@ -19,26 +19,40 @@ public class Goblin : Interactable, IEnemy
     private Player player;
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
-    private Collider[] withinAggroColliders;    
+    private Collider[] withinAggroColliders;
 
+    [SerializeField] private AudioClip chaseAudio; // Referencia al AudioClip
+    private AudioSource audioSource; // AudioSource para reproducir el audio
+    private AudioManager globalAudioManager;
     Animator enemyAnimator;
 
     [SerializeField] private Healthbar _healthbar;
+
     void Start()
     {
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
             new LootDrop("key", 30),            
+
         };
+
         ID = 0;
         Experience = 100;
         navAgent = GetComponent<NavMeshAgent>();
         characterStats = new CharacterStats(6, 10, 2);
         currentHealth = maxHealth;
-
         enemyAnimator = GetComponentInChildren<Animator>();
+
+        // Configurar el AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        globalAudioManager = FindObjectOfType<AudioManager>();
     }
+
     void FixedUpdate()
     {
         withinAggroColliders = Physics.OverlapSphere(transform.position, 10, aggroLayerMask); // aggro radius
@@ -47,6 +61,7 @@ public class Goblin : Interactable, IEnemy
             ChasePlayer(withinAggroColliders[0].GetComponent<Player>());
         }
     }
+
     public void PerformAttack()
     {
         Debug.Log("Perform Attack invoked");
@@ -59,11 +74,13 @@ public class Goblin : Interactable, IEnemy
         }
         else Debug.Log("armColliderDamage is null");
     }
+
     IEnumerator ResetAttackActive(float delay)
     {
         yield return new WaitForSeconds(delay);
         enemyAnimator.SetBool("isAttacking", false);
     }
+
     public void TakeDamage(int amount)
     {
         Debug.Log("Took damage.");
@@ -72,10 +89,18 @@ public class Goblin : Interactable, IEnemy
         if (currentHealth <= 0)
             Die();
     }
+
     void ChasePlayer(Player player)
     {
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+        // Reproducir el audio si no está sonando
+        if (chaseAudio != null && !audioSource.isPlaying)
+        {
+            audioSource.clip = chaseAudio;
+            audioSource.Play();
+        }
 
         if (distanceToPlayer > navAgent.stoppingDistance)
         {
@@ -91,13 +116,18 @@ public class Goblin : Interactable, IEnemy
             }
         }
     }
+
     public void Die()
     {
         
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
         StartCoroutine(DestroyAfterAnimation());
+        audioSource.Stop();
+        globalAudioManager.ResumeMusic();
+
     }
+
     private IEnumerator DestroyAfterAnimation()
     {
         while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
@@ -108,10 +138,11 @@ public class Goblin : Interactable, IEnemy
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
         CombatEvents.EnemyDied(this);
-        Spawner.Respawn();        
+        Spawner.Respawn();
         Destroy(gameObject);
         DropLoot();
     }
+
     void DropLoot()
     {
         Debug.Log("DropLoot called.");

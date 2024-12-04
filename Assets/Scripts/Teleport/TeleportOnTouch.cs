@@ -48,10 +48,7 @@ public class TeleportOnTouch : MonoBehaviour
         {
             panel = panelTransform.gameObject;
         }
-        else
-        {
-            Debug.LogWarning("No se encontró el objeto 'Panel_Portal' como hijo del portal.");
-        }
+        
 
         // Buscar el objeto destino por nombre
         if (!string.IsNullOrEmpty(targetLocationName))
