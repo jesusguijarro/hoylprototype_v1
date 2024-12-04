@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf2c58076848f848a53b5b0c4c1b84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLocation: {fileID: 746790721596660810, guid: 67f57d20f9686cc4d89e4002e2da7c24, type: 3}
+  targetLocationName: Piso3
 --- !u!114 &-8296686059327662082
 MonoBehaviour:
   m_ObjectHideFlags: 0

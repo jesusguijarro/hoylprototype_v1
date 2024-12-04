@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class TeleportOnTouch : MonoBehaviour
 {
     [SerializeField]
-    private Transform targetLocation; // Lugar de destino en el Inspector, directamente asignado
+    private string targetLocationName; // Nombre del objeto destino en la escena (configurable desde el prefab)
+
+    private GameObject targetLocation; // Objeto destino encontrado en la escena
     private Player player;
     private NavMeshAgent playerAgent;
 
@@ -15,33 +17,82 @@ public class TeleportOnTouch : MonoBehaviour
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        // Buscar el AudioManager en la escena
+        GameObject audioObject = GameObject.FindGameObjectWithTag("Audio");
+        if (audioObject != null)
+        {
+            audioManager = audioObject.GetComponent<AudioManager>();
+        }
+        else
+        {
+            Debug.LogError("No se encontró un objeto con la etiqueta 'Audio'.");
+        }
     }
 
     void Start()
     {
-        player = FindAnyObjectByType<Player>();
-        playerAgent = player.GetComponent<NavMeshAgent>();
-        panel = transform.Find("Panel_Portal").gameObject;
+        // Buscar el jugador dinámicamente
+        player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            playerAgent = player.GetComponent<NavMeshAgent>();
+        }
+        else
+        {
+            Debug.LogError("No se encontró ningún objeto de tipo 'Player' en la escena.");
+        }
+
+        // Buscar el panel del portal dentro del objeto
+        Transform panelTransform = transform.Find("Panel_Portal");
+        if (panelTransform != null)
+        {
+            panel = panelTransform.gameObject;
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'Panel_Portal' como hijo del portal.");
+        }
+
+        // Buscar el objeto destino por nombre
+        if (!string.IsNullOrEmpty(targetLocationName))
+        {
+            targetLocation = GameObject.Find(targetLocationName);
+            if (targetLocation == null)
+            {
+                Debug.LogError($"No se encontró ningún objeto en la escena con el nombre '{targetLocationName}'.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("El nombre del destino no ha sido configurado en el prefab.");
+        }
     }
 
-    // Este método se llama cuando el jugador entra en el área de la puerta
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // Desactivar NavMeshAgent antes de teletransportar
-            playerAgent.enabled = false;
+            if (targetLocation != null)
+            {
+                // Desactivar NavMeshAgent antes de teletransportar
+                playerAgent.enabled = false;
 
-            // Reproducir el sonido de portal
-            audioManager.PlaySFX(audioManager.portal);
+                // Reproducir el sonido de portal
+                if (audioManager != null)
+                {
+                    audioManager.PlaySFX(audioManager.portal);
+                }
 
-            // Iniciar la transición y teletransportar al jugador
-            StartCoroutine(LoadTransitionSceneAndTeleport(targetLocation.position));
+                // Iniciar la transición y teletransportar al jugador
+                StartCoroutine(LoadTransitionSceneAndTeleport(targetLocation.transform.position));
+            }
+            else
+            {
+                Debug.LogWarning("No se ha establecido un destino para el teletransporte.");
+            }
         }
     }
 
-    // Método para cargar la escena de transición y teletransportar al jugador
     public IEnumerator LoadTransitionSceneAndTeleport(Vector3 targetPosition)
     {
         // Cargar la escena de transición de manera asíncrona
@@ -67,14 +118,19 @@ public class TeleportOnTouch : MonoBehaviour
         // Descargar la escena de transición
         SceneManager.UnloadSceneAsync("loadingScene");
 
-        // Limpiar los botones y ocultar el panel si era necesario
-        panel.SetActive(false);
+        // Ocultar el panel si era necesario
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
     }
 
-    // Este método podría cerrarse si deseas ocultar el panel de portales manualmente
     public void ClosePortalPanel()
     {
         // Ocultar el panel
-        panel.SetActive(false);
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
     }
 }
