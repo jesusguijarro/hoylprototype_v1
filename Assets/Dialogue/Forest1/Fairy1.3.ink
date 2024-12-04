@@ -1,10 +1,10 @@
 INCLUDE ../globals.ink
 
+¡Lo logramos,  ~PlayerUsername! #speaker:Hada #portrait:fairy_happy #layout:right
+
 -> main
 
 === main ===
-
-- ¡Lo logramos,  ~PlayerUsername! #speaker:Hada #portrait:fairy_happy #layout:right
 
 - !Fue una dura batalla! Sin considerar esta batalla ¿como te sientes normalmente tú ~PlayerUsername? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 17
 
