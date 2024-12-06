@@ -28,13 +28,14 @@ public class Goblin : Interactable, IEnemy
 
     [SerializeField] private Healthbar _healthbar;
 
+    private bool isDead = false; // Bandera para evitar comportamientos no deseados tras la muerte
+
     void Start()
     {
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
-            new LootDrop("key", 30),            
-
+            new LootDrop("key", 30),
         };
 
         ID = 0;
@@ -55,6 +56,8 @@ public class Goblin : Interactable, IEnemy
 
     void FixedUpdate()
     {
+        if (isDead) return; // Si el goblin está muerto, no hace nada
+
         withinAggroColliders = Physics.OverlapSphere(transform.position, 10, aggroLayerMask); // aggro radius
         if (withinAggroColliders.Length > 0)
         {
@@ -64,6 +67,8 @@ public class Goblin : Interactable, IEnemy
 
     public void PerformAttack()
     {
+        if (isDead) return; // No atacar si está muerto
+
         Debug.Log("Perform Attack invoked");
         enemyAnimator.SetBool("isAttacking", true);
         if (armColliderDamage != null)
@@ -83,6 +88,8 @@ public class Goblin : Interactable, IEnemy
 
     public void TakeDamage(int amount)
     {
+        if (isDead) return; // No recibir daño si está muerto
+
         Debug.Log("Took damage.");
         currentHealth -= amount;
         _healthbar.UpdateHealthBar(maxHealth, currentHealth);
@@ -95,11 +102,11 @@ public class Goblin : Interactable, IEnemy
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        // Reproducir el audio si no está sonando
+        // Reproducir la música de persecución con un fade-in
         if (chaseAudio != null && !audioSource.isPlaying)
         {
             audioSource.clip = chaseAudio;
-            audioSource.Play();
+            StartCoroutine(FadeInAudio(audioSource, 1.0f, 0.5f)); // Fade-in a volumen 0.5
         }
 
         if (distanceToPlayer > navAgent.stoppingDistance)
@@ -119,13 +126,20 @@ public class Goblin : Interactable, IEnemy
 
     public void Die()
     {
-        
+        if (isDead) return; // Evitar múltiples llamadas a Die
+
+        isDead = true; // Marcar como muerto
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
-        StartCoroutine(DestroyAfterAnimation());
-        audioSource.Stop();
-        globalAudioManager.ResumeMusic();
 
+        // Detener audio inmediatamente y realizar fade-out
+        StartCoroutine(FadeOutAudio(audioSource, 0.5f, () =>
+        {
+            audioSource.Stop();
+            globalAudioManager.ResumeMusic(); // Reanudar música principal después del fade-out
+        }));
+
+        StartCoroutine(DestroyAfterAnimation());
     }
 
     private IEnumerator DestroyAfterAnimation()
@@ -152,5 +166,34 @@ public class Goblin : Interactable, IEnemy
             PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
             instance.ItemDrop = item;
         }
+    }
+
+    private IEnumerator FadeInAudio(AudioSource source, float duration, float targetVolume)
+    {
+        float startVolume = 0f;
+        source.volume = startVolume;
+        source.Play();
+
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            source.volume = Mathf.Lerp(startVolume, targetVolume, t / duration);
+            yield return null;
+        }
+
+        source.volume = targetVolume; // Asegúrate de alcanzar el volumen objetivo
+    }
+
+    private IEnumerator FadeOutAudio(AudioSource source, float duration, System.Action onComplete = null)
+    {
+        float startVolume = source.volume;
+
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            source.volume = Mathf.Lerp(startVolume, 0, t / duration);
+            yield return null;
+        }
+
+        source.volume = 0; // Asegúrate de que el volumen sea 0 al finalizar
+        onComplete?.Invoke(); // Llama al callback si se proporcionó
     }
 }

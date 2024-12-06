@@ -20,66 +20,72 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    // Método para pausar la música principal y reproducir un clip temporal
     public void PlayTemporaryMusic(AudioClip tempClip)
     {
         if (musicSource.isPlaying)
         {
-            musicSource.Pause(); // Pausa la música de fondo
-            isMusicPaused = true; // Marca que la música está pausada
+            musicSource.Pause();
+            isMusicPaused = true;
         }
 
-        // Crear un AudioSource temporal
         GameObject tempObject = new GameObject("TempAudioSource");
         tempSource = tempObject.AddComponent<AudioSource>();
         tempSource.clip = tempClip;
         tempSource.Play();
 
-        // Inicia una coroutine para reanudar la música principal
         StartCoroutine(WaitForTempMusicToEnd(tempObject));
     }
 
-    // Coroutine para esperar que termine la música temporal
     private IEnumerator WaitForTempMusicToEnd(GameObject tempObject)
     {
         while (tempSource.isPlaying)
         {
-            yield return null; // Espera mientras se reproduce
+            yield return null;
         }
 
-        Destroy(tempObject); // Destruye el objeto temporal
+        Destroy(tempObject);
 
-        // Reanuda la música principal si estaba pausada
         if (isMusicPaused)
         {
-            musicSource.Play();
-            isMusicPaused = false; // Marca que la música ya no está pausada
+            ResumeMusic();
         }
     }
 
-    // Método para pausar la música principal
     public void PauseMusic()
     {
         if (musicSource.isPlaying)
         {
             musicSource.Pause();
-            isMusicPaused = true; // Marca que la música está pausada
+            isMusicPaused = true;
         }
     }
 
-    // Método para reanudar la música principal
     public void ResumeMusic()
     {
         if (isMusicPaused)
         {
-            musicSource.Play();
-            isMusicPaused = false; // Marca que la música ya no está pausada
+            StartCoroutine(FadeInAudio(musicSource, 1.0f));
+            isMusicPaused = false;
         }
     }
 
-    // Método para reproducir efectos de sonido (sin cambios)
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
+    }
+
+    private IEnumerator FadeInAudio(AudioSource source, float duration)
+    {
+        float startVolume = 0f;
+        source.volume = startVolume;
+        source.Play();
+
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            source.volume = Mathf.Lerp(startVolume, 1.0f, t / duration);
+            yield return null;
+        }
+
+        source.volume = 1.0f;
     }
 }
