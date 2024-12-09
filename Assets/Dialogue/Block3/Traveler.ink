@@ -16,7 +16,7 @@
 
 - Si lo logras al parecer podrás reunirte con el gran Hannibal! #speaker:Viajero #portrait:traveler_happy #layout:right
 
-- ¡Veré como me las arreglo, muchas gracias! #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- ¡Veré como me las arreglo, muchas gracias! #speaker:~PlayerUsername #portrait:male_player_happy #layout:left
 
 
 -> END

@@ -1,4 +1,4 @@
- Debemos actuar rápido antes de que el rey de las sombras se dé cuenta de nuestra presencia. Tu puedes liberar al hada Aurora y derrotar al mal que acecha en este lugar. #speaker:Furry #portrait:furry_neutral #layout:right
+ Debemos actuar rápido antes de que el rey de las sombras se dé cuenta de nuestra presencia. Tu puedes liberar al hada Aurora y derrotar al mal que asecha en este lugar. #speaker:Furry #portrait:furry_neutral #layout:right
 
 -> main
 

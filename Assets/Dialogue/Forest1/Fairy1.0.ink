@@ -1,8 +1,10 @@
+
+
+¿Dónde estoy?, ¿Qué es este lugar? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left   
+
 -> main
 
 === main ===
-    
-- ¿Dónde estoy?, ¿Qué es este lugar? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left    
     
 - ¡Saludos, ~PlayerUsername! Bienvenido al Bosque Encantado #speaker:Hada #portrait:fairy_neutral #layout:right
 

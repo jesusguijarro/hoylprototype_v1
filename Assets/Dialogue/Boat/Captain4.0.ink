@@ -10,7 +10,7 @@
 
 - Mientras la tomo podrías traer algo de dentro de la cabina ~PlayerUsername #speaker:Capitan #portrait:captain_neutral #layout:right
 
-- Es hora de descansar mientras hace efecto Jugador, debes de descansar también
+- Es hora de descansar mientras hace efecto Jugador, debes de descansar también...
 
 -> END
 

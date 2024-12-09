@@ -11,25 +11,25 @@ Hola de nuevo ~PlayerUsername! Muchos de estos problemas como el que acabamos de
 //pregunta 11
 
 +[Me llevo bien con la gente]
-    ~ question11 = 0
+    ~ q11 = 0
     Me alegra escuchar eso #portrait:furry_happy
 +[Me peleo muchas veces]
-    ~ question11 = 1
+    ~ q11 = 1
     Oh no puede ser! #portrait:furry_sad
 +[Me peleo siempre]
-    ~ question11 = 2
+    ~ q11 = 2
     Es triste escuchar eso #portrait:furry_sad
 
 - Los amigos son muy importantes en estas situaciones ¿tienes amigos ~PlayerUsername? #portrait:furry_neutral //22 
 
 +[Tengo muchos amigos]
-    ~ question22 = 0
+    ~ q22 = 0
     Me alegra demasiado escuchar eso #portrait:furry_happy
 +[Tengo muchos amigos pero me gustaria tener mas]
-    ~ question22 = 1
+    ~ q22 = 1
     Es bueno escuchar eso #portrait:furry_happy
 +[No tengo amigos]
-    ~ question22 = 2
+    ~ q22 = 2
     Es triste escuchar eso #portrait:furry_sad
 
 - ¡Ahora todo el bosque te consideramos un gran amigo! #portrait:furry_happy

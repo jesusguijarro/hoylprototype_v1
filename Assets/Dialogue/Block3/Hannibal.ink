@@ -19,13 +19,13 @@ INCLUDE ../globals.ink
 - En tu mundo ¿qué tal es tu trabajo en la escuela ~PlayerUsername? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //23
 
 +[Es bueno]
-    ~ question23 = 0
+    ~ q23 = 0
     Me alegra demasiado escuchar eso #portrait:hannibal_happy
 +[No es tan bueno como antes]
-    ~ question23 = 1
+    ~ q23 = 1
     Eso puede ser normal solo es cuestion de mejorar #portrait:hannibal_neutral
 +[Lo llevo mejor que antes]
-    ~ question23 = 2
+    ~ q23 = 2
     Que bueno es escuchar eso #portrait:hannibal_happy
 
 - En este mundo te has desempeñado muy bien en tus aventuras! #speaker:Hannibal #portrait:hannibal_happy #layout:right
@@ -43,38 +43,38 @@ INCLUDE ../globals.ink
 - Conforme tu aspecto ~PlayerUsername, ¿cómo te sientes? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //14
 
 +[Tengo buen aspecto]
-    ~ question14 = 0
+    ~ q14 = 0
     Me algra escuchar que pienses eso #portrait:hannibal_happy
 +[Hay algunas cosas de mi aspecto que no me gustan]
-    ~ question14 = 1
+    ~ q14 = 1
     A veces esta bien que pensemos eso #portrait:hannibal_neutral
 +[Soy feo]
-    ~ question14 = 2
+    ~ q14 = 2
     Es muy triste escuchar eso #portrait:hannibal_sad
     
 - Y en general ~PlayerUsername, ¿te gusta cómo eres? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //7
 
 +[Me odio]
-    ~ question7 = 0
+    ~ q07 = 0
     Es triste escuchar eso #portrait:hannibal_sad
 +[No me gusta como soy] 
-    ~ question7 = 1
+    ~ q07 = 1
     Es triste escuchar eso #portrait:hannibal_sad
 +[Me gusta como soy]
-    ~ question7 = 2
+    ~ q07 = 2
     Me alegra escuchar eso #portrait:hannibal_happy
 
 - De sus pociones se habla en todos lados, ¿cómo llego a ser tan bueno en ello? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
 
 - Primero te preguntaré, ¿cómo te ves comparado con las demás personas ~PlayerUsername? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //14
 +[Nunca podré ser tan bueno como otros]
-    ~ question14 = 0
+    ~ q14 = 0
     Que triste es escuchar eso #portrait:hannibal_sad
 +[Si quiero puedo ser tan bueno como otros]
-    ~ question14 = 1
+    ~ q14 = 1
     Me alegra que pienses asi #portrait:hannibal_happy
 +[Soy tan bueno como otros]
-    ~ question14 = 2
+    ~ q14 = 2
     Que bueno es ver que pienses asi #portrait:hannibal_happy
 
 - La clave está en dejar de darle importancia a lo que digan los demás. #speaker:Hannibal #portrait:hannibal_neutral #layout:right
