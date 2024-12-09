@@ -27,13 +27,13 @@ INCLUDE ../globals.ink
 
 - En tu mundo donde hay escuela ¿te diviertes ~PlayerUsername? #speaker:Capitan #portrait:captain_neutral #layout:right //21
 +[Nunca] 
-    ~ q21 = 0
+    ~ q21 = 2
     Me entristece oir eso #portrait:captain_sad
 +[De vez en cuando]
     ~ q21 = 1
     A veces es normal que no nos divirtamos #portrait:captain_sad
 +[Muchas veces]
-    ~ q21 = 2
+    ~ q21 = 0
     Eso me alegra demasiado#portrait:captain_happy
     
 - Sigamos reparando el barco ~PlayerUsername, ¿a qué lugar te gustaría ir ahora? Dirigite al portal y elige tu destino! #speaker:Capitan #portrait:captain_happy #layout:right

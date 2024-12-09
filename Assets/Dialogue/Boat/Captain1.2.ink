@@ -19,13 +19,13 @@ El futuro es incierto, pero estamos juntos en esta aventura. #speaker:Capitán #
 
 - Probablemente sientas que es una carga buscar las piezas faltantes ¿te cuesta hacer este tipo de deberes en tu día a día? #portrait:captain_neutro // 15
 +[Siempre me cuesta]
-    ~ q15 = 0
+    ~ q15 = 2
     Eso me pone triste! #portrait:captain_sad
 +[Muchas veces me cuesta]
     ~ q15 = 1
     Eso me pone triste! #portrait:captain_sad
 +[No me cuesta]
-    ~ q15 = 2
+    ~ q15 = 0
     Genial, eso me pone feliz! #portrait:captain_happy
 
 - Dicho esto jugador, dirigete al portal que esta en el barco. #portrait:captain_neutro

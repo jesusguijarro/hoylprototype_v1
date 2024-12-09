@@ -33,25 +33,25 @@ INCLUDE ../globals.ink
 - Hay que aprovechar y comamos algo, ¿siempre tienes hambre en tu día a día? #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 18
 
 +[La mayoria de los dias no tengo ganas de comer]
-    ~ q18 = 0
+    ~ q18 = 2
     Eso me pone triste! #portrait:fairy_sad
 +[Muchos dias no tengo ganas de comer]
     ~ q18 = 1
     Eso me pone triste! #portrait:fairy_sad
 +[Como muy bien]
-    ~ q18 = 2
+    ~ q18 = 0
     Ohh, eso me entristece! #portrait:fairy_happy
 
 - Personalmente en estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 13
 
 +[No puedo decidirme]
-    ~ q13 = 0
+    ~ q13 = 2
     Que dificil cuando no podemos decidir! #portrait:fairy_sad
 +[Me cuesta decidirme]
     ~ q13 = 1
     Eso suele paasarme tambien! #portrait:fairy_sad
 +[Me decido fácilmente]
-    ~ q13 = 2
+    ~ q13 = 0
     Me alegra escuchar eso! #portrait:fairy_happy
 
 - A a mí me cuesta mucho decidirme! #portrait:fairy_sad
@@ -59,13 +59,13 @@ INCLUDE ../globals.ink
 - Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 16
 
 +[Todas las noches me cuesta dormirme]
-    ~ q16 = 0
+    ~ q16 = 2
     Eso debe ser muy complicado! #portrait:fairy_sad
 +[Muchas noches me cuesta dormirme]
     ~ q16 = 1
     Eso suele paasarme tambien! #portrait:fairy_sad
 +[Duermo muy bien]
-    ~ q16 = 2
+    ~ q16 = 0
     Me alegra escuchar eso! #portrait:fairy_happy
 
 - Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Hada #portrait:fairy_neutro #layout:right

@@ -55,26 +55,26 @@ INCLUDE ../globals.ink
 - Y en general ~PlayerUsername, ¿te gusta cómo eres? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //7
 
 +[Me odio]
-    ~ q07 = 0
+    ~ q07 = 2
     Es triste escuchar eso #portrait:hannibal_sad
 +[No me gusta como soy] 
     ~ q07 = 1
     Es triste escuchar eso #portrait:hannibal_sad
 +[Me gusta como soy]
-    ~ q07 = 2
+    ~ q07 = 0
     Me alegra escuchar eso #portrait:hannibal_happy
 
 - De sus pociones se habla en todos lados, ¿cómo llego a ser tan bueno en ello? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
 
 - Primero te preguntaré, ¿cómo te ves comparado con las demás personas ~PlayerUsername? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //14
 +[Nunca podré ser tan bueno como otros]
-    ~ q14 = 0
+    ~ q24 = 2
     Que triste es escuchar eso #portrait:hannibal_sad
 +[Si quiero puedo ser tan bueno como otros]
-    ~ q14 = 1
+    ~ q24 = 1
     Me alegra que pienses asi #portrait:hannibal_happy
 +[Soy tan bueno como otros]
-    ~ q14 = 2
+    ~ q24 = 0
     Que bueno es ver que pienses asi #portrait:hannibal_happy
 
 - La clave está en dejar de darle importancia a lo que digan los demás. #speaker:Hannibal #portrait:hannibal_neutral #layout:right

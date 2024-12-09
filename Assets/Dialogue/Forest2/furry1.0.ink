@@ -10,13 +10,13 @@ El Hada Aurora ha sido capturada por el rey de las sombras. Necesitamos tu ayuda
 
 - En situaciones como esta, ¿cómo manejas la calma ~PlayerUsername? #speaker:Furry #portrait:furry_neutral #layout:right //pregunta 11
 +[Las cosas me preocupan siempre]
-    ~ q11 = 0
+    ~ q11 = 2
     Eso es muy triste #portrait:furry_sad
 +[Las cosas me preocupan muchas veces]
     ~ q11 = 1
     Eso me pone muy triste #portrait:furry_sad
 +[Las cosas me preocupan de cuando en cuando]
-    ~ q11 = 2
+    ~ q11 = 0
     Es normal preocuparnos algunas veces#portrait:furry_neutral
 
 - Hace mucho tiempo yo vivía con el miedo constante de que me pasarán cosas malas. #speaker:Furry #portrait:furry_neutral #layout:right
@@ -38,7 +38,7 @@ El Hada Aurora ha sido capturada por el rey de las sombras. Necesitamos tu ayuda
 - ¿Tú qué piensas sobre las cosas malas que pasan a tu al rededor ~PlayerUsername? #portrait:furry_neutral //8
 
 +[Todas las cosas malas son culpa mia]
-    ~ q08 = 0
+    ~ q08 = 2
     Es triste escuchar eso. #portrait:furry_sad
     -> DONE
 +[Muchas cosas malas son culpa mia]
@@ -46,7 +46,7 @@ El Hada Aurora ha sido capturada por el rey de las sombras. Necesitamos tu ayuda
     Eso me pone muy triste. #portrait:furry_sad
     -> DONE
 +[Generalmente no tengo la culpa de que ocurran cosas malas]
-    ~ q08 = 2
+    ~ q08 = 0
     Que bueno que pienses eso. #portrait:furry_happy
     -> DONE
     

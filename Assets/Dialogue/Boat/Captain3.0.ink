@@ -16,25 +16,25 @@ INCLUDE ../globals.ink
 
 - ¿Alguna vez tienes ganas de llorar? //10
 +[Tengo ganas de llorar todos los dias]
-    ~ q10 = 0
+    ~ q10 = 2
     Me da mucha tristeza escuchar eso #portrait:captain_sad
 +[Tengo ganas de llorar muchos dias]
     ~ q10 = 1
     Me sa mucha tristeza escuchar eso #portrait:captain_sad
 +[Tengo ganas de llorar de vez en cuando]
-    ~ q10 = 2
+    ~ q10 = 0
     A veces es normal querer llorar de vez en cuando #portrait:captain_neutral
 
 - Si alguna vez te pasará algo jugador, alguien se preocuparía por ti, ¿alguien te quiere? //25
 
 +[Nadie me quiere]
-    ~ q25 = 0
+    ~ q25 = 2
     Es triste escuchar eso #captain_sad
 +[No estoy seguro de que alguien me quiera]
     ~ q25 = 1
     Muchas de las veces podemos pensar eso #captain_sad
 +[Estoy seguro de que alguien me quiere]
-    ~ q25 = 2
+    ~ q25 = 0
     Me alegra escuchar eso #captain_happy
 
 - Te preguntarás Jugador, por qué re pregunto todo esto. #speaker:Capitan #portrait:captain_neutral #layout:right
@@ -59,10 +59,10 @@ INCLUDE ../globals.ink
     ~ q09 = 0
     Me alegra mucho escuchar eso #captain_happy
 +[Pienso en matarme pero no lo haria]
-    ~ q09 = 0
+    ~ q09 = 1
     Que triste es escuchar eso #captain_sad
 +[Quiero matarme]
-    ~ q09 = 0
+    ~ q09 = 2
     Es demasiado triste escuchar eso #captain_sad
     
 - En estos momentos lo unico que me podría salvar es una de las posiones del legendario Hannibal. #speaker:Capitan #portrait:captain_neutral #layout:right
