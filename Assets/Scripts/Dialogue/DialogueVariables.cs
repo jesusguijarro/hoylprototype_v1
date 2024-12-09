@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 using System.IO;
+using UnityEngine.Networking;
 
 public class DialogueVariables
 {
@@ -29,7 +30,6 @@ public class DialogueVariables
         VariablesToStory(story);
         story.variablesState.variableChangedEvent += VariableChanged;
     }
-
     public void StopListening(Story story) 
     {
         story.variablesState.variableChangedEvent -= VariableChanged;
@@ -38,12 +38,37 @@ public class DialogueVariables
     {
         Debug.Log("Variable changed: " + name + " = " + value);
         // only maintain variables that were initialized from the globals ink file
+        string questionString = name.Substring(1, 2);
+        int qNumber = int.Parse(questionString);
+
+        // Try to convert Ink.Runtime.Object to int
+        int answerValue = 0;
+        if (value is Ink.Runtime.IntValue intValue)
+        {
+            answerValue = intValue.value;
+            Debug.Log("Converted value to int: " + answerValue);
+        }
+        else
+        {
+            Debug.LogError("Value is not an integer: " + value);
+        }
+
+        string username = PlayerPrefs.GetString("PlayerUsername");
+
+        Debug.Log("qNumber " + qNumber);
+        Debug.Log("answerValue " + answerValue);
+        Debug.Log("username" + username);
+
+
+        AnswerManager.Instance.SendAnswerToServer(qNumber, answerValue, username);
+        // StartCoroutine(PostSaveAnswer(qNumber, answerValue, username));
+
         if (variables.ContainsKey(name))
         {
             variables.Remove(name);
             variables.Add(name, value);
         }
-    }   
+    }
     private void VariablesToStory(Story story)
     {
         foreach (KeyValuePair<string, Ink.Runtime.Object> variable in variables)
