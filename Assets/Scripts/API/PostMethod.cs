@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class PostMethod : MonoBehaviour
 {
     //public GameObject outputArea;
@@ -40,7 +41,7 @@ public class PostMethod : MonoBehaviour
         TextMeshProUGUI statusText = statusPanel.GetComponentInChildren<TextMeshProUGUI>();
         statusText.text = "Cargando...";
 
-        string uri = "http://localhost:8083/graphql";
+        string uri = "http://192.168.1.76:8083/graphql";
 
         string name = nameInputField.text;
         string ageStr = ageInputField.text;
@@ -78,6 +79,7 @@ public class PostMethod : MonoBehaviour
             Debug.Log("JSON Payload: " + json);
 
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
+            //request.certificateHandler = new BypassCertificate();
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.uploadHandler.contentType = "application/json; charset=utf-8";
             request.downloadHandler = new DownloadHandlerBuffer();
@@ -96,6 +98,7 @@ public class PostMethod : MonoBehaviour
                 Debug.Log("Response: " + request.downloadHandler.text);                
                 statusPanel.SetActive(false);
                 PlayerPrefs.SetString("PlayerUsername",username);
+                SceneManager.LoadScene("SampleScene");
             }
         }
     }

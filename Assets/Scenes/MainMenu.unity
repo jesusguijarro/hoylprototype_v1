@@ -549,7 +549,6 @@ GameObject:
   - component: {fileID: 70033850}
   - component: {fileID: 70033854}
   - component: {fileID: 70033855}
-  - component: {fileID: 70033856}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -673,18 +672,6 @@ MonoBehaviour:
   nameInputField: {fileID: 1467900200}
   ageInputField: {fileID: 8422984}
   userInputField: {fileID: 724214637}
---- !u!114 &70033856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70033848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb1e41443ec08b418dff862ea9cfad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &96933139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,7 +3843,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 70033856}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RegisterMenuToGame, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
