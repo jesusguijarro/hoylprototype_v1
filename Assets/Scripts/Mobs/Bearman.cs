@@ -21,7 +21,7 @@ public class Bearman : Interactable, IEnemy
 
     Animator enemyAnimator;
 
-    //[SerializeField] private Healthbar _healthbar;
+    [SerializeField] private Healthbar _healthbar;
     void Start()
     {
         Droptable = new DropTable();
@@ -37,10 +37,10 @@ public class Bearman : Interactable, IEnemy
         characterStats = new CharacterStats(6, 10, 2);
         currentHealth = maxHealth;
 
-        //if (_healthbar) Debug.Log("_healthbar exists");
-        //else Debug.Log("_healthbar don't exists");
+        if (_healthbar) Debug.Log("_healthbar exists");
+        else Debug.Log("_healthbar don't exists");
 
-        //_healthbar.UpdateHealthBar(maxHealth, currentHealth);
+        _healthbar.UpdateHealthBar(maxHealth, currentHealth);
 
         enemyAnimator = GetComponentInChildren<Animator>();
     }
@@ -77,7 +77,7 @@ public class Bearman : Interactable, IEnemy
     {
         Debug.Log("Took damage.");
         currentHealth -= amount;
-        //_healthbar.UpdateHealthBar(maxHealth, currentHealth);
+        _healthbar.UpdateHealthBar(maxHealth, currentHealth);
         if (currentHealth <= 0)
             Die();
     }
