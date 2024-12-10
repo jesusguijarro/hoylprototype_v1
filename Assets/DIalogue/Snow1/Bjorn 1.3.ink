@@ -15,7 +15,7 @@ INCLUDE ../globals.ink
     ~q17 = 1
     Ohh, eso debe ser duro! #portrait:bjorn_sad
 +[Estoy cansado siempre]
-~q17 = 2
+    ~q17 = 2
     Ohh, eso debe ser duro! #portrait:bjorn_sad
     
 - Que tranquilidad se ha quedado, ¿cómo te sientes?#speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 20
