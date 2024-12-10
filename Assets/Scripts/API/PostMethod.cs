@@ -41,7 +41,8 @@ public class PostMethod : MonoBehaviour
         TextMeshProUGUI statusText = statusPanel.GetComponentInChildren<TextMeshProUGUI>();
         statusText.text = "Cargando...";
 
-        string uri = "http://192.168.1.76:8083/graphql";
+        // string uri = "http://192.168.1.76:8083/graphql"; http://10.1.142.159:8083/graphql
+        string uri = "http://10.1.142.159:8083/graphql";
 
         string name = nameInputField.text;
         string ageStr = ageInputField.text;
@@ -98,6 +99,7 @@ public class PostMethod : MonoBehaviour
                 Debug.Log("Response: " + request.downloadHandler.text);                
                 statusPanel.SetActive(false);
                 PlayerPrefs.SetString("PlayerUsername",username);
+                PlayerPrefs.SetString("PlayerAppearance", appearanceEnumValue.ToString());
                 SceneManager.LoadScene("SampleScene");
             }
         }
