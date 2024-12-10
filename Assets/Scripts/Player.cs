@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public int maxHealth;
     public PlayerLevel PlayerLevel { get; set; }
 
+    [SerializeField] private GameObject playerManPrefab; // Prefab para el personaje masculino
+    [SerializeField] private GameObject playerWomanPrefab; // Prefab para el personaje femenino
     [SerializeField] private GameObject revivePanel; // Referencia al panel de revivir
     [SerializeField] private float reviveOffset = 2f; // Distancia de desplazamiento al revivir
 
@@ -15,10 +17,28 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        // Configura PlayerAppearance
+        string playerAppearance = PlayerPrefs.GetString("PlayerAppearance");
+        if (playerAppearance == "MALE")
+        {
+            playerManPrefab.SetActive(true);
+            playerWomanPrefab.SetActive(false);
+        }
+        else if (playerAppearance == "FEMALE")
+        {
+            playerManPrefab.SetActive(false);
+            playerWomanPrefab.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("PlayerAppearance value is invalid or missing in PlayerPrefs.");
+        }
+
         PlayerLevel = GetComponent<PlayerLevel>();
         this.currentHealth = this.maxHealth;
         characterStats = new CharacterStats(10, 10, 10);
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+
         string playerUsername = PlayerPrefs.GetString("PlayerUsername");
         Debug.Log("Bienvenido, " + playerUsername + "!");
     }

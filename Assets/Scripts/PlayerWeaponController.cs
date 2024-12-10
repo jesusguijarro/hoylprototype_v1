@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    public GameObject playerHand;
+    public GameObject playerHandWoman;
+    public GameObject playerHandMan;
+    private GameObject playerHand;
     public GameObject EquippedWeapon  { get; set; }
 
     //Transform spawnProjectile;
@@ -16,7 +18,21 @@ public class PlayerWeaponController : MonoBehaviour
     {
         //spawnProjectile = transform.Find("ProjectileSpawn");
         characterStats = GetComponent<Player>().characterStats;
-        
+
+        string playerAppearance = PlayerPrefs.GetString("PlayerAppearance");
+        if (playerAppearance == "MALE")
+        {
+            playerHand = playerHandMan.gameObject;
+        }
+        else if (playerAppearance == "FEMALE")
+        {
+            playerHand = playerHandWoman.gameObject;
+        }
+        else
+        {
+            Debug.LogError("PlayerAppearance value is invalid or missing in PlayerPrefs.");
+        }
+
     }
     public void EquipWeapon(Item itemToEquip)
     {
