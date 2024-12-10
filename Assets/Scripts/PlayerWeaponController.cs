@@ -62,7 +62,7 @@ public class PlayerWeaponController : MonoBehaviour
         int damageToDeal = (characterStats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue()*2) 
             + Random.Range(2,8);
         damageToDeal += CalculateCrit(damageToDeal);
-        Debug.Log("Damage Dealt: " + damageToDeal);
+        //Debug.Log("Damage Dealt: " + damageToDeal);
         return damageToDeal;
     }
 

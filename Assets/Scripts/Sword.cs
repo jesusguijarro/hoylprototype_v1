@@ -24,11 +24,11 @@ public class Sword : MonoBehaviour, IWeapon
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Collision");
+        //Debug.Log("Collision");
         if (isAttacking && col.CompareTag("Enemy"))
         {
             col.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
-            Debug.Log("Enemy hit with damage: " + CurrentDamage);
+            //Debug.Log("Enemy hit with damage: " + CurrentDamage);
             isAttacking = false; // Reset attack state to avoid multiple hits
         }
     }
