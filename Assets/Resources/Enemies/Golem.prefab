@@ -606,6 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthbarSprite: {fileID: 3929299727191473546}
+  _reduceSpeed: 2
 --- !u!1 &3818197219312273723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,7 +1194,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   currentHealth: 0
-  maxHealth: 300
+  maxHealth: 700
   pickupItem: {fileID: 0}
   _healthbar: {fileID: 4713351427589863510}
 --- !u!195 &6188597211190093710
