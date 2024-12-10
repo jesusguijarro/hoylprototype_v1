@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthbarSprite: {fileID: 5587135809491051804}
+  _reduceSpeed: 2
 --- !u!1 &2515453886444328740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1155,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 500
   pickupItem: {fileID: 0}
+  guideUI: {fileID: 2138074005485931627, guid: c4dc7dc09c1be28439e5e930a3bdc1a3, type: 3}
+  showPanel: {fileID: 2600197220434079229, guid: 245629aa347949843974683b597afe74, type: 3}
   _healthbar: {fileID: 6342981250008691568}
 --- !u!195 &4977186883430045567
 NavMeshAgent:

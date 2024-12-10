@@ -4,31 +4,46 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class GuideUI : MonoBehaviour
+public class GuideUIManager : MonoBehaviour
 {
-    TextMeshProUGUI titleGuide, descriptionGuide;
-    Image imageGuide;
-    Button continueButton;
+    public static GuideUIManager Instance { get; private set; }
+
+    public GameObject guidePanel;
+    public TextMeshProUGUI titleGuide, descriptionGuide;
+    public Image imageGuide;
+    public Button continueButton;
+
+    private void Awake()
+    {
+        // Ensure there's only one instance
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes if necessary
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
-        titleGuide = transform.Find("Title_Guide").GetComponent<TextMeshProUGUI>();
-        descriptionGuide = transform.Find("Description_Guide").GetComponent <TextMeshProUGUI>();
-        imageGuide = transform.Find("Image_Guide").GetComponent<Image>();
-        continueButton = transform.Find("Button").GetComponent<Button>();
-        gameObject.SetActive(false);
+        //gameObject.SetActive(true);        
+        guidePanel.SetActive(false);
+        continueButton.onClick.AddListener(Disable);
     }
-
-    public void Enable(string title, string description, Sprite image)
-    {
+    public void Parameters(string title, string description, Sprite image)
+    {        
         titleGuide.text = title;
         descriptionGuide.text = description;
         imageGuide.sprite = image;
-        gameObject.SetActive(true);
-    }
-
+        //gameObject.SetActive(true);
+        guidePanel.SetActive(true);
+    }    
     public void Disable()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        guidePanel.SetActive(false);
     }
 }

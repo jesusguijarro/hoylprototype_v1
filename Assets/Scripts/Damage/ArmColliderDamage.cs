@@ -15,12 +15,12 @@ public class ArmColliderDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("Enemy Collision");
+        //Debug.Log("Enemy Collision");
         if (isAttacking && col.CompareTag("Player"))
         {
             Player player = col.GetComponent<Player>();            
             player.TakeDamage(CurrentDamage);
-            Debug.Log("Player hit with damage: " + CurrentDamage);
+            //Debug.Log("Player hit with damage: " + CurrentDamage);
             isAttacking = false;
         }
     }

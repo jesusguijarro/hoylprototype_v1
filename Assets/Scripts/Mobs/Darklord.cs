@@ -24,6 +24,9 @@ public class Darklord : Interactable, IEnemy
 
     Animator enemyAnimator;
 
+    // Guide UI
+    //public GuideUIManager guideUI; 
+
     [SerializeField] private Healthbar _healthbar;       
     void Start() {
         Droptable = new DropTable();
@@ -51,11 +54,11 @@ public class Darklord : Interactable, IEnemy
     }
     public void PerformAttack()
     {
-        Debug.Log("Perform Attack invoked");
+        //Debug.Log("Perform Attack invoked");
         enemyAnimator.SetBool("isAttacking", true);
         if (armColliderDamage != null)
         {
-            Debug.Log("PerformAttack");
+            //Debug.Log("PerformAttack");
             armColliderDamage.PerformAttack(10);
             StartCoroutine(ResetAttackActive(0.5f));
         }
@@ -68,7 +71,7 @@ public class Darklord : Interactable, IEnemy
     }
     public void TakeDamage(int amount)
     {
-        Debug.Log("Took damage.");
+        //Debug.Log("Took damage.");
         currentHealth -= amount;
         _healthbar.UpdateHealthBar(maxHealth, currentHealth);
         if (currentHealth <= 0)
@@ -76,6 +79,7 @@ public class Darklord : Interactable, IEnemy
     }
     void ChasePlayer(Player player)
     {
+        //showPanel.ShowPanel();
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -97,9 +101,9 @@ public class Darklord : Interactable, IEnemy
     {
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
-        StartCoroutine(DestroyAfterAnimation());        
+        StartCoroutine(Destroy());        
     }
-    private IEnumerator DestroyAfterAnimation()
+    private IEnumerator Destroy()
     {
         while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
@@ -108,10 +112,22 @@ public class Darklord : Interactable, IEnemy
 
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
+        yield return StartCoroutine(ShowGuide());
+
         CombatEvents.EnemyDied(this);
         Spawner.Respawn();
-        Destroy(gameObject);
+        Destroy(gameObject);        
     }
+
+    private IEnumerator ShowGuide()
+    {
+        yield return new WaitForSeconds(3f);
+
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/fairy_happy");
+
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!","Has derrotado al Senor Oscuro, dirigite con el Hada Aurora en la fogata cerca del puente del Norte!",image);
+    }
+
     void DropLoot()
     {
         Item item = Droptable.GetDrop();
