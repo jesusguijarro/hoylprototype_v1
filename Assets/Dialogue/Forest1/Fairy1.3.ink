@@ -42,7 +42,7 @@ INCLUDE ../globals.ink
     ~ q18 = 0
     Ohh, eso me entristece! #portrait:fairy_happy
 
-- Personalmente en estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 13
+- En estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 13
 
 +[No puedo decidirme]
     ~ q13 = 2

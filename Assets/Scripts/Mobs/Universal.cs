@@ -24,7 +24,7 @@ public class Universal : Interactable, IEnemy
 
     Animator enemyAnimator;
 
-    //[SerializeField] private Healthbar _healthbar;
+    [SerializeField] private Healthbar _healthbar;
     void Start() {
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
@@ -70,7 +70,7 @@ public class Universal : Interactable, IEnemy
     {
         Debug.Log("Took damage.");
         currentHealth -= amount;
-        //_healthbar.UpdateHealthBar(maxHealth, currentHealth);
+        _healthbar.UpdateHealthBar(maxHealth, currentHealth);
         if (currentHealth <= 0)
             Die();
     }
