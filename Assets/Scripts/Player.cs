@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,29 +7,68 @@ public class Player : MonoBehaviour
     public int maxHealth;
     public PlayerLevel PlayerLevel { get; set; }
 
+    [SerializeField] private GameObject revivePanel; // Referencia al panel de revivir
+    [SerializeField] private float reviveOffset = 2f; // Distancia de desplazamiento al revivir
+
+    private Vector3 deathPosition;
+    private bool isRevived = false; // Indica si el jugador ha sido revivido
+
     void Start()
-    {        
+    {
         PlayerLevel = GetComponent<PlayerLevel>();
         this.currentHealth = this.maxHealth;
-        characterStats = new CharacterStats(10,10,10);
+        characterStats = new CharacterStats(10, 10, 10);
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
         string playerUsername = PlayerPrefs.GetString("PlayerUsername");
         Debug.Log("Bienvenido, " + playerUsername + "!");
     }
 
     public void TakeDamage(int amount)
-    {        
+    {
         currentHealth -= amount;
         if (currentHealth <= 0)
             Die();
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
-
     }
 
-    private void Die() 
+    private void Die()
     {
-        Debug.Log("Player dead. Reset health.");
+        // Guarda la posición al morir
+        deathPosition = transform.position;
+        Debug.Log("Player dead. Showing revive panel.");
+        revivePanel.SetActive(true);
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Reviving player. Resetting health.");
         this.currentHealth = this.maxHealth;
         UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
+
+        // Si ya ha sido revivido, no hacer nada más
+        if (isRevived)
+            return;
+
+        // Aquí se llama al método de LoadPlayerPosition que recupera la penúltima posición guardada
+        SavePlayerPosition savePlayerPosition = FindObjectOfType<SavePlayerPosition>(); // Obtener el script que guarda la posición
+        if (savePlayerPosition != null)
+        {
+            savePlayerPosition.LoadPlayerPosition(); // Cargar la penúltima posición guardada
+        }
+        else
+        {
+            Debug.LogError("SavePlayerPosition component not found in the scene.");
+        }
+
+        isRevived = true; // Indica que el jugador ha sido revivido y se ha colocado en la nueva posición
+
+        if (revivePanel != null)
+        {
+            revivePanel.SetActive(false); // Oculta el panel de revivir
+        }
+        else
+        {
+            Debug.LogError("Revive panel no encontrado.");
+        }
     }
 }

@@ -3,7 +3,8 @@ guid: a23f70ae51f49e94cab9c35a53faa404
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - revivePanel: {fileID: 5719700049785137330, guid: 1ffd9b284733c824fbfc81dc3572eaf6, type: 3}
   executionOrder: 100
   icon: {instanceID: 0}
   userData: 

@@ -31,10 +31,6 @@ public class DoorwayTeleport : MonoBehaviour
 
         // Buscar el panel de portal
         panel = transform.Find("Panel_Portal")?.gameObject;
-        if (panel == null)
-        {
-            Debug.LogError("No se encontró el Panel_Portal en el objeto.");
-        }
 
         // Comprobar que targetLocation no sea nulo
         if (targetLocation == null)
