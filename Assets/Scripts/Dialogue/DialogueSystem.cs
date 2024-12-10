@@ -120,6 +120,11 @@ public class DialogueSystem : MonoBehaviour
 
         dialogueVariables.StartListening(currentStory);
 
+        currentStory.BindExternalFunction("endGame", () =>
+        {
+            Debug.Log("Fin del juego.");    
+        });
+
         // reset portrait, layout and speaker
         displayNameText.text = "???";
         portraitAnimator.Play("default");
@@ -128,11 +133,13 @@ public class DialogueSystem : MonoBehaviour
         ContinueStory();
     }
 
-    private void ExitDialogueMode()
+    private IEnumerable ExitDialogueMode()
     {
-
+        yield return new WaitForSeconds(5f);
+        
         dialogueVariables.StopListening(currentStory);
-
+        currentStory.UnbindExternalFunction("endGame");
+        
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";        

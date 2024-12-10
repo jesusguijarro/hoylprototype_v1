@@ -1,3 +1,5 @@
+EXTERNAL endGame()
+    
     ¡Capitán! estoy de vuelta, logré conseguir la posión del gran Hannibal #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
 
 -> main
@@ -10,7 +12,8 @@
 
 - Mientras la tomo podrías traer algo de dentro de la cabina ~PlayerUsername #speaker:Capitan #portrait:captain_neutral #layout:right
 
-- Es hora de descansar mientras hace efecto Jugador, debes de descansar también...
+- Es hora de descansar mientras hace efecto ~PlayerUsername, debes de descansar también...
+
+~ endGame()
 
 -> END
-
