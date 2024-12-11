@@ -112,8 +112,11 @@ public class DialogueSystem : MonoBehaviour
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         string playerName = PlayerPrefs.GetString("PlayerUsername");
-        string inkText = inkJSON.text.Replace("~PlayerUsername", playerName);        
-                
+        string inkText = inkJSON.text.Replace("~PlayerUsername", playerName);
+
+        // Procesar el contenido del archivo Ink
+        inkText = ProcessInkContent(inkText);
+
         currentStory = new Story(inkText);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -122,16 +125,17 @@ public class DialogueSystem : MonoBehaviour
 
         currentStory.BindExternalFunction("endGame", () =>
         {
-            Debug.Log("Fin del juego.");    
+            Debug.Log("Fin del juego.");
         });
 
-        // reset portrait, layout and speaker
+        // Resetear etiquetas iniciales
         displayNameText.text = "???";
         portraitAnimator.Play("default");
         layoutAnimator.Play("right");
 
         ContinueStory();
     }
+
 
     private IEnumerable ExitDialogueMode()
     {
@@ -223,25 +227,27 @@ public class DialogueSystem : MonoBehaviour
 
     private void HandleTags(List<string> currentTags)
     {
-        // loop through each tag and handle it accordingly
+        // Recorre cada etiqueta y manéjala según corresponda
         foreach (string tag in currentTags)
         {
-            // parse the tag
+            // Divide la etiqueta
             string[] splitTag = tag.Split(':');
             if (splitTag.Length != 2)
             {
-                Debug.LogError("Tag could not be appropiately parsed: " + tag);
+                Debug.LogError("Tag could not be appropriately parsed: " + tag);
+                continue;
             }
+
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
 
-            // handle the tag
+            // Maneja la etiqueta
             switch (tagKey)
             {
                 case SPEAKER_TAG:
                     displayNameText.text = tagValue;
                     break;
-                
+
                 case PORTRAIT_TAG:
                     portraitAnimator.Play(tagValue);
                     break;
@@ -249,11 +255,23 @@ public class DialogueSystem : MonoBehaviour
                 case LAYOUT_TAG:
                     layoutAnimator.Play(tagValue);
                     break;
+
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled");
                     break;
             }
-        } 
+        }
+    }
+    public string ProcessInkContent(string inkContent)
+    {
+        string appearance = PlayerPrefs.GetString("PlayerAppearance", "MALE").ToLower(); // Default to "male"
+
+        // Sustituir etiquetas específicas según la apariencia
+        inkContent = inkContent.Replace("player_neutral", $"{appearance}_player_neutral");
+        inkContent = inkContent.Replace("player_happy", $"{appearance}_player_happy");
+        inkContent = inkContent.Replace("player_sad", $"{appearance}_player_sad");
+
+        return inkContent;
     }
 
     private void DisplayChoices()
@@ -307,7 +325,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueVariables.variables.TryGetValue(variableName, out variableValue);
         if (variableName == null)
         {
-            Debug.LogWarning("Ink Variable was found to be null: " + variableName);
+            Debug.LogWarning("Ink Variable was found to be null: " + variableName); 
         }
         return variableValue;
     }
