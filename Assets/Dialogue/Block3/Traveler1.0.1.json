@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^Recuerda tienes que llegar al final del paseo de las piedras, sin caer al agua! ","#","^speaker:Viajero ","/#","#","^portrait:traveler_neutral ","/#","#","^layout:right","/#","\n",{"->":"main"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"main":["end",{"#f":1}],"#f":1}],"listDefs":{}}

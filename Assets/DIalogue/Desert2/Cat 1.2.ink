@@ -6,7 +6,6 @@
 
 === main ===
 
-
 - En situaciones como esta, ¿cómo manejas la calma ~PlayerUsername?. #speaker:Gato #portrait:bastet_neutral #layout:right //11
 +[Las cosas me preocupan siempre]
 ~q11 = 2

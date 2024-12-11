@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^Puedes encontrar la cueva del oso en la isla de la izquierda, mucha suerte! ","#","^speaker:Joven ","/#","#","^portrait:youngwoman_neutral ","/#","#","^layout:right","/#","\n",{"->":"main"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"main":["end",{"#f":1}],"#f":1}],"listDefs":{}}

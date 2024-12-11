@@ -7,17 +7,17 @@ Hola de nuevo ~PlayerUsername! Muchos de estos problemas como el que acabamos de
 
 === main ===
 
-- Normalmente ~PlayerUsername, ¿te llevas bien con la gente? #speaker:Furry #portrait:furry_neutral #layout:right
+- Normalmente ~PlayerUsername, ¿cómo te llevas con la gente? #speaker:Furry #portrait:furry_neutral #layout:right
 //pregunta 11
 
 +[Me llevo bien con la gente]
-    ~ q11 = 2
+    ~ q11 = 0
     Me alegra escuchar eso #portrait:furry_happy
 +[Me peleo muchas veces]
     ~ q11 = 1
     Oh no puede ser! #portrait:furry_sad
 +[Me peleo siempre]
-    ~ q11 = 0
+    ~ q11 = 2
     Es triste escuchar eso #portrait:furry_sad
 
 - Los amigos son muy importantes en estas situaciones ¿tienes amigos ~PlayerUsername? #portrait:furry_neutral //22 
@@ -34,7 +34,7 @@ Hola de nuevo ~PlayerUsername! Muchos de estos problemas como el que acabamos de
 
 - ¡Ahora todo el bosque te consideramos un gran amigo! #portrait:furry_happy
 
-- Escuché que su barco se averió, en agradecimiento los habitantes del bosque prepararon velas, espero que sea de gran ayuda. #speaker:Hada #portrait:furry_happy #layout:right
+- Escuché que su barco se averió, en agradecimiento los habitantes del bosque prepararon velas, espero que sea de gran ayuda. #speaker:Furry #portrait:furry_happy #layout:right
 
 - Dirigite al portal al final del puente, el capitán te espera!.
 
