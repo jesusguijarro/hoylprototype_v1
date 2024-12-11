@@ -6,7 +6,7 @@ INCLUDE ../globals.ink
 
 === main ===
 
-- ¡Gracias Capitán! Estoy buscando respuestas y aventuras. #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- ¡Gracias Capitán! Estoy buscando respuestas y aventuras. #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Antes de continuar, me gustaría hacerte unas preguntas ~PlayerUsername. #speaker:Capitán #portrait:captain_neutral #layout:right
 
