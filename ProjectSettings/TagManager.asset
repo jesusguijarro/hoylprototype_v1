@@ -7,6 +7,8 @@ TagManager:
   - Interactable Object
   - Enemy
   - Audio
+  - Ground
+  - AttackZone
   layers:
   - Default
   - TransparentFX
