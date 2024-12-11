@@ -28,14 +28,14 @@ public class VolumeSettings : MonoBehaviour
     public void SetMusicVolume()
     {
         musicVolume = musicSlider.value;
-        myMixer.SetFloat("Music", Mathf.Log10(musicVolume) * 20);  // Ajusta la música de fondo y de batalla
+        //myMixer.SetFloat("Music", Mathf.Log10(musicVolume) * 20);  // Ajusta la música de fondo y de batalla
         PlayerPrefs.SetFloat("musicVolume", musicVolume);
     }
 
     public void SetSFXVolume()
     {
         sfxVolume = SFXSlider.value;
-        myMixer.SetFloat("SFX", Mathf.Log10(sfxVolume) * 20);  // Ajusta los efectos de sonido
+        //myMixer.SetFloat("SFX", Mathf.Log10(sfxVolume) * 20);  // Ajusta los efectos de sonido
         PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
     }
 

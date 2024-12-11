@@ -20,13 +20,16 @@ public class Golem : Interactable, IEnemy
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
-    //private Collider attackCollider;
-     
+    private AudioManager audioManager;
+    public int cont = 0;
+
     Animator enemyAnimator;
 
     [SerializeField] private Healthbar _healthbar;
+
     void Start()
     {
+        audioManager = AudioManager.Instance;
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
@@ -41,13 +44,12 @@ public class Golem : Interactable, IEnemy
         currentHealth = maxHealth;
 
         if (_healthbar) Debug.Log("_healthbar exists");
-        else Debug.Log("_healthbar don't exists");
+        else Debug.Log("_healthbar doesn't exist");
 
         _healthbar.UpdateHealthBar(maxHealth, currentHealth);
-        //attackCollider = transform.Find("AttackCollider").GetComponent<Collider>();
-        //attackCollider.isTrigger = true;  // Ensure this collider only handles damage as a trigger        
 
-        enemyAnimator = GetComponentInChildren<Animator>();        
+        enemyAnimator = GetComponentInChildren<Animator>();
+        
     }
 
     void FixedUpdate()
@@ -58,22 +60,23 @@ public class Golem : Interactable, IEnemy
             ChasePlayer(withinAggroColliders[0].GetComponent<Player>());
         }
     }
+
     public void PerformAttack()
     {
         enemyAnimator.SetBool("isAttacking", true);
-        //Debug.Log("damage to player");
-        //player.TakeDamage(5);
         if (armColliderDamage != null)
         {
-            Debug.Log("PerformAttack");
+            Debug.Log("Performing attack");
             // Activate damage only during this attack
             armColliderDamage.PerformAttack(10);
-            //playerAnimator.SetTrigger("Attack"); // Trigger attack animation
 
-            // Reset damage after animation duration (adjust timing to animation length)
+            // Reset attack after animation duration
             StartCoroutine(ResetAttackActive(0.5f));
         }
-        else Debug.Log("armColliderDamage is null");
+        else
+        {
+            Debug.Log("armColliderDamage is null");
+        }
     }
 
     IEnumerator ResetAttackActive(float delay)
@@ -82,7 +85,7 @@ public class Golem : Interactable, IEnemy
         enemyAnimator.SetBool("isAttacking", false);
     }
 
-public void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         Debug.Log("Took damage.");
         currentHealth -= amount;
@@ -90,22 +93,27 @@ public void TakeDamage(int amount)
         if (currentHealth <= 0)
             Die();
     }
+
     void ChasePlayer(Player player)
     {
-        //enemyAnimator.Play("Roar");
-        //wait after Roar ends
+        if (cont == 0)
+        {
+            StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
+            cont++;
+        }
+        
+        Debug.Log("Se metio al chasePlayer");
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        // Update destination only if distance is larger than stopping distance
         if (distanceToPlayer > navAgent.stoppingDistance)
         {
             navAgent.SetDestination(player.transform.position);
-            enemyAnimator.SetBool("isMoving", true);  // Start running animation
+            enemyAnimator.SetBool("isMoving", true);  // Start moving animation
         }
         else
         {
-            enemyAnimator.SetBool("isMoving", false); // Stop running animation
+            enemyAnimator.SetBool("isMoving", false); // Stop moving animation
             if (!IsInvoking("PerformAttack"))
             {
                 InvokeRepeating("PerformAttack", 0.5f, 2f);
@@ -115,23 +123,22 @@ public void TakeDamage(int amount)
 
     public void Die()
     {
+        StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
+
         StartCoroutine(DestroyAfterAnimation());
     }
 
-    private IEnumerator DestroyAfterAnimation() {
-        //DropLoot();
-        // Wait until the animator is in the "Die" state to ensure the animation starts
+    private IEnumerator DestroyAfterAnimation()
+    {
         while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
-            yield return null; // Wait until the Die state is active
+            yield return null;
         }
 
-        // Wait for the full duration of the Die animation
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
-        // Now destroy the object after the animation finishes
         CombatEvents.EnemyDied(this);
         Spawner.Respawn();
         Destroy(gameObject);

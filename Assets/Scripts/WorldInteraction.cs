@@ -105,10 +105,13 @@ public class WorldInteraction : MonoBehaviour
 
     void MoveWithWASD()
     {
-
-        // Disable NavMeshAgent's pathfinding while using WASD movement
-        playerAgent.updateRotation = false;
-        playerAgent.isStopped = true;
+        // Verifica si el NavMeshAgent está habilitado
+        if (playerAgent.enabled)
+        {
+            // Disable NavMeshAgent's pathfinding while using WASD movement
+            playerAgent.updateRotation = false;
+            playerAgent.isStopped = true;
+        }
 
         // Get input for movement
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -118,7 +121,7 @@ public class WorldInteraction : MonoBehaviour
         Vector3 movementDirection = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
         Vector3 movement = movementDirection * movementSpeed * Time.deltaTime;
 
-        // Aply movement to the player's position
+        // Apply movement to the player's position
         transform.Translate(movement, Space.World);
 
         // Rotate the player in the direction of movement
@@ -127,7 +130,6 @@ public class WorldInteraction : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
         }
-
     }
 
     void GetInteraction()
@@ -190,7 +192,12 @@ public class WorldInteraction : MonoBehaviour
             playerAnimator.SetBool("isJumping", false);
             playerAnimator.SetBool("isFalling", false);
             isJumping = false;
-            playerAgent.enabled = true; // Re-enable NavMeshAgent when grounded
+
+            // Rehabilita NavMeshAgent si estaba desactivado
+            if (!playerAgent.enabled)
+            {
+                playerAgent.enabled = true;
+            }
 
             // Revert to default collision detection when grounded
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
