@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
@@ -16,23 +14,24 @@ public class VolumeSettings : MonoBehaviour
         {
             LoadVolume();
         }
-        else {
+        else
+        {
             SetMusicVolume();
             SetSFXVolume();
-        }        
+        }
     }
 
     public void SetMusicVolume()
     {
         float volume = musicSlider.value;
-        myMixer.SetFloat("music", Mathf.Log10(volume)*20);
+        myMixer.SetFloat("music", Mathf.Log10(volume) * 20);  // Ajusta la música de fondo y de batalla
         PlayerPrefs.SetFloat("musicVolume", volume);
     }
-    
+
     public void SetSFXVolume()
     {
         float volume = SFXSlider.value;
-        myMixer.SetFloat("SFX", Mathf.Log10(volume)*20);
+        myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);  // Ajusta los efectos de sonido
         PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 

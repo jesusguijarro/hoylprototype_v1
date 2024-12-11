@@ -21,14 +21,11 @@ public class Goblin : Interactable, IEnemy
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
 
-    [SerializeField] private AudioClip chaseAudio; // Referencia al AudioClip
-    private AudioSource audioSource; // AudioSource para reproducir el audio
-    private AudioManager globalAudioManager;
-    Animator enemyAnimator;
+    private Animator enemyAnimator;
 
     [SerializeField] private Healthbar _healthbar;
 
-    private bool isDead = false; // Bandera para evitar comportamientos no deseados tras la muerte
+    private bool isDead = false; // Flag to prevent undesired behavior after death
 
     void Start()
     {
@@ -44,21 +41,13 @@ public class Goblin : Interactable, IEnemy
         characterStats = new CharacterStats(6, 10, 2);
         currentHealth = maxHealth;
         enemyAnimator = GetComponentInChildren<Animator>();
-
-        // Configurar el AudioSource
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-        globalAudioManager = FindObjectOfType<AudioManager>();
     }
 
     void FixedUpdate()
     {
-        if (isDead) return; // Si el goblin está muerto, no hace nada
+        if (isDead) return; // If the goblin is dead, do nothing
 
-        withinAggroColliders = Physics.OverlapSphere(transform.position, 10, aggroLayerMask); // aggro radius
+        withinAggroColliders = Physics.OverlapSphere(transform.position, 10, aggroLayerMask); // Aggro radius
         if (withinAggroColliders.Length > 0)
         {
             ChasePlayer(withinAggroColliders[0].GetComponent<Player>());
@@ -67,7 +56,7 @@ public class Goblin : Interactable, IEnemy
 
     public void PerformAttack()
     {
-        if (isDead) return; // No atacar si está muerto
+        if (isDead) return; // Do not attack if dead
 
         Debug.Log("Perform Attack invoked");
         enemyAnimator.SetBool("isAttacking", true);
@@ -88,7 +77,7 @@ public class Goblin : Interactable, IEnemy
 
     public void TakeDamage(int amount)
     {
-        if (isDead) return; // No recibir daño si está muerto
+        if (isDead) return; // Do not take damage if dead
 
         Debug.Log("Took damage.");
         currentHealth -= amount;
@@ -101,13 +90,6 @@ public class Goblin : Interactable, IEnemy
     {
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        // Reproducir la música de persecución con un fade-in
-        if (chaseAudio != null && !audioSource.isPlaying)
-        {
-            audioSource.clip = chaseAudio;
-            StartCoroutine(FadeInAudio(audioSource, 1.0f, 0.5f)); // Fade-in a volumen 0.5
-        }
 
         if (distanceToPlayer > navAgent.stoppingDistance)
         {
@@ -126,18 +108,11 @@ public class Goblin : Interactable, IEnemy
 
     public void Die()
     {
-        if (isDead) return; // Evitar múltiples llamadas a Die
+        if (isDead) return; // Prevent multiple calls to Die
 
-        isDead = true; // Marcar como muerto
+        isDead = true; // Mark as dead
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
-
-        // Detener audio inmediatamente y realizar fade-out
-        StartCoroutine(FadeOutAudio(audioSource, 0.5f, () =>
-        {
-            audioSource.Stop();
-            globalAudioManager.ResumeMusic(); // Reanudar música principal después del fade-out
-        }));
 
         StartCoroutine(DestroyAfterAnimation());
     }
@@ -166,34 +141,5 @@ public class Goblin : Interactable, IEnemy
             PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
             instance.ItemDrop = item;
         }
-    }
-
-    private IEnumerator FadeInAudio(AudioSource source, float duration, float targetVolume)
-    {
-        float startVolume = 0f;
-        source.volume = startVolume;
-        source.Play();
-
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            source.volume = Mathf.Lerp(startVolume, targetVolume, t / duration);
-            yield return null;
-        }
-
-        source.volume = targetVolume; // Asegúrate de alcanzar el volumen objetivo
-    }
-
-    private IEnumerator FadeOutAudio(AudioSource source, float duration, System.Action onComplete = null)
-    {
-        float startVolume = source.volume;
-
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            source.volume = Mathf.Lerp(startVolume, 0, t / duration);
-            yield return null;
-        }
-
-        source.volume = 0; // Asegúrate de que el volumen sea 0 al finalizar
-        onComplete?.Invoke(); // Llama al callback si se proporcionó
     }
 }
