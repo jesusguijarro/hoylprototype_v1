@@ -8,7 +8,7 @@ INCLUDE ../globals.ink
 
 - ¡Qué enorme aventura has tenido! Conseguiste la primer pieza faltante #speaker:Capitan #portrait:captain_happy #layout:right
 
-- Ha sido una experiencia increíble, Capitán! #speaker:~PlayerUsername #portrait:male_player_neutral #layout:right
+- Ha sido una experiencia increíble, Capitán! #speaker:~PlayerUsername #portrait:player_neutral #layout:right
 
 - Antes de que te pongas cómodo, déjame hacerte una pregunta más. #speaker:Capitan #portrait:captain_neutral #layout:right
 

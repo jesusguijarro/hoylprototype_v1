@@ -18,7 +18,7 @@ INCLUDE ../globals.ink
     ~ q17 = 2
     Ohh, eso debe ser duro! #portrait:fairy_sad
     
-- Que tranquilidad se ha quedado, ¿cómo te sientes? #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 20
+- Que tranquilidad se ha quedado, ¿cómo te sientes normalmente ~PlayerUsername? #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 20
 
 +[Nunca me siento solo]
     ~ q20 = 0

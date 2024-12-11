@@ -18,7 +18,7 @@ INCLUDE ../globals.ink
     ~q17 = 2
     Ohh, eso debe ser duro! #portrait:bjorn_sad
     
-- Que tranquilidad se ha quedado, ¿cómo te sientes?#speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 20
+- Que tranquilidad se ha quedado, ¿cómo te sientes normalmente ~PlayerUsername? #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 20
 
 +[Nunca me siento solo]
     ~q20 = 0
@@ -31,6 +31,7 @@ INCLUDE ../globals.ink
     ohh, eso me entristece! #portrait:bjorn_sad
 
 - Hay que aprovechar y comamos algo, ¿siempre tienes hambre en tu día a día? #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 18
+
 +[La mayoria de los dias no tengo ganas de comer]
     ~q18 = 2
     Eso me pone triste! #portrait:bjorn_sad
@@ -41,7 +42,8 @@ INCLUDE ../globals.ink
     ~q18 = 0
     Ohh, eso me entristece! #portrait:bjorn_happy
 
-- Personalmente en estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 13
+- En estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 13
+
 +[No puedo decidirme]
     ~q13 = 2
     Que dificil cuando no podemos decidir! #portrait:bjorn_sad
@@ -51,6 +53,8 @@ INCLUDE ../globals.ink
 +[Me decido fácilmente]
     ~q13 = 0
     Me alegra escuchar eso! #portrait:bjorn_happy
+    
+- A a mí me cuesta mucho decidirme! #portrait:bjorn_sad    
     
 - Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 16
 
@@ -65,5 +69,7 @@ INCLUDE ../globals.ink
     Me alegra escuchar eso! #portrait:bjorn_happy
 
 - Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Bjorn #portrait:bjorn_neutral #layout:right
+
+- ¡Dirigete de vuelta al barco por el portal de la isla del norte, el capitán te espera! #portrait:bjorn_happy
 
 ->END

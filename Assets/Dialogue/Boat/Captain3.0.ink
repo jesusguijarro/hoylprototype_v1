@@ -8,7 +8,7 @@ INCLUDE ../globals.ink
 
 - ¡Qué gran aventura has tenido! #portrait:captain_happy
 
-- Ha sido una experiencia increíble, hice muchos amigos y conseguí una nueva pieza para el barco! #speaker:~PlayerUsername #portrait:male_player_happy #layout:left
+- Ha sido una experiencia increíble, hice muchos amigos y conseguí una nueva pieza para el barco! #speaker:~PlayerUsername #portrait:player_happy #layout:left
 
 - Se he puesto la situación un poco melancólica con tu ausencia ~PlayerUsername. #speaker:Capitan #portrait:captain_neutral #layout:right
 
@@ -67,7 +67,7 @@ INCLUDE ../globals.ink
     
 - En estos momentos lo unico que me podría salvar es una de las posiones del legendario Hannibal. #speaker:Capitan #portrait:captain_neutral #layout:right
 
-- ¿Dónde puedo encontrar al legendario Hannibal? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- ¿Dónde puedo encontrar al legendario Hannibal? #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Lamentable no se le ha visto desde hace mucho tiempo, permanece en las sombras debido a su apariencia #speaker:Capitan #portrait:captain_neutral #layout:right
 
