@@ -21,11 +21,23 @@ public class WorldInteraction : MonoBehaviour
     private void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>();
-        playerAnimator = GetComponentInChildren<Animator>(); // get the animator component
+        AssignAnimator(); // get the animator component
         rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
+
+    public void AssignAnimator()
+    {
+        // Get the Animator from the active child prefab
+        playerAnimator = GetComponentInChildren<Animator>();
+        if (playerAnimator == null)
+        {
+            Debug.LogError("Animator component not found on the active player prefab.");
+        }
+    }
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)

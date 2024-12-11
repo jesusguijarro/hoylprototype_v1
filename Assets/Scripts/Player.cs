@@ -32,6 +32,18 @@ public class Player : MonoBehaviour
             Debug.LogError("PlayerAppearance value is invalid or missing in PlayerPrefs.");
         }
 
+
+        // Dynamically update the Animator in WorldInteraction
+        WorldInteraction worldInteraction = GetComponent<WorldInteraction>();
+        if (worldInteraction != null)
+        {
+            worldInteraction.AssignAnimator();
+        }
+        else
+        {
+            Debug.LogError("WorldInteraction script not found on Player.");
+        }
+
         PlayerLevel = GetComponent<PlayerLevel>();
         this.currentHealth = this.maxHealth;
         characterStats = new CharacterStats(10, 10, 10);
