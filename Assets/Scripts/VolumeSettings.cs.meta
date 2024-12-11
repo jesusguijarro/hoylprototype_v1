@@ -3,7 +3,10 @@ guid: 91d206b79b2a8d743be5a73e69a50e1f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - myMixer: {fileID: 24100000, guid: 8a7c42aaa152f6c43b260d2b0115447f, type: 2}
+  - musicSlider: {instanceID: 0}
+  - SFXSlider: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

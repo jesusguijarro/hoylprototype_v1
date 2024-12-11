@@ -3,65 +3,58 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("--- Audio Source ---")]
+    [Header("--- Audio Sources ---")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource SFXSource;
 
-    [Header("--- Audio Clip ---")]
-    public AudioClip background;
+    [Header("--- Audio Clips ---")]
+    public AudioClip backgroundMusic;
+    public AudioClip battleMusic;
     public AudioClip portal;
-    public AudioClip battleMusic;  // Música de pelea
 
-    private AudioSource tempSource;
+    private AudioSource battleMusicSource;
     private bool isMusicPaused = false;
+    private int activeBattleZones = 0;
 
-    private AudioSource battleMusicSource; // Fuente de audio para música de pelea
-    private int activeBattleZones = 0; // Contador de zonas de combate activas
-
-    void Start()
+    private void Start()
     {
-        musicSource.clip = background;
-        musicSource.Play();
+        InitializeMusicSources();
+        PlayBackgroundMusic();
+    }
 
-        // Configurar la fuente de música de pelea
+    private void InitializeMusicSources()
+    {
+        if (!musicSource)
+            musicSource = gameObject.AddComponent<AudioSource>();
+        if (!SFXSource)
+            SFXSource = gameObject.AddComponent<AudioSource>();
+
+        musicSource.clip = backgroundMusic;
+        musicSource.loop = true;
+
         battleMusicSource = gameObject.AddComponent<AudioSource>();
         battleMusicSource.clip = battleMusic;
         battleMusicSource.loop = true;
-        battleMusicSource.volume = 0f; // Inicialmente el volumen es 0
+        battleMusicSource.volume = 0f;
     }
 
-    public void PlayTemporaryMusic(AudioClip tempClip)
+    private void Update()
     {
-        if (musicSource.isPlaying)
-        {
-            musicSource.Pause();
-            isMusicPaused = true;
-        }
-
-        GameObject tempObject = new GameObject("TempAudioSource");
-        tempSource = tempObject.AddComponent<AudioSource>();
-        tempSource.clip = tempClip;
-        tempSource.Play();
-
-        StartCoroutine(WaitForTempMusicToEnd(tempObject));
+        // Actualizar los volúmenes dinámicamente según los ajustes en VolumeSettings
+        musicSource.volume = VolumeSettings.musicVolume * VolumeSettings.masterVolume;
+        battleMusicSource.volume = VolumeSettings.musicVolume * VolumeSettings.masterVolume; // Control dinámico
+        SFXSource.volume = VolumeSettings.sfxVolume * VolumeSettings.masterVolume;
     }
 
-    private IEnumerator WaitForTempMusicToEnd(GameObject tempObject)
+    public void PlayBackgroundMusic()
     {
-        while (tempSource.isPlaying)
+        if (!musicSource.isPlaying)
         {
-            yield return null;
-        }
-
-        Destroy(tempObject);
-
-        if (isMusicPaused)
-        {
-            ResumeMusic();
+            musicSource.Play();
         }
     }
 
-    public void PauseMusic()
+    public void PauseBackgroundMusic()
     {
         if (musicSource.isPlaying)
         {
@@ -70,7 +63,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ResumeMusic()
+    public void ResumeBackgroundMusic()
     {
         if (isMusicPaused)
         {
@@ -79,119 +72,85 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(AudioClip clip)
-    {
-        SFXSource.PlayOneShot(clip);
-    }
-
-    private IEnumerator FadeInAudio(AudioSource source, float duration)
-    {
-        float startVolume = 0f;
-        source.volume = startVolume;
-        source.Play();
-
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            source.volume = Mathf.Lerp(startVolume, 1.0f, t / duration);
-            yield return null;
-        }
-
-        source.volume = 1.0f;
-    }
-
-    // Método para manejar la música de pelea
     public void EnterBattleZone()
     {
         activeBattleZones++;
-        if (activeBattleZones > 0)
+        if (activeBattleZones == 1)
         {
-            // Pausar la música de fondo y activar la música de pelea
-            StartCoroutine(HandleBattleMusic(true)); // Activar música de batalla
+            StartCoroutine(SwitchToBattleMusic());
         }
     }
 
     public void ExitBattleZone()
     {
         activeBattleZones--;
-        if (activeBattleZones == 0)
+        if (activeBattleZones <= 0)
         {
-            // Detener la música de pelea y reactivar la música de fondo
-            StartCoroutine(HandleBattleMusic(false)); // Desactivar música de batalla
+            StartCoroutine(SwitchToBackgroundMusic());
         }
     }
 
-    // Método para manejar la transición entre la música de fondo y la música de batalla
-    private IEnumerator HandleBattleMusic(bool isEnteringBattle)
+    private IEnumerator SwitchToBattleMusic()
     {
-        if (isEnteringBattle)
-        {
-            // Fade out la música de fondo
-            yield return StartCoroutine(FadeOutBackgroundMusic(1.0f));
-
-            // Fade in la música de batalla
-            battleMusicSource.volume = 0f;
-            battleMusicSource.Play();
-            yield return StartCoroutine(FadeInBattleMusic(1.0f));
-        }
-        else
-        {
-            // Fade out la música de batalla
-            yield return StartCoroutine(FadeOutBattleMusic(1.0f));
-
-            // Fade in la música de fondo
-            yield return StartCoroutine(FadeInBackgroundMusic(1.0f));
-        }
-    }
-
-    // Fade In para la música de batalla
-    private IEnumerator FadeInBattleMusic(float duration)
-    {
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            battleMusicSource.volume = Mathf.Lerp(0f, 1.0f, t / duration);
-            yield return null;
-        }
-        battleMusicSource.volume = 1.0f;
-    }
-
-    // Fade Out para la música de batalla
-    private IEnumerator FadeOutBattleMusic(float duration)
-    {
-        for (float t = 0; t < duration; t += Time.deltaTime)
-        {
-            battleMusicSource.volume = Mathf.Lerp(1.0f, 0f, t / duration);
-            yield return null;
-        }
-
+        Debug.Log("Cambiando a música de batalla.");
+        yield return StartCoroutine(FadeOutAudio(musicSource, 1.0f));
         battleMusicSource.volume = 0f;
+        battleMusicSource.Play();
+        yield return StartCoroutine(FadeInAudio(battleMusicSource, 1.0f));
+    }
+
+    private IEnumerator SwitchToBackgroundMusic()
+    {
+        Debug.Log("Cambiando a música de fondo.");
+        yield return StartCoroutine(FadeOutAudio(battleMusicSource, 1.0f));
         battleMusicSource.Stop();
+        yield return StartCoroutine(FadeInAudio(musicSource, 1.0f));
     }
 
-    // Fade In para la música de fondo al salir de la zona de batalla
-    private IEnumerator FadeInBackgroundMusic(float duration)
+    private IEnumerator FadeInAudio(AudioSource source, float duration)
     {
-        musicSource.volume = 0f;
-        musicSource.Play();
+        float startVolume = 0f;
+        source.volume = startVolume;
+        if (!source.isPlaying) source.Play();
 
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
-            musicSource.volume = Mathf.Lerp(0f, 1.0f, t / duration);
+            source.volume = Mathf.Lerp(startVolume, VolumeSettings.musicVolume * VolumeSettings.masterVolume, t / duration);
             yield return null;
         }
 
-        musicSource.volume = 1.0f;
+        source.volume = VolumeSettings.musicVolume * VolumeSettings.masterVolume;
     }
 
-    // Fade Out para la música de fondo al entrar en la zona de batalla
-    private IEnumerator FadeOutBackgroundMusic(float duration)
+    private IEnumerator FadeOutAudio(AudioSource source, float duration)
     {
+        float startVolume = source.volume;
+
         for (float t = 0; t < duration; t += Time.deltaTime)
         {
-            musicSource.volume = Mathf.Lerp(1.0f, 0f, t / duration);
+            source.volume = Mathf.Lerp(startVolume, 0f, t / duration);
             yield return null;
         }
 
-        musicSource.volume = 0f;
-        musicSource.Stop();
+        source.volume = 0f;
+        source.Stop();
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        if (clip)
+        {
+            SFXSource.PlayOneShot(clip);
+        }
+    }
+
+    public void PlayPortalSound()
+    {
+        if (portal)
+        {
+            Debug.Log("Reproduciendo sonido del portal y saliendo de la zona de batalla.");
+            PlaySFX(portal);
+            ExitBattleZone(); // Llama a ExitBattleZone al reproducir el sonido del portal
+        }
     }
 }

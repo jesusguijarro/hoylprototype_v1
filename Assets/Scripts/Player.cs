@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject playerManPrefab; // Prefab para el personaje masculino
     [SerializeField] private GameObject playerWomanPrefab; // Prefab para el personaje femenino
     [SerializeField] private GameObject revivePanel; // Referencia al panel de revivir
-    [SerializeField] private float reviveOffset = 2f; // Distancia de desplazamiento al revivir
 
     private Vector3 deathPosition;
     private bool isRevived = false; // Indica si el jugador ha sido revivido

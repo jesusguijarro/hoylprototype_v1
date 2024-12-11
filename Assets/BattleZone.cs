@@ -11,7 +11,8 @@ public class BattleZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Asegúrate de que solo el jugador active la música
+        // Asegúrate de que solo el jugador active la música
+        if (other.CompareTag("Player"))  // Cambia "Player" por el Tag o Layer que uses para el jugador
         {
             audioManager.EnterBattleZone();  // Activa la música de batalla
         }
@@ -19,7 +20,8 @@ public class BattleZone : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        // Verifica si el jugador sale de la zona de batalla
+        if (other.CompareTag("Player"))  // Cambia "Player" por el Tag o Layer que uses para el jugador
         {
             audioManager.ExitBattleZone();  // Desactiva la música de batalla y reactiva la música de fondo
         }
