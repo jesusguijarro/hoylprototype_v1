@@ -8,7 +8,7 @@
 
 - Fui capturada por él y llevada a su guarida, pero logré escapar y refugiarme aquí en el cuarto piso. #speaker:Escarabajo #portrait:purplebeetle_sad #layout:right
 
-- Sin embargo, no podía regresar hasta que un valiente héroe como tú derrotara a la serpiente. Estoy muy agradecida por tu valentía. #portrait:purplebeetle_happy
+- Sin embargo, no podía regresar hasta que un valiente héroe como tú derrotara a al Señor Lagarto. Estoy muy agradecida por tu valentía. #portrait:purplebeetle_happy
 
 ->END
 

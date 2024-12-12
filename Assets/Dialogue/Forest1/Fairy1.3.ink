@@ -1,4 +1,5 @@
 INCLUDE ../globals.ink
+EXTERNAL gotAnchor()
 
 ¡Lo lograste,  ~PlayerUsername! #speaker:Hada #portrait:fairy_happy #layout:right
 
@@ -71,5 +72,7 @@ INCLUDE ../globals.ink
 - Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Hada #portrait:fairy_neutro #layout:right
 
 - Dirigete al barco tomando el portal al final del puente, el capitán te espera! #portrait:fairy_happy
+
+~ gotAnchor()
 
 -> END

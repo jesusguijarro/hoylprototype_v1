@@ -1,4 +1,5 @@
 INCLUDE ../globals.ink
+EXTERNAL gotAnchor()    
     
 !Fue una dura batalla! Sin considerar esta batalla ¿como te sientes normalmente tú ~PlayerUsername? #speaker:Escarabajo #portrait:purplebeetle_neutral #layout:right //pregunta 17
 
@@ -18,7 +19,7 @@ INCLUDE ../globals.ink
 ~q17 = 2
     ohh, eso debe ser duro! #portrait:purplebeetle_sad
     
-- Que tranquilidad se ha quedado, ¿cómo te sientes normalmente ~PlayerUsername? #speaker:EscarabajoMorado #portrait:purplebeetle_neutral #layout:right //pregunta 20
+- Que tranquilidad se ha quedado, ¿cómo te sientes normalmente ~PlayerUsername? #speaker:Escarabajo #portrait:purplebeetle_neutral #layout:right //pregunta 20
 
 +[Nunca me siento solo]
 ~q20 = 0
@@ -56,7 +57,7 @@ INCLUDE ../globals.ink
     
 - - A a mí me cuesta mucho decidirme! #portrait:purplebeetle_sad    
     
-- Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:EscarabajoMorado #portrait:purplebeetle_neutral #layout:right //pregunta 16
+- Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Escarabajo #portrait:purplebeetle_neutral #layout:right //pregunta 16
 
 +[Todas las noches me cuesta dormirme]
 ~q16 = 2
@@ -71,5 +72,7 @@ INCLUDE ../globals.ink
 - Escuché que su barco se averió, en agradecimiento los herreros del desierto prepararon un ancla, espero que sea de gran ayuda #speaker:Escarabajo #portrait:purplebeetle_happy #layout:right
 
 - Dirigete a la puerta, podrás llegar con el capitán! 
+
+~ gotAnchor()
 
 ->END
