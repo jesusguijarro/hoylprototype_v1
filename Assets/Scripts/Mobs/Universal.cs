@@ -97,9 +97,9 @@ public class Universal : Interactable, IEnemy
     {
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
-        StartCoroutine(DestroyAfterAnimation());
+        StartCoroutine(Destroy());
     }
-    private IEnumerator DestroyAfterAnimation()
+    private IEnumerator Destroy()
     {
         while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
@@ -108,10 +108,22 @@ public class Universal : Interactable, IEnemy
 
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
+        yield return StartCoroutine(ShowGuide());
+
         CombatEvents.EnemyDied(this);
         Spawner.Respawn();
         Destroy(gameObject);
     }
+
+    private IEnumerator ShowGuide()
+    {
+        yield return new WaitForSeconds(3f);
+
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/fairy_happy");
+
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Senor Oscuro, dirigite con el Hada Aurora en la fogata cerca del puente del Norte!", image);
+    }
+
     void DropLoot()
     {
         Item item = Droptable.GetDrop();
