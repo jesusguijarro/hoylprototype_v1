@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Ink.UnityIntegration;
-using Ink.Runtime;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -128,6 +127,24 @@ public class DialogueSystem : MonoBehaviour
         currentStory.BindExternalFunction("endGame", () =>
         {
             Debug.Log("Fin del juego.");
+        });
+
+        currentStory.BindExternalFunction("gotAnchor", () =>
+        {
+            Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/anchor");
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan dos!", image);            
+        });
+
+        currentStory.BindExternalFunction("gotRudder", () =>
+        {
+            Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/rudder");
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan otro!", image);
+        });
+
+        currentStory.BindExternalFunction("gotBoatSails", () =>
+        {
+            Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/boat_sails");
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
         });
 
         // Resetear etiquetas iniciales
