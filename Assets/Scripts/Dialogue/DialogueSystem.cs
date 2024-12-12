@@ -123,10 +123,10 @@ public class DialogueSystem : MonoBehaviour
 
         dialogueVariables.StartListening(currentStory);
 
-        currentStory.BindExternalFunction("endGame", () =>
-        {
-            Debug.Log("Fin del juego.");
-        });
+        //currentStory.BindExternalFunction("endGame", () =>
+        //{
+        //    Debug.Log("Fin del juego.");
+        //});
 
         // Resetear etiquetas iniciales
         displayNameText.text = "???";
@@ -142,7 +142,7 @@ public class DialogueSystem : MonoBehaviour
         yield return new WaitForSeconds(5f);
         
         dialogueVariables.StopListening(currentStory);
-        currentStory.UnbindExternalFunction("endGame");
+        //currentStory.UnbindExternalFunction("endGame");
         
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
