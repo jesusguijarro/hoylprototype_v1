@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Ink.UnityIntegration;
+using Ink.Runtime;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class DialogueSystem : MonoBehaviour
     private const string LAYOUT_TAG = "layout";
 
     private DialogueVariables dialogueVariables;
-
+    //private InkExternalFunctions inkExternalFunctions;
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -68,6 +69,7 @@ public class DialogueSystem : MonoBehaviour
         }
 
         dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        //inkExternalFunctions = new InkExternalFunctions();
     }
 
     private void Start()
@@ -123,10 +125,10 @@ public class DialogueSystem : MonoBehaviour
 
         dialogueVariables.StartListening(currentStory);
 
-        //currentStory.BindExternalFunction("endGame", () =>
-        //{
-        //    Debug.Log("Fin del juego.");
-        //});
+        currentStory.BindExternalFunction("endGame", () =>
+        {
+            Debug.Log("Fin del juego.");
+        });
 
         // Resetear etiquetas iniciales
         displayNameText.text = "???";
@@ -137,12 +139,12 @@ public class DialogueSystem : MonoBehaviour
     }
 
 
-    private IEnumerable ExitDialogueMode()
+    private IEnumerator ExitDialogueMode()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.2f);
         
         dialogueVariables.StopListening(currentStory);
-        //currentStory.UnbindExternalFunction("endGame");
+        currentStory.UnbindExternalFunction("endGame");
         
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -158,20 +160,28 @@ public class DialogueSystem : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+            // set text for the current dialogue line
             if (displayLineCoroutine != null)
             {
                 StopCoroutine(displayLineCoroutine);
             }
-
-            //dialogueText.text = currentStory.Continue();        old line
-            displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
-
-            // handle tags
-            HandleTags(currentStory.currentTags);
+            string nextLine = currentStory.Continue();
+            // handle case where the last line is an external function
+            if (nextLine.Equals("") && !currentStory.canContinue)
+            {
+                StartCoroutine(ExitDialogueMode());
+            }
+            // otherwise, handle the normal case for continuing the story
+            else
+            {
+                // handle tags
+                HandleTags(currentStory.currentTags);
+                displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+            }
         }
         else
         {
-            ExitDialogueMode();
+            StartCoroutine(ExitDialogueMode());
         }
     }
 
