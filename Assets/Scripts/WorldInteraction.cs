@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,8 +7,8 @@ public class WorldInteraction : MonoBehaviour
 {
     NavMeshAgent playerAgent;
     public float movementSpeed = 5f;
-    public bool isUsingWASD = false; // tracks if the player is using WASD keys
-    Animator playerAnimator; // reference to the animator
+    public bool isUsingWASD = false; // Tracks if the player is using WASD keys
+    Animator playerAnimator; // Reference to the animator
     Sword sword;
 
     public float jumpForce = 7f;
@@ -21,7 +20,7 @@ public class WorldInteraction : MonoBehaviour
     private void Start()
     {
         playerAgent = GetComponent<NavMeshAgent>();
-        AssignAnimator(); // get the animator component
+        AssignAnimator(); // Get the animator component
         rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -37,37 +36,58 @@ public class WorldInteraction : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
+        if (SimpleInput.GetButtonDown("Jump") && isGrounded)
+        {
+            Jump();
+        }
+        if (SimpleInput.GetButtonDown("X") && isGrounded)
+        {
+            PerformAttack();
+        }
+        if (SimpleInput.GetButtonDown("I") && isGrounded)
+        {
+            Debug.Log("Inventario");
+        }
+        if (SimpleInput.GetButtonDown("C") && isGrounded)
+        {
+            Debug.Log("Botón C presionado");
+            GetInteraction();
+        }
+        // Salto
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
 
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        // Movimiento con joystick o teclado
+        if (SimpleInput.GetAxisRaw("Horizontal") != 0 || SimpleInput.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             isUsingWASD = true;
-            MoveWithWASD();
+            MoveWithJoystickOrWASD();
         }
         else
         {
             isUsingWASD = false;
         }
 
+        // Interacción
         if (Input.GetMouseButtonDown(0) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             GetInteraction();
         }
 
+        // Ataque
         if (Input.GetKeyDown(KeyCode.X))
         {
             PerformAttack();
         }
 
+        // Actualizar animaciones
         UpdateAnimations();
 
-        // Check for falling state using both y-velocity and ground proximity
+        // Verificar estado de caída
         if (!isGrounded && rb.velocity.y < -0.1f && !IsGroundNearby())
         {
             playerAnimator.SetBool("isFalling", true);
@@ -80,17 +100,45 @@ public class WorldInteraction : MonoBehaviour
 
     private bool IsGroundNearby()
     {
-        // Use a Raycast to detect if the player is close to the ground
+        // Detectar proximidad al suelo
         return Physics.Raycast(transform.position, Vector3.down, 0.1f);
+    }
+
+    void MoveWithJoystickOrWASD()
+    {
+        if (playerAgent.enabled)
+        {
+            // Desactivar el pathfinding del NavMeshAgent mientras se usa el joystick o WASD
+            playerAgent.updateRotation = false;
+            playerAgent.isStopped = true;
+        }
+
+        // Obtener los valores de movimiento del joystick o teclado
+        float moveHorizontal = SimpleInput.GetAxis("Horizontal");
+        float moveVertical = SimpleInput.GetAxis("Vertical");
+
+        // Calcular la dirección de movimiento
+        Vector3 movementDirection = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
+        Vector3 movement = movementDirection * movementSpeed * Time.deltaTime;
+
+        // Aplicar el movimiento a la posición del jugador
+        transform.Translate(movement, Space.World);
+
+        // Rotar al jugador en la dirección del movimiento
+        if (movementDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
     }
 
     void Jump()
     {
         playerAnimator.SetBool("isGrounded", false);
         isGrounded = false;
-        playerAgent.enabled = false; // Disable NavMeshAgent during jump
-        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // Reset vertical velocity before jump
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // High-precision collision
+        playerAgent.enabled = false; // Desactivar NavMeshAgent durante el salto
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // Resetear velocidad vertical antes del salto
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // Colisión de alta precisión
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         playerAnimator.SetBool("isJumping", true);
         isJumping = true;
@@ -99,13 +147,12 @@ public class WorldInteraction : MonoBehaviour
     void PerformAttack()
     {
         playerAnimator.SetBool("isAttacking", true);
-        if (sword != null) // Separate check to ensure sword exists
+        if (sword != null) // Verificar que la espada existe
         {
-            //playerAnimator.SetBool("isAttacking", true); // Immediately set isAttacking to true
-            sword.PerformAttack(10); // Initiate the attack logic
+            sword.PerformAttack(10); // Iniciar el ataque
             Debug.Log("Attack triggered");
         }
-        // Reset attack after a delay (adjust to the animation length if needed)
+        // Resetear ataque después de un breve retraso
         StartCoroutine(ResetAttackAfterDelay(0.5f));
     }
 
@@ -115,39 +162,9 @@ public class WorldInteraction : MonoBehaviour
         playerAnimator.SetBool("isAttacking", false);
     }
 
-    void MoveWithWASD()
-    {
-        // Verifica si el NavMeshAgent está habilitado
-        if (playerAgent.enabled)
-        {
-            // Disable NavMeshAgent's pathfinding while using WASD movement
-            playerAgent.updateRotation = false;
-            playerAgent.isStopped = true;
-        }
-
-        // Get input for movement
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        // Calculate movement direction
-        Vector3 movementDirection = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
-        Vector3 movement = movementDirection * movementSpeed * Time.deltaTime;
-
-        // Apply movement to the player's position
-        transform.Translate(movement, Space.World);
-
-        // Rotate the player in the direction of movement
-        if (movementDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
-        }
-    }
-
     void GetInteraction()
     {
-        // Enable NavMeshAgent's pathfinding when clicking for movement
-        playerAgent.isStopped = false;
+        playerAgent.isStopped = false; // Habilitar movimiento del NavMeshAgent
         Ray interactionRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit interactionInfo;
         if (Physics.Raycast(interactionRay, out interactionInfo, Mathf.Infinity))
@@ -162,8 +179,6 @@ public class WorldInteraction : MonoBehaviour
             {
                 interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
                 playerAgent.stoppingDistance += 2.5f;
-                Debug.Log("Stopping distance: " + playerAgent.stoppingDistance);
-                Debug.Log("Distance to interactable object: " + Vector3.Distance(playerAgent.transform.position, interactedObject.transform.position));
             }
             else
             {
@@ -175,15 +190,15 @@ public class WorldInteraction : MonoBehaviour
 
     void UpdateAnimations()
     {
-        // If player is using WASD, play the walking animation
         if (isUsingWASD)
         {
             playerAnimator.SetBool("isMoving", true);
         }
         else
+        {
             playerAnimator.SetBool("isMoving", false);
+        }
 
-        // If the NavMeshAgent is moving, trigger walking animation
         if (playerAgent.velocity.magnitude > 0.1f && !isUsingWASD)
         {
             playerAnimator.SetBool("isMoving", true);
@@ -192,7 +207,6 @@ public class WorldInteraction : MonoBehaviour
         {
             playerAnimator.SetBool("isMoving", false);
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -205,18 +219,12 @@ public class WorldInteraction : MonoBehaviour
             playerAnimator.SetBool("isFalling", false);
             isJumping = false;
 
-            // Rehabilita NavMeshAgent si estaba desactivado
             if (!playerAgent.enabled)
             {
                 playerAgent.enabled = true;
             }
 
-            // Revert to default collision detection when grounded
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        }
-        else if (isJumping && collision.gameObject.CompareTag("Enemy"))
-        {
-            rb.AddForce(Vector3.down * 2f, ForceMode.Impulse); // Apply a downward force
         }
     }
 }
