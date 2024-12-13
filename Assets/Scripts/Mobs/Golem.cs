@@ -101,8 +101,6 @@ public class Golem : Interactable, IEnemy
             StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
             cont++;
         }
-        
-        Debug.Log("Se metio al chasePlayer");
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
