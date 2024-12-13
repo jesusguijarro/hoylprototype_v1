@@ -226,5 +226,9 @@ public class WorldInteraction : MonoBehaviour
 
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
         }
+        else if (isJumping && collision.gameObject.CompareTag("Enemy"))
+        {
+            rb.AddForce(Vector3.down * 2f, ForceMode.Impulse); // Apply a downward force
+        }
     }
 }
