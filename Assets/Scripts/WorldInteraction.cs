@@ -46,10 +46,6 @@ public class WorldInteraction : MonoBehaviour
         {
             PerformAttack();
         }
-        if (SimpleInput.GetButtonDown("I") && isGrounded)
-        {
-            Debug.Log("Inventario");
-        }
         if (SimpleInput.GetButtonDown("C") && isGrounded)
         {
             Debug.Log("Botón C presionado");
