@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Ink.UnityIntegration;
+//using Ink.UnityIntegration;
 
 public class DialogueSystem : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private float typingSpeed = 0.04f;
 
     [Header("Globals Ink File")]
-    [SerializeField] private InkFile globalsInkFile;
+    [SerializeField] private TextAsset globalsInkJSON;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -67,7 +67,8 @@ public class DialogueSystem : MonoBehaviour
             Destroy(gameObject);
         }
 
-        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        //dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        dialogueVariables = new DialogueVariables(globalsInkJSON.text);
     }
 
     private void Start()
