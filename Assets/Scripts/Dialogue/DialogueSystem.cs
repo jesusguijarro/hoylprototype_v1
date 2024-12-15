@@ -48,7 +48,7 @@ public class DialogueSystem : MonoBehaviour
     private const string LAYOUT_TAG = "layout";
 
     private DialogueVariables dialogueVariables;
-
+    //private InkExternalFunctions inkExternalFunctions;
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -67,8 +67,8 @@ public class DialogueSystem : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
-        dialogueVariables = new DialogueVariables(globalsInkJSON.text);
+        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        //inkExternalFunctions = new InkExternalFunctions();
     }
 
     private void Start()
@@ -124,10 +124,28 @@ public class DialogueSystem : MonoBehaviour
 
         dialogueVariables.StartListening(currentStory);
 
-        //currentStory.BindExternalFunction("endGame", () =>
-        //{
-        //    Debug.Log("Fin del juego.");
-        //});
+        currentStory.BindExternalFunction("endGame", () =>
+        {
+            Debug.Log("Fin del juego.");
+        });
+
+        currentStory.BindExternalFunction("gotAnchor", () =>
+        {
+            Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/anchor");
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan dos!", image);            
+        });
+
+        currentStory.BindExternalFunction("gotRudder", () =>
+        {
+            Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/rudder");
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan otro!", image);
+        });
+
+        currentStory.BindExternalFunction("gotBoatSails", () =>
+        {
+            Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/boat_sails");
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
+        });
 
         // Resetear etiquetas iniciales
         displayNameText.text = "???";
@@ -138,12 +156,12 @@ public class DialogueSystem : MonoBehaviour
     }
 
 
-    private IEnumerable ExitDialogueMode()
+    private IEnumerator ExitDialogueMode()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.2f);
         
         dialogueVariables.StopListening(currentStory);
-        //currentStory.UnbindExternalFunction("endGame");
+        currentStory.UnbindExternalFunction("endGame");
         
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -159,20 +177,28 @@ public class DialogueSystem : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+            // set text for the current dialogue line
             if (displayLineCoroutine != null)
             {
                 StopCoroutine(displayLineCoroutine);
             }
-
-            //dialogueText.text = currentStory.Continue();        old line
-            displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
-
-            // handle tags
-            HandleTags(currentStory.currentTags);
+            string nextLine = currentStory.Continue();
+            // handle case where the last line is an external function
+            if (nextLine.Equals("") && !currentStory.canContinue)
+            {
+                StartCoroutine(ExitDialogueMode());
+            }
+            // otherwise, handle the normal case for continuing the story
+            else
+            {
+                // handle tags
+                HandleTags(currentStory.currentTags);
+                displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+            }
         }
         else
         {
-            ExitDialogueMode();
+            StartCoroutine(ExitDialogueMode());
         }
     }
 
@@ -228,7 +254,7 @@ public class DialogueSystem : MonoBehaviour
 
     private void HandleTags(List<string> currentTags)
     {
-        // Recorre cada etiqueta y manéjala según corresponda
+        // Recorre cada etiqueta y manï¿½jala segï¿½n corresponda
         foreach (string tag in currentTags)
         {
             // Divide la etiqueta
@@ -267,7 +293,7 @@ public class DialogueSystem : MonoBehaviour
     {
         string appearance = PlayerPrefs.GetString("PlayerAppearance", "MALE").ToLower(); // Default to "male"
 
-        // Sustituir etiquetas específicas según la apariencia
+        // Sustituir etiquetas especï¿½ficas segï¿½n la apariencia
         inkContent = inkContent.Replace("player_neutral", $"{appearance}_player_neutral");
         inkContent = inkContent.Replace("player_happy", $"{appearance}_player_happy");
         inkContent = inkContent.Replace("player_sad", $"{appearance}_player_sad");

@@ -1,4 +1,5 @@
 INCLUDE ../globals.ink
+EXTERNAL gotAnchor()
     
 ¡Lo lograste Jugador, el pueblo de La Tierras Nevadas te estará eternamente agredecido! #speaker:Bjorn #portrait:bjorn_neutral #layout:right 
 
@@ -71,5 +72,7 @@ INCLUDE ../globals.ink
 - Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Bjorn #portrait:bjorn_neutral #layout:right
 
 - ¡Dirigete de vuelta al barco por el portal de la isla del norte, el capitán te espera! #portrait:bjorn_happy
+
+~ gotAnchor()
 
 ->END

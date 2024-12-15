@@ -20,6 +20,8 @@ public class Lizardmen : Interactable, IEnemy
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
+    private AudioManager audioManager;
+    public int cont = 0;
     //private Collider attackCollider;
 
     Animator enemyAnimator;
@@ -27,6 +29,7 @@ public class Lizardmen : Interactable, IEnemy
     [SerializeField] private Healthbar _healthbar;
     void Start()
     {
+        audioManager = AudioManager.Instance;
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
@@ -77,6 +80,11 @@ public class Lizardmen : Interactable, IEnemy
     }
     void ChasePlayer(Player player)
     {
+        if (cont == 0)
+        {
+            StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
+            cont++;
+        }
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -96,11 +104,12 @@ public class Lizardmen : Interactable, IEnemy
     }
     public void Die()
     {
+        StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
-        StartCoroutine(DestroyAfterAnimation());
+        StartCoroutine(Destroy());
     }
-    private IEnumerator DestroyAfterAnimation()
+    private IEnumerator Destroy()
     {
         while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
@@ -109,10 +118,21 @@ public class Lizardmen : Interactable, IEnemy
 
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
+        yield return StartCoroutine(ShowGuide());
+
         CombatEvents.EnemyDied(this);
         Spawner.Respawn();
         Destroy(gameObject);
     }
+
+    private IEnumerator ShowGuide()
+    {
+        yield return new WaitForSeconds(3f);
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/purplebeetle_happy");
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Senor Lagarto, dirigite a la puerta del fondo tal vez encuentres a un nuevo amigo...", image);
+    }
+
+
     void DropLoot()
     {
         Item item = Droptable.GetDrop();

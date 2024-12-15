@@ -18,12 +18,15 @@ public class Bearman : Interactable, IEnemy
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
+    private AudioManager audioManager;
+    public int cont = 0;
 
     Animator enemyAnimator;
 
     [SerializeField] private Healthbar _healthbar;
     void Start()
     {
+        audioManager = AudioManager.Instance;
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
@@ -83,6 +86,11 @@ public class Bearman : Interactable, IEnemy
     }
     void ChasePlayer(Player player)
     {
+        if (cont == 0)
+        {
+            StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
+            cont++;
+        }
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -103,6 +111,7 @@ public class Bearman : Interactable, IEnemy
     }
     public void Die()
     {
+        StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
         StartCoroutine(DestroyAfterAnimation());

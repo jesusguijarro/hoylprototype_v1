@@ -17,10 +17,13 @@ public class Slime : Interactable, IEnemy
     private Player player;
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
-    private Collider[] withinAggroColliders;    
+    private Collider[] withinAggroColliders;
+    private AudioManager audioManager;
+    public int cont = 0;
 
     void Start()
     {
+        audioManager = AudioManager.Instance;
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
@@ -57,6 +60,11 @@ public class Slime : Interactable, IEnemy
     }
     void ChasePlayer(Player player)
     {
+        if (cont == 0)
+        {
+            StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
+            cont++;
+        }
         navAgent.SetDestination(player.transform.position);
         this.player = player;
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
@@ -71,6 +79,7 @@ public class Slime : Interactable, IEnemy
 
     public void Die() 
     {
+        StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         //DropLoot();
         CombatEvents.EnemyDied(this);
         this.Spawner.Respawn();

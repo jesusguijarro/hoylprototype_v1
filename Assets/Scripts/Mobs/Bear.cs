@@ -20,6 +20,8 @@ public class Bear : Interactable, IEnemy
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
+    private AudioManager audioManager;
+    public int cont = 0;
 
     Animator enemyAnimator;
 
@@ -27,6 +29,7 @@ public class Bear : Interactable, IEnemy
 
     private void Start()
     {
+        audioManager = AudioManager.Instance;
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
@@ -90,6 +93,11 @@ public class Bear : Interactable, IEnemy
     }
     void ChasePlayer(Player player)
     {
+        if (cont == 0)
+        {
+            StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
+            cont++;
+        }
         //enemyAnimator.Play("Roar");
         //wait after Roar ends
         this.player = player;
@@ -112,6 +120,7 @@ public class Bear : Interactable, IEnemy
     }
     public void Die()
     {
+        StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         //enemyAnimator.Play("Die");
         navAgent.isStopped = true;
         CombatEvents.EnemyDied(this);

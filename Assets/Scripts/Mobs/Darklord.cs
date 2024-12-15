@@ -20,6 +20,8 @@ public class Darklord : Interactable, IEnemy
     private NavMeshAgent navAgent;
     private CharacterStats characterStats;
     private Collider[] withinAggroColliders;
+    private AudioManager audioManager;
+    public int cont = 0;
     //private Collider attackCollider;
 
     Animator enemyAnimator;
@@ -29,6 +31,7 @@ public class Darklord : Interactable, IEnemy
 
     [SerializeField] private Healthbar _healthbar;       
     void Start() {
+        audioManager = AudioManager.Instance;
         Droptable = new DropTable();
         Droptable.loot = new List<LootDrop>
         {
@@ -79,6 +82,11 @@ public class Darklord : Interactable, IEnemy
     }
     void ChasePlayer(Player player)
     {
+        if (cont == 0)
+        {
+            StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
+            cont++;
+        }
         //showPanel.ShowPanel();
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -99,6 +107,7 @@ public class Darklord : Interactable, IEnemy
     }
     public void Die()
     {
+        StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
         StartCoroutine(Destroy());        

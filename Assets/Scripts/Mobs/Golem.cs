@@ -101,8 +101,6 @@ public class Golem : Interactable, IEnemy
             StartCoroutine(AudioManager.Instance.SwitchToBattleMusic());
             cont++;
         }
-        
-        Debug.Log("Se metio al chasePlayer");
         this.player = player;
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -127,10 +125,10 @@ public class Golem : Interactable, IEnemy
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
 
-        StartCoroutine(DestroyAfterAnimation());
+        StartCoroutine(Destroy());
     }
 
-    private IEnumerator DestroyAfterAnimation()
+    private IEnumerator Destroy()
     {
         while (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
         {
@@ -139,9 +137,20 @@ public class Golem : Interactable, IEnemy
 
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
+        yield return StartCoroutine(ShowGuide());
+
         CombatEvents.EnemyDied(this);
         Spawner.Respawn();
         Destroy(gameObject);
+    }
+
+    private IEnumerator ShowGuide()
+    {
+        yield return new WaitForSeconds(3f);
+
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/fairy_happy");
+
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Golem de Hielo, dirigite con Bjorn en la casa cerca del puente del Norte!", image);
     }
 
     void DropLoot()
