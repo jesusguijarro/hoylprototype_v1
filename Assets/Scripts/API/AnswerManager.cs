@@ -30,7 +30,7 @@ public class AnswerManager : MonoBehaviour
 
     private IEnumerator SendAnswerCoroutine(int questionNumber, int answerValue, string username)
     {
-        string uri = "http://192.168.1.76:8083/graphql";
+        string uri = "http://192.168.0.101:8083/graphql";
         string mutation = "mutation { saveAnswer(create: { question: " + questionNumber + ", answer: " + answerValue + ", playerUsername: \"" + username + "\" }) {id question answer playerUsername} }";
 
         using (UnityWebRequest request = new UnityWebRequest(uri, "POST"))
