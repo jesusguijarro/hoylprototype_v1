@@ -134,7 +134,7 @@ public class Darklord : Interactable, IEnemy
 
         Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/darklord_neutral");
 
-        GuideUIManager.Instance.Parameters("Enemigo derrotado!","Has derrotado al Senor Oscuro, dirigite al rededor del puente del Norte encontrarás a alguien...!",image);
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!","Has derrotado al Senor Oscuro, dirigite al rededor del puente del Norte encontraras a alguien...!",image);
     }
 
     void DropLoot()
