@@ -66,6 +66,10 @@ public class PlayerWeaponController : MonoBehaviour
         { 
             PerformWeaponAttack();
         }
+        if (SimpleInput.GetButtonDown("X"))
+        {
+            PerformWeaponAttack();
+        }
     }
 
     public void PerformWeaponAttack()
