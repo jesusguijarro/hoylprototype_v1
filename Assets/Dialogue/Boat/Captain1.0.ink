@@ -78,4 +78,4 @@ INCLUDE ../globals.ink
     Eso me pone triste! #speaker:Capitán #portrait:captain_sad #layout:right
     -> DONE
     
--> END
+-> END 

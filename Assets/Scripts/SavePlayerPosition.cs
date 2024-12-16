@@ -43,7 +43,7 @@ public class SavePlayerPosition : MonoBehaviour
         PlayerPrefs.SetFloat("playerPosition_" + positionIndex + "_Z", playerPosition.z);
         PlayerPrefs.Save();
 
-        Debug.Log("Player position saved at index: " + positionIndex);
+        // Debug.Log("Player position saved at index: " + positionIndex);
 
         // Incrementar el índice para la próxima posición guardada
         positionIndex++;

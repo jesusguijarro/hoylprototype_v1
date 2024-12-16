@@ -8,12 +8,20 @@ using UnityEngine.Networking;
 public class DialogueVariables
 {
     public Dictionary<string, Ink.Runtime.Object> variables {  get; set; }
-    public DialogueVariables(string globalsFilePath) 
-    { 
-        // compile the story
-        string inkFileContents = File.ReadAllText(globalsFilePath);
-        Ink.Compiler compiler = new Ink.Compiler(inkFileContents);
-        Story globalVariablesStory = compiler.Compile();
+
+    private Story globalVariablesStory;
+    private const string saveVariablesKey = "INK_VARIABLES";
+
+    public DialogueVariables(TextAsset loadGlobalsJSON)
+    {
+        // create the story
+        globalVariablesStory = new Story(loadGlobalsJSON.text);
+        // if we have saved data, load it
+        // if (PlayerPrefs.HasKey(saveVariablesKey))
+        // {
+        //     string jsonState = PlayerPrefs.GetString(saveVariablesKey);
+        //     globalVariablesStory.state.LoadJson(jsonState);
+        // }
 
         // initialize the dictionary
         variables = new Dictionary<string, Ink.Runtime.Object>();
@@ -24,6 +32,25 @@ public class DialogueVariables
             Debug.Log("Initialized global dialogue variable: " + name + " = " + value);
         }
     }
+
+
+
+    //public DialogueVariables(string globalsFilePath)
+    //{
+    //    // compile the story
+    //    string inkFileContents = File.ReadAllText(globalsFilePath);
+    //    Ink.Compiler compiler = new Ink.Compiler(inkFileContents);
+    //    Story globalVariablesStory = compiler.Compile();
+
+    //    // initialize the dictionary
+    //    variables = new Dictionary<string, Ink.Runtime.Object>();
+    //    foreach (string name in globalVariablesStory.variablesState)
+    //    {
+    //        Ink.Runtime.Object value = globalVariablesStory.variablesState.GetVariableWithName(name);
+    //        variables.Add(name, value);
+    //        Debug.Log("Initialized global dialogue variable: " + name + " = " + value);
+    //    }
+    //}
     public void StartListening(Story story)
     {
         // it's important that VariablesToStory is before assigning the listener!

@@ -43,8 +43,8 @@ public class Golem : Interactable, IEnemy
         characterStats = new CharacterStats(6, 10, 2);
         currentHealth = maxHealth;
 
-        if (_healthbar) Debug.Log("_healthbar exists");
-        else Debug.Log("_healthbar doesn't exist");
+        //if (_healthbar) Debug.Log("_healthbar exists");
+        //else Debug.Log("_healthbar doesn't exist");
 
         _healthbar.UpdateHealthBar(maxHealth, currentHealth);
 

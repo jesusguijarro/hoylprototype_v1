@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public static DialogueSystem Instance { get; set; }
+    public static DialogueSystem Instance;
 
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
@@ -52,27 +52,26 @@ public class DialogueSystem : MonoBehaviour
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
-        continueBtn.onClick.AddListener(delegate { ContinueDialogue(); });       
+        continueBtn.onClick.AddListener(delegate { ContinueDialogue(); });
 
-        if (Instance == null)
+        if (Instance != null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: if you want this to persist across scenes
-            Debug.Log("DialogueSystem instance created");
+            Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }
-        else
-        {
-            Debug.LogWarning("Duplicate DialogueSystem instance detected and destroyed in scene: " +
-                gameObject.scene.name + ", GameObject: " + gameObject.name);
-            Destroy(gameObject);
-        }
+        Instance = this;
 
-        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        dialogueVariables = new DialogueVariables(globalsInkJSON);
         //inkExternalFunctions = new InkExternalFunctions();
+    }
+
+    public static DialogueSystem GetInstance()
+    {
+        return Instance;
     }
 
     private void Start()
     {
+        Debug.Log("entré al start del dialogue");
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
 
