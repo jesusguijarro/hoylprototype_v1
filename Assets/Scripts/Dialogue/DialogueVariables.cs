@@ -87,7 +87,7 @@ public class DialogueVariables
         Debug.Log("username" + username);
 
 
-        AnswerManager.Instance.SendAnswerToServer(qNumber, answerValue, username);
+        //AnswerManager.Instance.SendAnswerToServer(qNumber, answerValue, username);
         // StartCoroutine(PostSaveAnswer(qNumber, answerValue, username));
 
         if (variables.ContainsKey(name))

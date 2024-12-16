@@ -17,6 +17,7 @@ public class DialogueSystem : MonoBehaviour
     [Header("Globals Ink File")]
     [SerializeField] private TextAsset globalsInkJSON;
 
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject continueIcon;
@@ -131,19 +132,19 @@ public class DialogueSystem : MonoBehaviour
         currentStory.BindExternalFunction("gotAnchor", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/anchor");
-            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan dos!", image);            
+            //GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan dos!", image);            
         });
 
         currentStory.BindExternalFunction("gotRudder", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/rudder");
-            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan otro!", image);
+            //GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan otro!", image);
         });
 
         currentStory.BindExternalFunction("gotBoatSails", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/boat_sails");
-            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
+            //GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
         });
 
         // Resetear etiquetas iniciales
