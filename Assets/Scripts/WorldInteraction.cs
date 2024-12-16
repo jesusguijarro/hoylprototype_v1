@@ -176,11 +176,11 @@ public class WorldInteraction : MonoBehaviour
                 interactedObject.GetComponent<Interactable>().MoveToInteraction(playerAgent);
                 playerAgent.stoppingDistance += 2.5f;
             }
-            else
-            {
-                playerAgent.stoppingDistance = 0;
-                playerAgent.destination = interactionInfo.point;
-            }
+            //else
+            //{
+            //    playerAgent.stoppingDistance = 0;
+            //    playerAgent.destination = interactionInfo.point;
+            //}
         }
     }
 
