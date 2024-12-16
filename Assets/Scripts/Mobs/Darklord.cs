@@ -132,9 +132,9 @@ public class Darklord : Interactable, IEnemy
     {
         yield return new WaitForSeconds(3f);
 
-        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/fairy_happy");
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/darklord_neutral");
 
-        GuideUIManager.Instance.Parameters("Enemigo derrotado!","Has derrotado al Senor Oscuro, dirigite con el Hada Aurora en la fogata cerca del puente del Norte!",image);
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!","Has derrotado al Senor Oscuro, dirigite al rededor del puente del Norte encontrarás a alguien...!",image);
     }
 
     void DropLoot()

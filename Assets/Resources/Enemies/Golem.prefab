@@ -1196,6 +1196,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 700
   pickupItem: {fileID: 0}
+  cont: 0
   _healthbar: {fileID: 4713351427589863510}
 --- !u!195 &6188597211190093710
 NavMeshAgent:
@@ -1211,7 +1212,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 2
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

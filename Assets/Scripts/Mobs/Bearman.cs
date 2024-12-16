@@ -114,9 +114,9 @@ public class Bearman : Interactable, IEnemy
         StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
-        StartCoroutine(DestroyAfterAnimation());
+        StartCoroutine(Destroy());
     }
-    private IEnumerator DestroyAfterAnimation()
+    private IEnumerator Destroy()
     {
         //DropLoot();
         // Wait until the animator is in the "Die" state to ensure the animation starts
@@ -128,10 +128,19 @@ public class Bearman : Interactable, IEnemy
         // Wait for the full duration of the Die animation
         yield return new WaitForSeconds(enemyAnimator.GetCurrentAnimatorStateInfo(0).length);
 
+        yield return StartCoroutine(ShowGuide());
+
         // Now destroy the object after the animation finishes
         CombatEvents.EnemyDied(this);
         Spawner.Respawn();
         Destroy(gameObject);
+    }
+
+    private IEnumerator ShowGuide()
+    {
+        yield return new WaitForSeconds(3f);        
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/youngwomen_happy");
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Oso Grizzly, dirigite a la isla del norte ahí encontrarás a la Joven...", image);
     }
     void DropLoot()
     {

@@ -148,7 +148,7 @@ public class Golem : Interactable, IEnemy
     {
         yield return new WaitForSeconds(3f);
 
-        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/fairy_happy");
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/bjorn_happy");
 
         GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Golem de Hielo, dirigite con Bjorn en la casa cerca del puente del Norte!", image);
     }
