@@ -1,6 +1,6 @@
     INCLUDE ../globals.ink
     
-    Este anillo te otorgará inmunidad y cura del control mental si el faraón intenta hipnotizarte #speaker:Gato #portrait:bastet_neutral #layout:right
+Hola de vuelta ~PlayerUsername, veo que estas de vuelta luego de esta situación inesperada! #speaker:Gato #portrait:bastet_happy #layout:right
 
 -> main
 

@@ -1,5 +1,5 @@
 INCLUDE ../globals.ink
-
+EXTERNAL gotRudder()
 
 Hola de nuevo ~PlayerUsername! Muchos de estos problemas como el que acabamos de vivir surgen de tener enemigos sin sentido. #speaker:Furry #portrait:furry_sad #layout:right
 
@@ -37,5 +37,7 @@ Hola de nuevo ~PlayerUsername! Muchos de estos problemas como el que acabamos de
 - Escuché que su barco se averió, en agradecimiento los habitantes del bosque prepararon velas, espero que sea de gran ayuda. #speaker:Furry #portrait:furry_happy #layout:right
 
 - Dirigite al portal al final del puente, el capitán te espera!.
+
+~ gotRudder()
 
 -> END

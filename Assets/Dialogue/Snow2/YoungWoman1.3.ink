@@ -1,5 +1,5 @@
 INCLUDE ../globals.ink
-
+EXTERNAL gotRudder()
 
 - Muchos de estos problemas como el que acabamos de vivir surgen de tener enemigos sin sentido #speaker:Joven #portrait:youngwoman_neutral #layout:right
 
@@ -36,5 +36,7 @@ INCLUDE ../globals.ink
 - Escuché que su barco se averió, en agradecimiento los habitantes de las Tierras Nevadas prepararon velas, espero que sea de gran ayuda.
 
 - Dirigite al portal al final del puente, el capitán te espera!.
+
+~ gotRudder()
 
 ->END

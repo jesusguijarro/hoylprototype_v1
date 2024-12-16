@@ -6,7 +6,7 @@ El Hada Aurora ha sido capturada por el rey de las sombras. Necesitamos tu ayuda
 
 === main ===
 
-- ¡Por supuesto que ayudaré! El hada Aurora necesita nuestra ayuda y no permitiré que el rey de las sombras se salga con la suya. #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- ¡Por supuesto que ayudaré! El hada Aurora necesita nuestra ayuda y no permitiré que el rey de las sombras se salga con la suya. #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - En situaciones como esta, ¿cómo manejas la calma ~PlayerUsername? #speaker:Furry #portrait:furry_neutral #layout:right //pregunta 11
 +[Las cosas me preocupan siempre]
@@ -40,14 +40,17 @@ El Hada Aurora ha sido capturada por el rey de las sombras. Necesitamos tu ayuda
 +[Todas las cosas malas son culpa mia]
     ~ q08 = 2
     Es triste escuchar eso. #portrait:furry_sad
-    -> DONE
 +[Muchas cosas malas son culpa mia]
     ~ q08 = 1
     Eso me pone muy triste. #portrait:furry_sad
-    -> DONE
 +[Generalmente no tengo la culpa de que ocurran cosas malas]
     ~ q08 = 0
     Que bueno que pienses eso. #portrait:furry_happy
-    -> DONE
+    
+-  Debemos actuar rápido antes de que el rey de las sombras se dé cuenta de nuestra presencia. Tu puedes liberar al hada Aurora y derrotar al mal que asecha en este lugar. #speaker:Furry #portrait:furry_neutral #layout:right    
+    
+- A partir de este punto no te puedo acompañar, mucha suerte ~PlayerUsername! #speaker:Furry #portrait:furry_happy #layout:right  
+
+- Puedes encontrar al señor oscuro en la isla de la izquierda, ahí es donde tiene al hada Aurora! #speaker:Furry #portrait:furry_neutral #layout:right
     
 -> END

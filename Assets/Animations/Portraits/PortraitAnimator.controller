@@ -749,7 +749,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: youngwomen_happy
+  m_Name: youngwoman_happy
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -853,7 +853,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: youngwomen_neutral
+  m_Name: youngwoman_neutral
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -983,7 +983,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: youngwomen_sad
+  m_Name: youngwoman_sad
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

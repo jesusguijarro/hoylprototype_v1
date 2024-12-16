@@ -57,7 +57,7 @@ EXTERNAL gotAnchor()
 
 - A a mí me cuesta mucho decidirme! #portrait:fairy_sad
     
-- Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Hada #portrait:fairy_neutro #layout:right //pregunta 16
+- Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 16
 
 +[Todas las noches me cuesta dormirme]
     ~ q16 = 2
@@ -69,7 +69,7 @@ EXTERNAL gotAnchor()
     ~ q16 = 0
     Me alegra escuchar eso! #portrait:fairy_happy
 
-- Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Hada #portrait:fairy_neutro #layout:right
+- Escuché que su barco se averió, en agradecimiento los herreros del bosque prepararon un ancla, espero que sea de gran ayuda #speaker:Hada #portrait:fairy_neutral #layout:right
 
 - Dirigete al barco tomando el portal al final del puente, el capitán te espera! #portrait:fairy_happy
 

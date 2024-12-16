@@ -1,4 +1,4 @@
-    ¿Dónde estoy? ¿Qué es este lugar? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+    ¿Dónde estoy? ¿Qué es este lugar? #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 -> main
 
