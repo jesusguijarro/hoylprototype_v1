@@ -15,7 +15,8 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private float typingSpeed = 0.04f;
 
     [Header("Globals Ink File")]
-    [SerializeField] private TextAsset globalsInkJSON;
+    [SerializeField] private Ink.UnityIntegration.InkFile globalsInkFile;
+
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
