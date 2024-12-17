@@ -49,8 +49,7 @@ public class DialogueSystem : MonoBehaviour
     private const string LAYOUT_TAG = "layout";
 
     private DialogueVariables dialogueVariables;
-    //private InkExternalFunctions inkExternalFunctions;
-    [SerializeField] private GameObject Endpanel;
+    //private InkExternalFunctions inkExternalFunctions;    
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -87,7 +86,7 @@ public class DialogueSystem : MonoBehaviour
         {
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
-        }
+        }        
     }
 
     private void Update()
@@ -127,26 +126,26 @@ public class DialogueSystem : MonoBehaviour
 
         currentStory.BindExternalFunction("endGame", () =>
         {
-            Endpanel.SetActive(true);
+            GuideUIManager.Instance.EnableEndPanel();
             Debug.Log("Fin del juego.");
         });
 
         currentStory.BindExternalFunction("gotAnchor", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/anchor");
-            //GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan dos!", image);            
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan dos!", image);            
         });
 
         currentStory.BindExternalFunction("gotRudder", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/rudder");
-            //GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan otro!", image);
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, aun te quedan otro!", image);
         });
 
         currentStory.BindExternalFunction("gotBoatSails", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/boat_sails");
-            //GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
         });
 
         // Resetear etiquetas iniciales

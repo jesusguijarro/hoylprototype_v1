@@ -25,7 +25,7 @@ EXTERNAL gotRudder()
 +[No es tan bueno como antes]
     ~ q23 = 1
     Eso puede ser normal solo es cuestion de mejorar #portrait:hannibal_neutral
-+[Lo llevo mejor que antes]
++[Lo llevo muy mal]
     ~ q23 = 2
     Que bueno es escuchar eso #portrait:hannibal_happy
 

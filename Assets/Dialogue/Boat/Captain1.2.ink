@@ -6,17 +6,6 @@ El futuro es incierto, pero estamos juntos en esta aventura. #speaker:Capitán #
 
 === main ===
 
-- ¿Cómo te sientes al respecto? // 6
-+ [A veces pienso que me pueden ocurrir cosas malas]
-    ~ q06 = 0
-    Está bien, eso pasa a veces! #portrait:captain_happy
-+ [Me preocupa que me ocurran cosas malas]
-    ~ q06 = 1
-    Es normal sentirse así algunas veces! #portrait:captain_neutro
-+ [Estoy seguro de que me van a ocurrir cosas terribles]
-    ~ q06 = 2
-    Eso me pone triste! #portrait:captain_sad
-
 - Probablemente sientas que es una carga buscar las piezas faltantes ¿te cuesta hacer este tipo de deberes en tu día a día? #portrait:captain_neutro // 15
 +[Siempre me cuesta]
     ~ q15 = 2

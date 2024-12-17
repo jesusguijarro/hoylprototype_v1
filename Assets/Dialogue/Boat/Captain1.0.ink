@@ -53,13 +53,13 @@ INCLUDE ../globals.ink
     
 - Antes de seguir con nuestra aventura, debo saber en que tipo de persona voy a confiar, ¿te consideras una persona mala? ~PlayerUsername? #speaker:Capitán #portrait:captain_neutro #layout:right // 5
 + [Soy malo siempre]
-    ~ q05 = 0
+    ~ q05 = 2
     Eso no esta bien! #speaker:Capitán #portrait:captain_sad #layout:right
 + [Soy malo muchas veces]
     ~ q05 = 1
     Eso no esta bien! #speaker:Capitán #portrait:captain_sad #layout:right
 + [Soy malo algunas veces]
-    ~ q05 = 2
+    ~ q05 = 0
     Es normal algunas veces! #speaker:Capitán #portrait:captain_neutro #layout:right
     
 - Te mentiría si te dijera que todos estamos libres de maldad ~PlayerUsername #speaker:Capitán #portrait:captain_neutro #layout:right

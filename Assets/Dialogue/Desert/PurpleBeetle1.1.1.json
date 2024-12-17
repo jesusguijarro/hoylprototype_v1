@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^Dirigete a la puerta, podrás llegar con el capitán! ","#","^speaker:Escarabajo ","/#","#","^portrait:purplebeetle_happy ","/#","#","^layout:right","/#","\n",{"->":"main"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"main":["end",{"#f":1}],"#f":1}],"listDefs":{}}

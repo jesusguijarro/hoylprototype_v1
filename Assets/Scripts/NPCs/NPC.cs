@@ -19,18 +19,21 @@ public class NPC : Interactable
         if (!DialogueSystem.Instance.dialogueIsPlaying)
         {
             if (currentInkFileIndex < inkJSONFiles.Length) 
-            {
+            {                           
                 DialogueSystem.Instance.EnterDialogueMode(inkJSONFiles[currentInkFileIndex]);
                 currentInkFileIndex++;
                 Debug.Log("currentInkFileIndex: " + currentInkFileIndex);
+                if (currentInkFileIndex > inkJSONFiles.Length - 1) {
+                    if (admirationSign) Destroy(admirationSign);
+                    Debug.Log("destruír----------------------");
+                }                    
             }
             else 
             {
-                DialogueSystem.Instance.EnterDialogueMode(inkJSONFiles[currentInkFileIndex-1]);
+                // DialogueSystem.Instance.EnterDialogueMode(inkJSONFiles[currentInkFileIndex-1]);
                 Debug.Log("No more dialogues for this NPC.");
                 //currentInkFileIndex++;
-                Debug.Log("currentInkFileIndex: " + currentInkFileIndex);
-                if(admirationSign) Destroy(admirationSign);
+                Debug.Log("currentInkFileIndex: " + currentInkFileIndex);                
             }
         }
         //Debug.Log(inkJSON.text);

@@ -29,13 +29,13 @@ INCLUDE ../globals.ink
 
 +[Nadie me quiere]
     ~ q25 = 2
-    Es triste escuchar eso #captain_sad
+    Es triste escuchar eso #portrait:captain_sad
 +[No estoy seguro de que alguien me quiera]
     ~ q25 = 1
-    Muchas de las veces podemos pensar eso #captain_sad
+    Muchas de las veces podemos pensar eso #portrait:captain_sad
 +[Estoy seguro de que alguien me quiere]
     ~ q25 = 0
-    Me alegra escuchar eso #captain_happy
+    Me alegra escuchar eso #portrait:captain_happy
 
 - Te preguntarás ~PlayerUsername, por qué re pregunto todo esto. #speaker:Capitan #portrait:captain_neutral #layout:right
 
@@ -53,7 +53,7 @@ INCLUDE ../globals.ink
     ~ q19 = 2
     Es triste escuchar eso #captain_sad
     
-- Sin importar la situación en la que te encuentres Jugador, ¿alguna vez has pensado en matarte? #speaker:Capitan #portrait:captain_neutral #layout:right //9
+- Sin importar la situación en la que te encuentres ~PlayerUsername, ¿alguna vez has pensado en matarte? #speaker:Capitan #portrait:captain_neutral #layout:right //9
 
 +[No pienso en matarme]
     ~ q09 = 0

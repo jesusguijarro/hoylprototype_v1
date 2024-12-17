@@ -128,9 +128,9 @@ public class Universal : Interactable, IEnemy
     {
         yield return new WaitForSeconds(3f);
 
-        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/fairy_happy");
+        Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/bastet_happy");
 
-        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Senor Oscuro, dirigite con el Hada Aurora en la fogata cerca del puente del Norte!", image);
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Faraon, entra por la puerta y te encontraras con Gato!", image);
     }
 
     void DropLoot()

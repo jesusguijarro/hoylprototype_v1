@@ -12,6 +12,7 @@ public class GuideUIManager : MonoBehaviour
     public TextMeshProUGUI titleGuide, descriptionGuide;
     public Image imageGuide;
     public Button continueButton;
+    public GameObject endPanel;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class GuideUIManager : MonoBehaviour
     {
         //gameObject.SetActive(true);        
         guidePanel.SetActive(false);
+        endPanel.SetActive(false);
         continueButton.onClick.AddListener(Disable);
     }
     public void Parameters(string title, string description, Sprite image)
@@ -45,5 +47,10 @@ public class GuideUIManager : MonoBehaviour
     {
         //gameObject.SetActive(false);
         guidePanel.SetActive(false);
+    }
+
+    public void EnableEndPanel()
+    {
+        endPanel.SetActive(true);
     }
 }
