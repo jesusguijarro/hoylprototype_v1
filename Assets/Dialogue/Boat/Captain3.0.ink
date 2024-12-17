@@ -79,7 +79,7 @@ INCLUDE ../globals.ink
 +[Muchas veces no lo hago]
     ~ q26 = 1
     Que bueno es oir eso #portrait:captain_happy
-+[Nunca lo hago]
++[Nunca hago lo que me dicen]
     ~ q26 = 2
     Escuchar eso es triste #portrait:captain_sad
     

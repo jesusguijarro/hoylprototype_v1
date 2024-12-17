@@ -7,7 +7,7 @@ EXTERNAL gotRudder()
 
 === main ===
 
-- Normalmente Jugador, ¿cómo te llevas con la gente? #speaker:Joven #portrait:youngwoman_neutral #layout:right //27
+- Normalmente ~PlayerUsername, ¿cómo te llevas con la gente? #speaker:Joven #portrait:youngwoman_neutral #layout:right //27
 
 +[Me llevo bien con la gente]
     ~q27 = 0

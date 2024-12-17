@@ -17,7 +17,7 @@ El futuro es incierto, pero estamos juntos en esta aventura. #speaker:Capitán #
     ~ q15 = 0
     Genial, eso me pone feliz! #portrait:captain_happy
 
-- Dicho esto jugador, dirigete al portal que esta en el barco. #portrait:captain_neutro
+- Dicho esto ~PlayerUsername, dirigete al portal que esta en el barco. #portrait:captain_neutro
 
 - Elige el camino que quieras, es tu elección! #portrait:captain_happy
 
