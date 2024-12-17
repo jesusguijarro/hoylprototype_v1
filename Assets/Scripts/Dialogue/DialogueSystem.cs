@@ -50,6 +50,7 @@ public class DialogueSystem : MonoBehaviour
 
     private DialogueVariables dialogueVariables;
     //private InkExternalFunctions inkExternalFunctions;
+    [SerializeField] private GameObject Endpanel;
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -126,6 +127,7 @@ public class DialogueSystem : MonoBehaviour
 
         currentStory.BindExternalFunction("endGame", () =>
         {
+            Endpanel.SetActive(true);
             Debug.Log("Fin del juego.");
         });
 
