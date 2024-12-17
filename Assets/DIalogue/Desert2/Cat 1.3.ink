@@ -13,8 +13,6 @@ Lo lograste ~PlayerUsername!, Gracias a ti todo volverá a la normalidad #speake
 
 - Muchos de estos problemas como el que acabamos de vivir surgen de tener enemigos sin sentido. #speaker:Gato #portrait:bastet_neutral #layout:right
 
-- Normalmente ~PlayerUsername, ¿cómo te llevas con la gente #speaker:Gato #portrait:bastet_neutral #layout:right //27
-
 +[Me llevo bien con la gente]
     ~q27 = 0
     Que bien es ecuchar eso #portrait:bastet_happy

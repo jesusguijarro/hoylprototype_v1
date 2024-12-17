@@ -41,7 +41,7 @@ EXTERNAL gotAnchor()
     Eso me pone triste! #portrait:fairy_sad
 +[Como muy bien]
     ~ q18 = 0
-    Ohh, eso me entristece! #portrait:fairy_happy
+    Ohh, eso me alegra! #portrait:fairy_happy
 
 - En estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Hada #portrait:fairy_neutral #layout:right //pregunta 13
 

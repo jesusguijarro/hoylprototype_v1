@@ -1,4 +1,5 @@
 INCLUDE ../globals.ink
+EXTERNAL gotRudder()
 
 ¡¿Quién eres tú?! #speaker:Hannibal #portrait:hannibal_neutral #layout:right
 
@@ -8,13 +9,13 @@ INCLUDE ../globals.ink
 
 - ¡¿Te mandaron a capturarme?! #speaker:Hannibal #portrait:hannibal_sad #layout:right
 
-- ¡Para nada, estoy en busca de una de sus pócimas legendarias! #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- ¡Para nada, estoy en busca de una de sus pócimas legendarias! #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Eres el primero en encontrarme, ¿no serás el aventurero del que se ha corrido la voz que ha ayudado a las tierras cercanas? #speaker:Hannibal #portrait:hannibal_happy #layout:right
 
 - ¡Aunque no lo creas tus hazañas me han ayudado hasta a mi!
 
-- Me siento alagado, pero ahora mismo me encuentro en una situación complicada #speaker:~PlayerUsername #portrait:male_player_sad #layout:left
+- Me siento alagado, pero ahora mismo me encuentro en una situación complicada #speaker:~PlayerUsername #portrait:player_sad #layout:left
 
 - En tu mundo ¿qué tal es tu trabajo en la escuela ~PlayerUsername? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //23
 
@@ -30,7 +31,7 @@ INCLUDE ../globals.ink
 
 - En este mundo te has desempeñado muy bien en tus aventuras! #speaker:Hannibal #portrait:hannibal_happy #layout:right
 
-- Necesito una de tus pociones magicas para salvar al Capitán! #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- Necesito una de tus pociones magicas para salvar al Capitán! #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Tranquilo, tu nombre es ~PlayerUsername, verdad...  #speaker:Hannibal #portrait:hannibal_neutral #layout:right
 
@@ -38,7 +39,7 @@ INCLUDE ../globals.ink
 
 - Por eso permanezco aquí oculto, pero al parecer tu no  sientes miedo.
 
-- Ahora mismo no me había pasado eso por la cabeza, siendo sincero #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- Ahora mismo no me había pasado eso por la cabeza, siendo sincero #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Conforme tu aspecto ~PlayerUsername, ¿cómo te sientes? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //14
 
@@ -64,7 +65,7 @@ INCLUDE ../globals.ink
     ~ q07 = 0
     Me alegra escuchar eso #portrait:hannibal_happy
 
-- De sus pociones se habla en todos lados, ¿cómo llego a ser tan bueno en ello? #speaker:~PlayerUsername #portrait:male_player_neutral #layout:left
+- De sus pociones se habla en todos lados, ¿cómo llego a ser tan bueno en ello? #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Primero te preguntaré, ¿cómo te ves comparado con las demás personas ~PlayerUsername? #speaker:Hannibal #portrait:hannibal_neutral #layout:right //14
 +[Nunca podré ser tan bueno como otros]
@@ -85,11 +86,13 @@ INCLUDE ../globals.ink
 
 - Por cierto, ya casi esta la poción...
 
-- Justo a tiempo para regresar al barco, antes de que la salud del Capitán empeore... #speaker:~PlayerUsername #portrait:male_player_sad #layout:left
+- Justo a tiempo para regresar al barco, antes de que la salud del Capitán empeore... #speaker:~PlayerUsername #portrait:player_sad #layout:left
 
 - Toma ~PlayerUsername, parte ahora mismo, hay un camino mas corto que yo uso normalmente  #speaker:Hannibal #portrait:hannibal_neutral #layout:right
 
 - Además, escuché que les hacen falta partes para el barco, te daré algo más dirigite al final de la cueva y encontrarás la salida.
+
+~ gotRudder()
 
 -> END
 

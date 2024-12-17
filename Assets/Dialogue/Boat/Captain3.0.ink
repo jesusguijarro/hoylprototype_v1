@@ -25,7 +25,7 @@ INCLUDE ../globals.ink
     ~ q10 = 0
     A veces es normal querer llorar de vez en cuando #portrait:captain_neutral
 
-- Si alguna vez te pasará algo jugador, alguien se preocuparía por ti, ¿alguien te quiere? //25
+- Si alguna vez te pasará algo ~PlayerUsername, alguien se preocuparía por ti, ¿alguien te quiere? //25
 
 +[Nadie me quiere]
     ~ q25 = 2
@@ -37,11 +37,11 @@ INCLUDE ../globals.ink
     ~ q25 = 0
     Me alegra escuchar eso #captain_happy
 
-- Te preguntarás Jugador, por qué re pregunto todo esto. #speaker:Capitan #portrait:captain_neutral #layout:right
+- Te preguntarás ~PlayerUsername, por qué re pregunto todo esto. #speaker:Capitan #portrait:captain_neutral #layout:right
 
 - Mientras estuve solo esperando tu regreso contraje una enfermedad. 
 
-- Muchas personas se preocupan por la enfermedad aunque no sea algo grave, ¿en tú caso cómo es Jugador? //19
+- Muchas personas se preocupan por la enfermedad aunque no sea algo grave, ¿en tú caso cómo es ~PlayerUsername? //19
 
 +[No me preocupa el dolor ni la enfermedad]
     ~ q19 = 0
@@ -73,13 +73,13 @@ INCLUDE ../globals.ink
 
 - Si alguien te dice qué hacer, ¿generalmente no haces lo que te dicen? //26
 
-+[Generalmente]
++[Generalmente, hago lo que me dicen]
     ~ q26 = 0
     Me alegra demasiado oir eso #portrait:captain_happy
-+[Muchas veces]
++[Muchas veces no lo hago]
     ~ q26 = 1
     Que bueno es oir eso #portrait:captain_happy
-+[Nunca]
++[Nunca lo hago]
     ~ q26 = 2
     Escuchar eso es triste #portrait:captain_sad
     

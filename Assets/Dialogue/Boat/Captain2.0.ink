@@ -23,7 +23,6 @@ INCLUDE ../globals.ink
 +[No quiero en absoluto estar con la gente]
     ~ q12 = 2
     Eso me entristece #portrait:captain_sad
-    
 
 - En tu mundo donde hay escuela ¿te diviertes ~PlayerUsername? #speaker:Capitan #portrait:captain_neutral #layout:right //21
 +[Nunca] 

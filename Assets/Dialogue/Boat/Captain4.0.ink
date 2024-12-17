@@ -1,6 +1,6 @@
 EXTERNAL endGame()
     
-    ¡Capitán! estoy de vuelta, logré conseguir la posión del gran Hannibal #speaker:~PlayerUsername #portrait:player_neutral #layout:left
+¡Capitán! estoy de vuelta, logré conseguir la posión del gran Hannibal #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 -> main
 

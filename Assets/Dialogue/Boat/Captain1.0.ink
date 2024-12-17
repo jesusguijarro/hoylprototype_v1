@@ -26,7 +26,7 @@ INCLUDE ../globals.ink
 
 - Antes de una aventura es importante saber sobre tus habilidades ~PlayerUsername, ¿Crees que te saldrán bien las cosas? #speaker:Capitán #portrait:captain_neutro #layout:right // pregunta 2
 + [Nunca me saldrá nada bien]
-    ~ q02 = 0
+    ~ q02 = 2
     Eso me pone triste! #speaker:Capitán #portrait:captain_sad #layout:right
     //-> DONE
 + [No estoy seguro de si las cosas me saldrán bien]
@@ -34,7 +34,7 @@ INCLUDE ../globals.ink
     Es normal sentirse así algunas veces! #speaker:Capitán #portrait:captain_neutro #layout:right
     //-> DONE
 + [Las cosas me saldrán bien]
-    ~ q02 = 2
+    ~ q02 = 0
     Genial, eso me pone feliz! #speaker:Capitán #portrait:captain_happy #layout:right
     //-> DONE
 

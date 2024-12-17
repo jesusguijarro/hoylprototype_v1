@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^Dirigete al barco tomando el portal al final del puente, el capitán te espera! ","#","^portrait:fairy_happy","/#","\n",{"->":"main"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"main":["end",{"#f":1}],"#f":1}],"listDefs":{}}

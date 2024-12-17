@@ -1,13 +1,13 @@
 INCLUDE ../globals.ink
 EXTERNAL gotAnchor()
     
-¡Lo lograste Jugador, el pueblo de La Tierras Nevadas te estará eternamente agredecido! #speaker:Bjorn #portrait:bjorn_neutral #layout:right 
+¡Lo lograste ~PlayerUsername, el pueblo de Las Tierras Nevadas te estará eternamente agredecido! #speaker:Bjorn #portrait:bjorn_neutral #layout:right 
 
 -> main
 
 === main ===
 
-- !Fue una dura batalla! Sin considerar esta batalla ¿como te sientes normalmente tú Jugador?//pregunta 17
+- !Fue una dura batalla! Sin considerar esta batalla ¿como te sientes normalmente tú ~PlayerUsername?//pregunta 17
 
 +[Estoy cansado de cuando en cuando]
     ~q17 = 0
@@ -41,7 +41,7 @@ EXTERNAL gotAnchor()
     Eso me pone triste! #portrait:bjorn_sad
 +[Como muy bien]
     ~q18 = 0
-    Ohh, eso me entristece! #portrait:bjorn_happy
+    Ohh, eso me alegra! #portrait:bjorn_happy
 
 - En estas situaciones como la que acaba de pasar, ¿en tu caso ~PlayerUsername, cómo lo llevas? #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 13
 
@@ -50,12 +50,12 @@ EXTERNAL gotAnchor()
     Que dificil cuando no podemos decidir! #portrait:bjorn_sad
 +[Me cuesta decidirme]
     ~q13 = 1
-    Eso suele paasarme tambien! #portrait:bjorn_sad
+    Eso suele pasarme tambien! #portrait:bjorn_sad
 +[Me decido fácilmente]
     ~q13 = 0
     Me alegra escuchar eso! #portrait:bjorn_happy
     
-- A a mí me cuesta mucho decidirme! #portrait:bjorn_sad    
+- A mí me cuesta mucho decidirme! #portrait:bjorn_sad    
     
 - Mucho por hoy ~PlayerUsername, es hora de que descansemos, ¡tienes que dormir para la siguiente aventura! #speaker:Bjorn #portrait:bjorn_neutral #layout:right //pregunta 16
 

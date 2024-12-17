@@ -11,13 +11,13 @@ Hola de nuevo ~PlayerUsername! Muchos de estos problemas como el que acabamos de
 //pregunta 11
 
 +[Me llevo bien con la gente]
-    ~ q11 = 0
+    ~ q27 = 0
     Me alegra escuchar eso #portrait:furry_happy
 +[Me peleo muchas veces]
-    ~ q11 = 1
+    ~ q27 = 1
     Oh no puede ser! #portrait:furry_sad
 +[Me peleo siempre]
-    ~ q11 = 2
+    ~ q27 = 2
     Es triste escuchar eso #portrait:furry_sad
 
 - Los amigos son muy importantes en estas situaciones ¿tienes amigos ~PlayerUsername? #portrait:furry_neutral //22 
