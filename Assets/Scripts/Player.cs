@@ -29,7 +29,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PlayerAppearance value is invalid or missing in PlayerPrefs.");
+            playerManPrefab.SetActive(true);
+            playerWomanPrefab.SetActive(false);
         }
 
 

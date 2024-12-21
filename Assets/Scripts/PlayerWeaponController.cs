@@ -30,7 +30,7 @@ public class PlayerWeaponController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PlayerAppearance value is invalid or missing in PlayerPrefs.");
+            playerHand = playerHandMan.gameObject;
         }
 
     }
