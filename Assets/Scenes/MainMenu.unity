@@ -1508,8 +1508,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: iBienvenido!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ef13b708854529940b5aa1f17c5e1081, type: 2}
-  m_sharedMaterial: {fileID: 2715424843990433398, guid: ef13b708854529940b5aa1f17c5e1081, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af88b559c9b05d34c82c866cd0b622b6, type: 2}
+  m_sharedMaterial: {fileID: 4291331247368999562, guid: af88b559c9b05d34c82c866cd0b622b6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
