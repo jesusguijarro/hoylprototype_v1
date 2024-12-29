@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal : ActionItem
 {
-    public Vector3 TeleportLocation { get; set; }
-
+    public Vector3 TeleportLocation { get; set; } 
     [SerializeField]
     private Portal[] linkedPortals;
     private PortalController PortalController { get; set; }
@@ -17,7 +17,12 @@ public class Portal : ActionItem
 
     public override void Interact()
     {
-        PortalController.ActivatePortal(linkedPortals);
-        playerAgent.ResetPath();
+        if (BoxColliderController.Instance.isTriger())
+        {
+            PortalController.ActivatePortal(linkedPortals);
+            playerAgent.ResetPath();
+        }
+
+
     }
 }

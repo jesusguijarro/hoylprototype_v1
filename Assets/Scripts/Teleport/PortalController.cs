@@ -31,6 +31,7 @@ public class PortalController : MonoBehaviour
 
     public void ActivatePortal(Portal[] portals)
     {
+        
         if (panel.activeSelf)
         {
             return;

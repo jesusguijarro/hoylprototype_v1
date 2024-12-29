@@ -25,7 +25,7 @@ public class NPC : Interactable
                 Debug.Log("currentInkFileIndex: " + currentInkFileIndex);
                 if (currentInkFileIndex > inkJSONFiles.Length - 1) {
                     if (admirationSign) Destroy(admirationSign);
-                    Debug.Log("destruír----------------------");
+                    BoxColliderController.Instance.TriggerActivate();
                 }                    
             }
             else 

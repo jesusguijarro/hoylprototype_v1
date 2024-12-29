@@ -50,6 +50,7 @@ public class DialogueSystem : MonoBehaviour
 
     private DialogueVariables dialogueVariables;
     //private InkExternalFunctions inkExternalFunctions;    
+
     void Awake()
     {
         continueBtn = dialoguePanel.transform.Find("Continue").GetComponent<Button>();
@@ -123,6 +124,10 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         dialogueVariables.StartListening(currentStory);
+        currentStory.BindExternalFunction("ColliderAct", () =>
+        {
+            //BoxColliderController.Instance.TriggerActivate(true);
+        });
 
         currentStory.BindExternalFunction("endGame", () =>
         {
