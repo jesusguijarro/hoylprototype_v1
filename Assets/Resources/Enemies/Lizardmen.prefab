@@ -756,8 +756,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   currentHealth: 0
-  maxHealth: 600
+  maxHealth: 1000
   pickupItem: {fileID: 0}
+  cont: 0
   _healthbar: {fileID: 870914327951173291}
 --- !u!195 &766755963747942796
 NavMeshAgent:
