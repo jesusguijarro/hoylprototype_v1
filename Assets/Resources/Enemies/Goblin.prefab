@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthbarSprite: {fileID: 8774380415257271580}
+  _reduceSpeed: 2
 --- !u!1 &414640284183847036
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,8 +237,7 @@ MonoBehaviour:
     m_Bits: 128
   currentHealth: 0
   maxHealth: 300
-  pickupItem: {fileID: 7522918355177131914, guid: 6793f69eb2e560c44be533973dc5033b, type: 3}
-  chaseAudio: {fileID: 8300000, guid: 6b6e38af1b8814a69bacc5aa599e4e2c, type: 3}
+  pickupItem: {fileID: 1164157651687673424, guid: 7a77aca8928780240bfaaa36d02b8364, type: 3}
   _healthbar: {fileID: 8625364309156523510}
 --- !u!195 &1116738937532886986
 NavMeshAgent:
