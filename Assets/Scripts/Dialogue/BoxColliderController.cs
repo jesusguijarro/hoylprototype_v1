@@ -10,7 +10,9 @@ public class BoxColliderController : MonoBehaviour
     public BoxCollider fightTrigger; // Trigger para después de la pelea
 
     [Header("Trigger Manual")]
-    public GameObject manualTrigger; // Trigger que se activa/desactiva manualmente con la tecla E
+    public GameObject manualTrigger;
+    [Header("Trigger Manual")]
+    public BoxCollider manualTrigger2;// Trigger que se activa/desactiva manualmente con la tecla E
     private bool Active;
 
     private void Awake()
@@ -27,6 +29,8 @@ public class BoxColliderController : MonoBehaviour
         // Desactivar los triggers al inicio
         if (fightTrigger != null)
             fightTrigger.enabled = false;
+        if (manualTrigger2 != null)
+            manualTrigger2.isTrigger = false;
         Active = false;
     }
 
@@ -51,7 +55,13 @@ public class BoxColliderController : MonoBehaviour
         return Active;
 
     }
+    public void TriggerDesactivate()
+    {
+        manualTrigger2.isTrigger = true;
 
-    
-    
+
+    }
+
+
+
 }

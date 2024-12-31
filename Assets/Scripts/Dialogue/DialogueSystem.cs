@@ -124,11 +124,6 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         dialogueVariables.StartListening(currentStory);
-        currentStory.BindExternalFunction("ColliderAct", () =>
-        {
-            //BoxColliderController.Instance.TriggerActivate(true);
-        });
-
         currentStory.BindExternalFunction("endGame", () =>
         {
             GuideUIManager.Instance.EnableEndPanel();

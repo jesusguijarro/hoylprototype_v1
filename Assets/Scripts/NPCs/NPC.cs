@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class NPC : Interactable
 {
@@ -11,31 +10,47 @@ public class NPC : Interactable
 
     [SerializeField] private GameObject admirationSign;
 
+    [Header("Box Collider")]
+    [SerializeField] private BoxCollider boxCollider; // Referencia al BoxCollider
+
     public override void Interact()
     {
         Debug.Log("inkJSONFiles.Length: " + inkJSONFiles.Length);
         Debug.Log("Interacted");
-        //DialogueSystem.Instance != null && 
+
         if (!DialogueSystem.Instance.dialogueIsPlaying)
         {
-            if (currentInkFileIndex < inkJSONFiles.Length) 
-            {                           
+            if (currentInkFileIndex < inkJSONFiles.Length)
+            {
                 DialogueSystem.Instance.EnterDialogueMode(inkJSONFiles[currentInkFileIndex]);
                 currentInkFileIndex++;
                 Debug.Log("currentInkFileIndex: " + currentInkFileIndex);
-                if (currentInkFileIndex > inkJSONFiles.Length - 1) {
-                    if (admirationSign) Destroy(admirationSign);
-                    BoxColliderController.Instance.TriggerActivate();
-                }                    
+
+                if (currentInkFileIndex > inkJSONFiles.Length - 1)
+                {
+                    if (admirationSign)
+                    {
+                        Destroy(admirationSign);
+                        BoxColliderController.Instance.TriggerActivate();
+                    }
+
+                    // Verificar si el BoxCollider está asignado
+                    if (boxCollider != null)
+                    {
+                        boxCollider.isTrigger = true; // Activar el trigger del BoxCollider
+                        Debug.Log("BoxCollider activado.");
+                    }
+                    else
+                    {
+                        Debug.Log("BoxCollider no está asignado, no se realizó ninguna acción.");
+                    }
+                }
             }
-            else 
+            else
             {
-                // DialogueSystem.Instance.EnterDialogueMode(inkJSONFiles[currentInkFileIndex-1]);
                 Debug.Log("No more dialogues for this NPC.");
-                //currentInkFileIndex++;
-                Debug.Log("currentInkFileIndex: " + currentInkFileIndex);                
+                Debug.Log("currentInkFileIndex: " + currentInkFileIndex);
             }
         }
-        //Debug.Log(inkJSON.text);
     }
 }
