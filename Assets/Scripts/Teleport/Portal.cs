@@ -17,11 +17,11 @@ public class Portal : ActionItem
 
     public override void Interact()
     {
-        if (BoxColliderController.Instance.isTriger())
-        {
+        //if (BoxColliderController.Instance.isTriger())
+        //{
             PortalController.ActivatePortal(linkedPortals);
             playerAgent.ResetPath();
-        }
+        //}
 
 
     }

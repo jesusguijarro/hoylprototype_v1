@@ -106,6 +106,7 @@ public class Universal : Interactable, IEnemy
         StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
+        BoxColliderController.Instance.TriggerActivate();
         StartCoroutine(Destroy());
     }
     private IEnumerator Destroy()

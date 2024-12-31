@@ -11,7 +11,9 @@ public class NPC : Interactable
     [SerializeField] private GameObject admirationSign;
 
     [Header("Box Collider")]
-    [SerializeField] private BoxCollider boxCollider; // Referencia al BoxCollider
+    [SerializeField] private BoxCollider boxCollider;
+    [Header("Box Collider")]
+    [SerializeField] private BoxCollider boxColliderPortal;// Referencia al BoxCollider
 
     public override void Interact()
     {
@@ -31,13 +33,22 @@ public class NPC : Interactable
                     if (admirationSign)
                     {
                         Destroy(admirationSign);
-                        BoxColliderController.Instance.TriggerActivate();
                     }
 
                     // Verificar si el BoxCollider está asignado
                     if (boxCollider != null)
                     {
                         boxCollider.isTrigger = true; // Activar el trigger del BoxCollider
+                        boxColliderPortal.enabled = true;
+                        Debug.Log("BoxCollider activado.");
+                    }
+                    else
+                    {
+                        Debug.Log("BoxCollider no está asignado, no se realizó ninguna acción.");
+                    }
+                    if (boxColliderPortal != null)
+                    {                      
+                        boxColliderPortal.enabled = true;
                         Debug.Log("BoxCollider activado.");
                     }
                     else

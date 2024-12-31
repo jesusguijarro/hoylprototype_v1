@@ -107,6 +107,7 @@ public class Lizardmen : Interactable, IEnemy
         StartCoroutine(AudioManager.Instance.SwitchToBackgroundMusic());
         enemyAnimator.Play("Die");
         navAgent.isStopped = true;
+        BoxColliderController.Instance.TriggerActivate();
         StartCoroutine(Destroy());
     }
     private IEnumerator Destroy()
@@ -129,7 +130,7 @@ public class Lizardmen : Interactable, IEnemy
     {
         yield return new WaitForSeconds(3f);
         Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/purplebeetle_happy");
-        //BoxColliderController.Instance.TriggerActivate(true);
+        
         GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Senor Lagarto, dirigite a la puerta del fondo tal vez encuentres a un nuevo amigo...", image);
     }
 
