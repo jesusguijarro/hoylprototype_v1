@@ -590,6 +590,8 @@ MonoBehaviour:
   inkJSONFiles:
   - {fileID: 0}
   admirationSign: {fileID: 5319800063464661570}
+  boxCollider: {fileID: 0}
+  boxColliderPortal: {fileID: 0}
 --- !u!195 &7017862358782726140
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -631,8 +633,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.1, z: 0.85}
-  m_Center: {x: 0, y: 1.05, z: 0}
+  m_Size: {x: 1, y: 4, z: 0.85}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!137 &8337079738689080316
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

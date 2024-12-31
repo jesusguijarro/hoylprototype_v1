@@ -1554,6 +1554,8 @@ MonoBehaviour:
   inkJSONFiles:
   - {fileID: 4900000, guid: 43f03581664f96945b1f256ae6c6a0f8, type: 3}
   admirationSign: {fileID: 7516063674057566515}
+  boxCollider: {fileID: 0}
+  boxColliderPortal: {fileID: 0}
 --- !u!195 &7221516991020377667
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1595,8 +1597,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 4, z: 1.67}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 1, y: 6, z: 1.67}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!137 &4448466642630450333
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -3192,6 +3194,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8878358463308821876}
     m_Modifications:
+    - target: {fileID: 2175442136666558835, guid: ef36d4601931ec743a443f0dd4507b02, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2175442136666558835, guid: ef36d4601931ec743a443f0dd4507b02, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 2180070011554003036, guid: ef36d4601931ec743a443f0dd4507b02, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
