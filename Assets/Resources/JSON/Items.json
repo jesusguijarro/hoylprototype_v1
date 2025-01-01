@@ -4,7 +4,7 @@
     "itemName": "Espada",
     "description": "Una larga y filosa espada.",
     "itemType": "Weapon",
-    "actionName": "Equip",
+    "actionName": "Equipar",
     "itemModifier": 0,
     "Stats": [
       {
