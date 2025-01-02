@@ -13,7 +13,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void Pause()
     {
-        Debug.Log("entré al pause");
+        //Debug.Log("entré al pause");
         pauseMenuPanel.SetActive(true);
         Time.timeScale = 0;
     }

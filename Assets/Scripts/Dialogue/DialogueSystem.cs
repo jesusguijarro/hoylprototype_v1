@@ -124,10 +124,11 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         dialogueVariables.StartListening(currentStory);
+
         currentStory.BindExternalFunction("endGame", () =>
         {
             GuideUIManager.Instance.EnableEndPanel();
-            Debug.Log("Fin del juego.");
+            // Debug.Log("Fin del juego.");
         });
 
         currentStory.BindExternalFunction("gotAnchor", () =>
