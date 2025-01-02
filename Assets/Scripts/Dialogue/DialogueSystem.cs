@@ -73,7 +73,7 @@ public class DialogueSystem : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("entré al start del dialogue");
+        // Debug.Log("entré al start del dialogue");
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
 

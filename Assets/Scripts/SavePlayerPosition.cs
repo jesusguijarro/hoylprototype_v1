@@ -7,6 +7,8 @@ public class SavePlayerPosition : MonoBehaviour
     private float saveInterval = 5f; // Intervalo de tiempo para guardar la posición
     private float lastSaveTime = 0f;
 
+    Vector3 playerPosition;
+
     void Start()
     {
         player = FindAnyObjectByType<Player>(); // Asegúrate de que el jugador está correctamente asignado
@@ -14,6 +16,7 @@ public class SavePlayerPosition : MonoBehaviour
         if (PlayerPrefs.HasKey("playerStarted"))
         {
             LoadPlayerPosition(); // Cargar la última posición guardada
+            //Debug.Log("playerStarted if entry");
         }
 
         if (!PlayerPrefs.HasKey("playerStarted"))
@@ -28,12 +31,12 @@ public class SavePlayerPosition : MonoBehaviour
         // Guardar la posición cada cierto tiempo
         if (Time.time - lastSaveTime >= saveInterval)
         {
-            SavePosition();
+            SavePositionRespawn();
             lastSaveTime = Time.time;
         }
     }
 
-    public void SavePosition()
+    public void SavePositionRespawn()
     {
         Vector3 playerPosition = player.transform.position;
 
@@ -44,7 +47,7 @@ public class SavePlayerPosition : MonoBehaviour
         PlayerPrefs.Save();
 
         // Debug.Log("Player position saved at index: " + positionIndex);
-
+        //Debug.Log("save position invoked");
         // Incrementar el índice para la próxima posición guardada
         positionIndex++;
     }
@@ -56,8 +59,9 @@ public class SavePlayerPosition : MonoBehaviour
         Debug.Log("PlayerPrefs reset!");
     }
 
-    public void LoadPlayerPosition()
+    public void LoadPlayerPositionKilled()
     {
+        //Debug.Log("LoadPlayerPosition invoked");
         player.gameObject.SetActive(false);
 
         // Buscar la penúltima posición guardada
@@ -71,7 +75,7 @@ public class SavePlayerPosition : MonoBehaviour
                 PlayerPrefs.GetFloat("playerPosition_" + targetIndex + "_Z")
             );
             player.transform.position = savedPosition;
-            Debug.Log("Player position loaded at index: " + targetIndex);
+            //Debug.Log("Player position loaded at index: " + targetIndex);
         }
         else
         {
@@ -80,4 +84,30 @@ public class SavePlayerPosition : MonoBehaviour
 
         player.gameObject.SetActive(true);
     }
+    public void SavePosition()
+    {
+        playerPosition = player.transform.position;
+
+        PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
+        PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
+        PlayerPrefs.SetFloat("playerPositionZ", playerPosition.z);
+        PlayerPrefs.Save();
+
+        //Debug.Log("Player position saved!");
+    }
+    private void LoadPlayerPosition()
+    {
+        player.gameObject.SetActive(false);
+        Vector3 savedPosition = new Vector3(
+            PlayerPrefs.GetFloat("playerPositionX"),
+            PlayerPrefs.GetFloat("playerPositionY"),
+            PlayerPrefs.GetFloat("playerPositionZ")
+        );
+        player.transform.position = savedPosition;
+        player.gameObject.SetActive(true);
+
+        //Debug.Log("Player position loaded!");
+    }
+
+
 }

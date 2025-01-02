@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         // Cargar la penúltima posición guardada
         if (savePlayerPosition != null)
         {
-            savePlayerPosition.LoadPlayerPosition();
+            savePlayerPosition.LoadPlayerPositionKilled();
         }
         else
         {
