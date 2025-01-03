@@ -38,18 +38,33 @@ public class PostMethod : MonoBehaviour
 
     IEnumerator PostDataCoroutine()
     {
-        TextMeshProUGUI statusText = statusPanel.GetComponentInChildren<TextMeshProUGUI>();
-        statusText.text = "Cargando...";
+        TextMeshProUGUI statusText = statusPanel.GetComponentInChildren<TextMeshProUGUI>();        
 
         string uri = "http://192.168.0.101:8083/graphql"; //http://10.1.142.159:8083/graphql
         // string uri = "http://10.1.142.159:8083/graphql";
 
         string name = nameInputField.text;
         string ageStr = ageInputField.text;
-        int age = int.Parse(ageInputField.text);
+        //int age = int.Parse(ageInputField.text);
         string username = userInputField.text;
         string appearance = AppearanceSelector.instance.selectedAppearance;
         Appearance appearanceEnumValue;
+
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(ageStr) || string.IsNullOrEmpty(appearance))
+        {
+            statusPanel.SetActive(true);
+            statusText.text = "Error: Por favor rellene todos los campos.";
+            yield break;
+        }
+
+        // Validate age
+        int age;
+        if (!int.TryParse(ageStr, out age) || age < 7 || age > 9)
+        {
+            statusPanel.SetActive(true);
+            statusText.text = "Error: Ingrese una edad válida (7-9).";
+            yield break;
+        }
 
         switch (appearance)
         {
@@ -63,13 +78,6 @@ public class PostMethod : MonoBehaviour
                 appearanceEnumValue = Appearance.OTHER;
                 break;
         }
-
-        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(ageStr) || string.IsNullOrEmpty(appearance))
-        {            
-            statusPanel.SetActive(true);
-            statusText.text = "Error: Por favor rellene todos los campos.";
-            yield break;
-        }     
 
         string mutation = "mutation { registerPlayer(create: { name: \"" + name + "\", age: " + age + ", username: \"" + username + "\", appearance: " + appearanceEnumValue + " }) { id name age username appearance } }";
 
@@ -93,6 +101,8 @@ public class PostMethod : MonoBehaviour
             }
             else
             {
+                statusPanel.SetActive(true);
+                statusText.text = "Cargando...";
                 Debug.Log("Request: " + request.url);
                 Debug.Log("Request Headers: " + request.GetRequestHeader("Content-Type"));
                 Debug.Log("Request Body: " + json);

@@ -52,5 +52,13 @@ public class GuideUIManager : MonoBehaviour
     public void EnableEndPanel()
     {
         endPanel.SetActive(true);
+        ResetGame();
+    }
+
+    public void ResetGame()
+    {
+        // after the end panel we reset the game
+        Debug.Log("You already ended the game! We are reseting all the values for a new game.");
+        PlayerPrefs.DeleteAll();
     }
 }
