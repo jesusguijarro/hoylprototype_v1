@@ -23,4 +23,10 @@ public class PauseMenuController : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         Time.timeScale = 1;
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("QuitGame called");
+        Application.Quit();
+    }
 }
