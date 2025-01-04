@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour
         if (PlayerPrefs.HasKey("PlayerUsername"))
         {
             // player already register
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("SampleScene");            
         }
         else
         {
