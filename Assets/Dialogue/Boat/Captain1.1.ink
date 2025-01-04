@@ -1,3 +1,7 @@
+// EXTERNAL changeInitialBoat()
+
+ // ~ changeInitialBoat()
+
 ¡Capitán, mire! Faltan muchas piezas del barco! #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 -> main

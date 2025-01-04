@@ -149,6 +149,11 @@ public class DialogueSystem : MonoBehaviour
             GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
         });
 
+        currentStory.BindExternalFunction("changeInitialBoat", () =>
+        {
+            GuideUIManager.Instance.ChangeInitialBoat();            
+        });
+
         // Resetear etiquetas iniciales
         displayNameText.text = "???";
         portraitAnimator.Play("default");

@@ -13,6 +13,9 @@ public class GuideUIManager : MonoBehaviour
     public Image imageGuide;
     public Button continueButton;
     public GameObject endPanel;
+  
+    public GameObject startBoat;
+    public GameObject startBoatUncomplete;
 
     private void Awake()
     {
@@ -48,17 +51,24 @@ public class GuideUIManager : MonoBehaviour
         //gameObject.SetActive(false);
         guidePanel.SetActive(false);
     }
-
     public void EnableEndPanel()
     {
         endPanel.SetActive(true);
         ResetGame();
     }
-
     public void ResetGame()
     {
         // after the end panel we reset the game
         Debug.Log("You already ended the game! We are reseting all the values for a new game.");
         PlayerPrefs.DeleteAll();
     }
+
+    public void ChangeInitialBoat()
+    {
+        Debug.Log("Change initial boat called");
+        startBoat.SetActive(false);
+        startBoatUncomplete.SetActive(true);
+    }
+
+
 }
