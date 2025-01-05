@@ -110,7 +110,7 @@ public class PostMethod : MonoBehaviour
                 statusPanel.SetActive(false);
                 PlayerPrefs.SetString("PlayerUsername",username);
                 PlayerPrefs.SetString("PlayerAppearance", appearanceEnumValue.ToString());
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("Tutorial");
             }
         }
     }
