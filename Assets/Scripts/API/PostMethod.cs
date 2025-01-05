@@ -57,6 +57,14 @@ public class PostMethod : MonoBehaviour
             yield break;
         }
 
+        // Validate username length
+        if (username.Length > 12)
+        {
+            statusPanel.SetActive(true);
+            statusText.text = "Error: Ingrese un username más corto (11 caracteres máximo).";
+            yield break;
+        }
+
         // Validate age
         int age;
         if (!int.TryParse(ageStr, out age) || age < 7 || age > 9)
