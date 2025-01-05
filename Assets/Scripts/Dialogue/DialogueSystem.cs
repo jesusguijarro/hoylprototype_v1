@@ -146,7 +146,7 @@ public class DialogueSystem : MonoBehaviour
         currentStory.BindExternalFunction("gotBoatSails", () =>
         {
             Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/boat_sails");
-            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has obtenido un objeto faltante del barco, obtuviste todos!", image);
+            GuideUIManager.Instance.Parameters("Objeto recibido!", "Has recolectado todos los objetos del barco!", image);
         });
 
         currentStory.BindExternalFunction("changeInitialBoat", () =>

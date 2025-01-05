@@ -131,7 +131,7 @@ public class Lizardmen : Interactable, IEnemy
         yield return new WaitForSeconds(3f);
         Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/purplebeetle_happy");
         
-        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Senor Lagarto, dirigite a la puerta del fondo tal vez encuentres a un nuevo amigo...", image);
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Señor Lagarto, dirigite a la puerta del fondo encontrás a un nuevo amigo...", image);
     }
 
 

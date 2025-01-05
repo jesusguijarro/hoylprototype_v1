@@ -131,7 +131,7 @@ public class Universal : Interactable, IEnemy
 
         Sprite image = Resources.Load<Sprite>("UI/Icons/GuideUsage/bastet_happy");
 
-        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Faraon, entra por la puerta y te encontraras con Gato!", image);
+        GuideUIManager.Instance.Parameters("Enemigo derrotado!", "Has derrotado al Faraón, entra por la puerta y te encontrarás con Gato!", image);
     }
 
     void DropLoot()
