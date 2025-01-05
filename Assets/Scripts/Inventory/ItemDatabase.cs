@@ -21,8 +21,8 @@ public class itemDatabase : MonoBehaviour
     private void BuildDatabase()
     {
         Items = JsonConvert.DeserializeObject<List<Item>>(Resources.Load<TextAsset>("JSON/Items").ToString());
-        Debug.Log(Items[1].ItemName + " is a " + Items[1].ItemType.ToString());
-        Debug.Log(Items[0].ItemName);
+        //Debug.Log(Items[1].ItemName + " is a " + Items[1].ItemType.ToString());
+        //Debug.Log(Items[0].ItemName);
     }
 
     public Item GetItem(string itemSlug) {

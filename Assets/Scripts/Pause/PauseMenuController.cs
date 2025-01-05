@@ -7,6 +7,12 @@ public class PauseMenuController : MonoBehaviour
     public GameObject pauseMenuPanel;
     //private bool pauseMenuIsActive;
 
+    private void Start()
+    {
+        //Debug.Log("---------- start called");
+        Pause();
+    }
+
     private void Update()
     {
     }
