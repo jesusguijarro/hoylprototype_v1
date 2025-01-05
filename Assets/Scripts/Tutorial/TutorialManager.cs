@@ -115,5 +115,6 @@ public class TutorialManager : MonoBehaviour
     void MoveToGame()
     {
         SceneManager.LoadScene("SampleScene");
+        PlayerPrefs.SetInt("PassToGame", 1);
     }
 }

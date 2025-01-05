@@ -7,7 +7,8 @@ public class SceneController : MonoBehaviour
 {
     void Start()
     {
-        if (PlayerPrefs.HasKey("PlayerUsername"))
+        int passToGame = PlayerPrefs.GetInt("PassToGame");
+        if (PlayerPrefs.HasKey("PlayerUsername") && passToGame==1)
         {
             // player already register
             SceneManager.LoadScene("SampleScene");            
