@@ -10,7 +10,7 @@
 
 - ¡Wow! ¿Eres un hada? #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
-- ¡Si, soy Aurora, guardiana del Bosque Encantado! ¿Cómo has llegado aqui? #speaker:Hada #portrait:fairy_neutral #layout:right
+- ¡Si, soy Aurora, guardiana del Bosque Encantado! ¿Cómo has llegado aquí? #speaker:Hada #portrait:fairy_neutral #layout:right
 
 - Estaba en un barco cuando vi este portal mágico, y antes de que pudiera darme cuenta, ¡me encontré aquí! #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
@@ -20,7 +20,7 @@
     
 - El Bosque Encantado es un lugar lleno de secretos y maravillas. Pero también es un lugar peligroso para los que no lo respetan #speaker:Hada #portrait:fairy_neutral #layout:right
 
-- Estoy dispuesto a ayudar en lo que pueda!. #speaker:~PlayerUsername #portrait:player_neutral #layout:left
+- ¡Estoy dispuesto a ayudar en lo que pueda!. #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
 - Ahora mismo el rey de las sombras, se encuentra en una isla cercana aquí, a la izquierda de esta isla. #speaker:Hada #portrait:fairy_neutral #layout:right
 

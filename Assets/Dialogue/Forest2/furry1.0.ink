@@ -37,17 +37,17 @@ El Hada Aurora ha sido capturada por el rey de las sombras. Necesitamos tu ayuda
 
 - ¿Tú qué piensas sobre las cosas malas que pasan a tu al rededor ~PlayerUsername? #portrait:furry_neutral //8
 
-+[Todas las cosas malas son culpa mia]
++[Todas las cosas malas son culpa mía]
     ~ q08 = 2
     Es triste escuchar eso. #portrait:furry_sad
-+[Muchas cosas malas son culpa mia]
++[Muchas cosas malas son culpa mía]
     ~ q08 = 1
     Eso me pone muy triste. #portrait:furry_sad
 +[Generalmente no tengo la culpa de que ocurran cosas malas]
     ~ q08 = 0
     Que bueno que pienses eso. #portrait:furry_happy
     
--  Debemos actuar rápido antes de que el rey de las sombras se dé cuenta de nuestra presencia. Tu puedes liberar al hada Aurora y derrotar al mal que asecha en este lugar. #speaker:Furry #portrait:furry_neutral #layout:right    
+-  Debemos actuar rápido antes de que el rey de las sombras se dé cuenta de nuestra presencia. Tú puedes liberar al hada Aurora y derrotar al mal que acecha en este lugar. #speaker:Furry #portrait:furry_neutral #layout:right    
     
 - A partir de este punto no te puedo acompañar, mucha suerte ~PlayerUsername! #speaker:Furry #portrait:furry_happy #layout:right  
 
