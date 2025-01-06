@@ -23,10 +23,10 @@ EXTERNAL gotRudder()
 
 +[Tengo muchos amigos]
     ~q22 = 0
-    Que alegria me da escuchar eso #portrait:youngwoman_happy 
+    Que alegría me da escuchar eso #portrait:youngwoman_happy 
 +[Tengo muchos amigos pero me gustaría tener más]
     ~q22 = 1
-    Es bueno oir eso #portrait:youngwoman_neutral
+    Es bueno oír eso #portrait:youngwoman_neutral
 +[No tengo amigos]
     ~q22 = 2
     Es triste escuchar eso #portrait:youngwoman_happy
@@ -35,7 +35,7 @@ EXTERNAL gotRudder()
 
 - Escuché que su barco se averió, en agradecimiento los habitantes de las Tierras Nevadas prepararon velas, espero que sea de gran ayuda.
 
-- Dirigite al portal al final del puente, el capitán te espera!.
+- Dirígete al portal al final del puente, ¡el capitán te espera!.
 
 ~ gotRudder()
 

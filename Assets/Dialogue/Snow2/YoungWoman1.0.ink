@@ -44,10 +44,10 @@ Bienvenido, ~PlayerUsername. Hemos escuchado los rumores sobre sus valientes haz
 
 - ¿Tú qué piensas sobre las cosas malas que pasan a tu al rededor ~PlayerUsername?
 
-+[Todas las cosas malas son culpa mia]
++[Todas las cosas malas son culpa mía]
     ~ q08 = 2
     Es triste escuchar eso. #portrait:youngwoman_sad
-+[Muchas cosas malas son culpa mia]
++[Muchas cosas malas son culpa mía]
     ~ q08 = 1
     Eso me pone muy triste. #portrait:youngwoman_sad
 +[Generalmente no tengo la culpa de que ocurran cosas malas]
