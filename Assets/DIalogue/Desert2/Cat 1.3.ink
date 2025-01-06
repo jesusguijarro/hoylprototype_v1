@@ -1,7 +1,7 @@
 INCLUDE ../globals.ink
 EXTERNAL gotRudder()
 
-Lo lograste ~PlayerUsername!, Gracias a ti todo volverá a la normalidad #speaker:Gato #portrait:bastet_happy #layout:right
+¡Lo lograste ~PlayerUsername!, Gracias a ti todo volverá a la normalidad #speaker:Gato #portrait:bastet_happy #layout:right
 
 -> main
 
@@ -28,7 +28,7 @@ Lo lograste ~PlayerUsername!, Gracias a ti todo volverá a la normalidad #speake
 +[Tengo muchos amigos]
     ~q22 = 0
     Que bien es ecuchar eso #portrait:bastet_happy
-+[Tengo muchos amigos pero me gustaria tener mas ]
++[Tengo muchos amigos, pero me gustaría tener más ]
     ~q22 = 1
     Eso es bueno #portrait:bastet_neutral
 +[No tengo amigos]
@@ -39,7 +39,7 @@ Lo lograste ~PlayerUsername!, Gracias a ti todo volverá a la normalidad #speake
 
 - Escuché que su barco se averió, en agradecimiento los habitantes del desierto prepararon velas, espero que sea de gran ayuda. #portrait:bastet_happy
 
-- Dirigite al portal al final del puente, el capitán te espera!.
+- ¡Dirígite al portal al final del puente, el capitán te espera!.
 
 ~ gotRudder()
 
