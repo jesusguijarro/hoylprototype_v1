@@ -65,11 +65,14 @@ public class Player : MonoBehaviour
     {
         currentHealth -= amount;
         if (currentHealth <= 0)
-            revivePanel.SetActive(true);
+            Die();
             UIEventHandler.HealthChanged(this.currentHealth, this.maxHealth);
     }
 
-
+    public void Die()
+    {
+        revivePanel.SetActive(true);
+    }
 
     public void Revive()
     {

@@ -12,7 +12,11 @@ public class SavePlayerPosition : MonoBehaviour
     void Start()
     {
         player = FindAnyObjectByType<Player>(); // Asegúrate de que el jugador está correctamente asignado
-
+        positionIndex = 0;
+        while (PlayerPrefs.HasKey("playerPosition_" + positionIndex + "_X"))
+        {
+            positionIndex++;
+        }
         if (PlayerPrefs.HasKey("playerStarted"))
         {
             LoadPlayerPosition(); // Cargar la última posición guardada
