@@ -12,12 +12,11 @@
 
 - ¡Genial!  Me sería de gran ayuda #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
-- Tienes que llegar al final del paseo de las piedras, sin caer al agua! #speaker:Viajero #portrait:traveler_neutral #layout:right
+- Tienes que llegar al final del paseo de las piedras, ¡sin caer al agua! #speaker:Viajero #portrait:traveler_neutral #layout:right
 
 - Si lo logras al parecer podrás reunirte con el gran Hannibal! #speaker:Viajero #portrait:traveler_happy #layout:right
 
 - ¡Veré como me las arreglo, muchas gracias! #speaker:~PlayerUsername #portrait:player_happy #layout:left
-
 
 -> END
 
