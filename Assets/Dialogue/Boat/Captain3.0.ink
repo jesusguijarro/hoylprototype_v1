@@ -20,7 +20,7 @@ INCLUDE ../globals.ink
     Me da mucha tristeza escuchar eso #portrait:captain_sad
 +[Tengo ganas de llorar muchos dias]
     ~ q10 = 1
-    Me sa mucha tristeza escuchar eso #portrait:captain_sad
+    Me da mucha tristeza escuchar eso #portrait:captain_sad
 +[Tengo ganas de llorar de vez en cuando]
     ~ q10 = 0
     A veces es normal querer llorar de vez en cuando #portrait:captain_neutral
