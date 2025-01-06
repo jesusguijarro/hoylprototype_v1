@@ -24,20 +24,20 @@ EXTERNAL gotRudder()
     Me alegra demasiado escuchar eso #portrait:hannibal_happy
 +[No es tan bueno como antes]
     ~ q23 = 1
-    Eso puede ser normal solo es cuestion de mejorar #portrait:hannibal_neutral
+    Eso puede ser normal solo es cuestión de mejorar #portrait:hannibal_neutral
 +[Lo llevo muy mal]
     ~ q23 = 2
-    Que bueno es escuchar eso #portrait:hannibal_happy
+    Que mal escuchar eso #portrait:hannibal_happy
 
-- En este mundo te has desempeñado muy bien en tus aventuras! #speaker:Hannibal #portrait:hannibal_happy #layout:right
+- ¡En este mundo te has desempeñado muy bien en tus aventuras! #speaker:Hannibal #portrait:hannibal_happy #layout:right
 
-- Necesito una de tus pociones magicas para salvar al Capitán! #speaker:~PlayerUsername #portrait:player_neutral #layout:left
+- ¡Necesito una de tus pociones magicas para salvar al Capitán! #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
-- Tranquilo, tu nombre es ~PlayerUsername, verdad...  #speaker:Hannibal #portrait:hannibal_neutral #layout:right
+- Tranquilo, tu nombre es ~PlayerUsername ¿verdad?  #speaker:Hannibal #portrait:hannibal_neutral #layout:right
 
 - Toma asiento, mientras preparo la poción que necesitas. La gente normalmente me tiene miedo por mi apariencia.
 
-- Por eso permanezco aquí oculto, pero al parecer tu no  sientes miedo.
+- Por eso permanezco aquí oculto, pero al parecer tú no  sientes miedo.
 
 - Ahora mismo no me había pasado eso por la cabeza, siendo sincero #speaker:~PlayerUsername #portrait:player_neutral #layout:left
 
@@ -48,7 +48,7 @@ EXTERNAL gotRudder()
     Me algra escuchar que pienses eso #portrait:hannibal_happy
 +[Hay algunas cosas de mi aspecto que no me gustan]
     ~ q14 = 1
-    A veces esta bien que pensemos eso #portrait:hannibal_neutral
+    A veces está bien que pensemos eso #portrait:hannibal_neutral
 +[Soy feo]
     ~ q14 = 2
     Es muy triste escuchar eso #portrait:hannibal_sad
@@ -73,10 +73,10 @@ EXTERNAL gotRudder()
     Que triste es escuchar eso #portrait:hannibal_sad
 +[Si quiero puedo ser tan bueno como otros]
     ~ q24 = 1
-    Me alegra que pienses asi #portrait:hannibal_happy
+    Me alegra que pienses así #portrait:hannibal_happy
 +[Soy tan bueno como otros]
     ~ q24 = 0
-    Que bueno es ver que pienses asi #portrait:hannibal_happy
+    Que bueno es ver que pienses así #portrait:hannibal_happy
 
 - La clave está en dejar de darle importancia a lo que digan los demás. #speaker:Hannibal #portrait:hannibal_neutral #layout:right
 
@@ -90,7 +90,7 @@ EXTERNAL gotRudder()
 
 - Toma ~PlayerUsername, parte ahora mismo, hay un camino mas corto que yo uso normalmente  #speaker:Hannibal #portrait:hannibal_neutral #layout:right
 
-- Además, escuché que les hacen falta partes para el barco, te daré algo más dirigite al final de la cueva y encontrarás la salida.
+- Además, escuché que les hacen falta partes para el barco. Te daré algo más dirígete al final de la cueva y encontrarás la salida.
 
 ~ gotRudder()
 
