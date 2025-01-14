@@ -29,7 +29,7 @@ public class TutorialManager : MonoBehaviour
         {
         "Bienvenido al Tutorial",
         "Controles de movimiento",
-        "Pausa y Inventario",
+        "Pausa e Inventario",
         "Interacción con personajes",
         "Signo de admiración",
         "Portales"
